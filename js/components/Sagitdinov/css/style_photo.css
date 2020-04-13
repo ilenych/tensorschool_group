@@ -1,0 +1,179 @@
+/* Блок галереи в профиле пользователя */
+.main__photoGalery{
+	object-fit: cover;
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	max-height: 10em;
+}
+.main__photoGalery:hover{
+	cursor: pointer;
+	box-shadow: 0 0 10px #4e1563;
+}
+
+.photoGalery__photo {
+	object-fit: cover;
+	margin: 0 0.2em;
+	border-radius: 5%;
+	background-color: #4e1563;
+	max-width: 24%;
+}
+
+/* Аватарка пользователя */
+.main__profileAvatar{
+	object-fit: cover;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+}
+
+
+.userAvatarImg{
+	object-fit: cover;
+	grid-column: 1/2;
+	grid-row: 1/2;
+	position: relative;
+	width: 100%;
+	height: auto;
+	border-radius: 1em;
+	box-shadow: 0 0 10px grey;
+	z-index: 3;
+}
+
+.userAvatarImg:hover{
+	cursor: zoom-in;
+	z-index: 1;
+	box-shadow: 0 0 10px #4e1563;
+}
+
+.userAvatarImgInstruments {
+	margin: 0.3em 0 0 0.3em;
+	grid-column: 1/2;
+	grid-row: 1/2;
+	max-width: 2.5em;
+	height: auto;
+	z-index: 2;
+}
+
+.userAvatarImgInstruments:hover{
+	max-width: 3em;
+	cursor: pointer;
+	z-index: 4;
+}
+
+.userAvatarImgInstruments_right{
+	justify-self: end;
+}
+
+.userAvatarImgInstruments_left{
+	justify-self: start;
+}
+
+/* все для вывода большого фото в центре экрана с затемнением фона */
+
+.fullPhotoBox{
+	width: 100%;
+	height:100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.fullPhoto{
+	position: fixed;
+	max-width: 900px;
+	max-height: 700px;
+	box-shadow: 0px 0px 1em #4e1563;
+	z-index: 6;
+}
+
+.fullPhoto:hover{
+	cursor:  zoom-out;
+}
+
+.fullPhotoShadow {
+	position:fixed;
+	width:100%;
+	height:100%;
+	background-color: rgba(0,0,0,0.5);
+	overflow:hidden;
+	left:0;
+	top:0;
+	z-index: 5;
+}
+
+/*Блоки большой галереи*/
+.bigGalery{
+	display: grid;
+	/* вариант с прокруткой скроллом вниз, реализован переход по страницам.
+	max-height: 600px;
+	overflow-y: scroll;
+	overflow-x:hidden;*/
+	align-items: stretch;
+	justify-content: stretch;
+	width: 100%;
+	grid-template-columns: repeat(3, 33%);
+
+	grid-gap: 0.3em;
+	padding: 1em 0;
+}
+
+.bigGalery__header{
+	display: grid;
+	grid-template-columns: repeat(2, 50%);
+}
+
+.bigGalery__headerCaption{
+	text-align: right;
+	margin: 0;
+	color: grey;
+	font-size: 0.8em;
+}
+
+.bigGalery__photo{
+	object-fit: cover;
+	border-radius: 3px;
+	width: 90%;
+	max-height: 400px;
+}
+.bigGalery__photo:hover{
+	cursor: zoom-in;
+	box-shadow: 0 0 10px #4e1563;
+}
+
+.bigGalery__headerBack{
+	grid-column: 1/2;
+	margin: 1em 0 0.5em;
+  color: blue;
+  text-decoration: underline;
+	text-align: left;
+	font-size: 1em;
+}
+
+.bigGalery__headerBack:hover{
+	cursor: pointer;
+}
+
+/* блоки переходов страниц scrollPages*/
+.scrollPages{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	height: 3em;
+}
+
+.scrollPages_number{
+	border-radius: 50%;
+	text-align: center;
+	width: 40px;
+	height: : 40px;
+}
+
+.scrollPages_caption{
+	width: 10em;
+}
+.scrollPages_number:hover{
+	cursor: pointer;
+	font-size: 2em;
+}
