@@ -3,7 +3,7 @@ define([
     'components/Alsynbaev/base'
 ], function (basic) {
     'use strict';
-    alert('Loaded module Profile Info');
+    loadCss('js/components/Alsynbaev/css/profileInfo.css')
 
     class ProfileInfoPersonModel extends Model {
         relationStr = [["Не женат", "Есть подруга", "Влюблен", "Женат", "В гражданском браке", "Все сложно"], ["Не замужем", "Есть друг", "Влюблена", "Замужем", "В гражданском браке", "Все сложно"]];
@@ -246,7 +246,10 @@ define([
             }
         }
     }
-    loadCss('css/profileInfo.css');
+
+    // const profileMainInfoElement = document.createElement('div');
+    // document.querySelector(".content__coloumn-main").prepend(profileMainInfoElement);
+
     const model = new ProfileInfoPersonModel({
         first_name: 'Рональд',
         last_name: 'Уизли',
@@ -272,5 +275,4 @@ define([
 
     const profileMainInfo = factory.create(ProfileInfo, { item: model });
     profileMainInfo.mount(document.body);
-
 });
