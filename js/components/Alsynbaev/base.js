@@ -1,3 +1,11 @@
+function loadCss(url) {
+    var link = document.createElement("link");
+    link.type = "text/css";
+    link.rel = "stylesheet";
+    link.href = url;
+    document.getElementsByTagName("head")[0].appendChild(link);
+}
+
 class Component {
     constructor(options) {
         this.options = { ...this.getDefaultOptions(), ...options };
@@ -219,7 +227,7 @@ class Component {
     }
 }
 
-    Component.prototype.generateId = function () {
+Component.prototype.generateId = function () {
     return Math.random().toString(32).slice(2);
 };
 
@@ -276,11 +284,3 @@ class Model {
         }
     }
 }
-
-class AbstractFactory {
-    create(component, options) {
-        return new component(options || {});
-    }
-}
-
-const factory = new AbstractFactory()
