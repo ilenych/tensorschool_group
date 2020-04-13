@@ -12,7 +12,7 @@ requirejs.config({
 		Modul3: 'components/Tugaeva/Modul3', // Тугаева Динара
 		Modul4: 'components/Saitov/Modul4', // Саитов Роман
 		Modul5: 'components/Sagitdinov/Modul5', // Сагитдинов Руслан
-		Modul6: 'components/Alsynbaev/Modul6', // Алсынбаев Фанис
+		ProfileInfo: 'components/Alsynbaev/profileInfo', // Алсынбаев Фанис
     }
 });
 
