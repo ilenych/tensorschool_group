@@ -1,7 +1,6 @@
-define([], function () {
+define(['ProfileInfo'], function (profileInfo) {
     'use strict';
-    
-    document.body.innerHTML = 'Main Page';
 
+    document.body.innerHTML = 'Main Page';
 });
 
