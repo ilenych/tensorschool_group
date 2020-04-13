@@ -164,7 +164,7 @@
 }
 
 .scrollPages_number{
-	border-radius: 50%;
+	border-radius: 10%;
 	text-align: center;
 	width: 40px;
 	height: : 40px;
@@ -176,4 +176,5 @@
 .scrollPages_number:hover{
 	cursor: pointer;
 	font-size: 2em;
+	box-shadow: 0px 5px 5px #4e1563;
 }
