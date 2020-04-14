@@ -1,54 +1,15 @@
-
 define([
-    'components/Alsynbaev/base'
-], function (basic) {
+    'ProfileInfo/Component',
+    'ProfileInfo/Models',
+    'ProfileInfo/Composite',
+    'ProfileInfo/CssHelper'
+], function () {
     'use strict';
-    loadCss('js/components/Alsynbaev/css/profileInfo.css')
-
-    class ProfileInfoPersonModel extends Model {
-        relationStr = [["Не женат", "Есть подруга", "Влюблен", "Женат", "В гражданском браке", "Все сложно"], ["Не замужем", "Есть друг", "Влюблена", "Замужем", "В гражданском браке", "Все сложно"]];
-
-        getRelationStr() {
-            if (this.gender >= 1 && this.relation >= 1) {
-                return this.relationStr[this.gender - 1][this.relation - 1];
-            }
-            return '';
-        }
-
-        getAge() {
-            return Math.floor((new Date().getTime() - new Date(this.bdate)) / (24 * 3600 * 365.25 * 1000));
-        }
-
-        getBdStr() {
-            const datetime = new Date(this.bdate);
-            const options = {
-                month: "long",
-                day: "numeric",
-            };
-
-            return datetime.toLocaleString("ru", options) + ", " + this.getAge() + " лет";
-        }
-
-        getSexStr() {
-            if (this.gender == 1) {
-                return "Мужской";
-            } else if (this.gender == 2) {
-                return "Женский";
-            }
-            return '';
-        }
-
-        getCityCountryStr() {
-            if (this.country == null || this.country == '')
-                return (this.city || '');
-            else
-                return (this.city || '') + ", " + (this.country);
-        }
-    }
+    loadCss('js/components/Alsynbaev/profileInfo/css/profileInfo.css')
 
     class ProfileInfo extends Component {
         constructor({ item }) {
-            super();
+            super({ item });
             this.state.item = item;
         }
 
@@ -114,7 +75,7 @@ define([
 
     class ProfileInfoShort extends Component {
         constructor({ item }) {
-            super();
+            super({ item });
             this.state.item = item;
         }
 
@@ -149,7 +110,7 @@ define([
 
     class ProfileInfoFull extends Component {
         constructor({ item }) {
-            super();
+            super({ item });
             this.state.item = item;
         }
 
@@ -247,9 +208,6 @@ define([
         }
     }
 
-    // const profileMainInfoElement = document.createElement('div');
-    // document.querySelector(".content__coloumn-main").prepend(profileMainInfoElement);
-
     const model = new ProfileInfoPersonModel({
         first_name: 'Рональд',
         last_name: 'Уизли',
@@ -274,5 +232,6 @@ define([
     });
 
     const profileMainInfo = factory.create(ProfileInfo, { item: model });
+
     profileMainInfo.mount(document.body);
 });
