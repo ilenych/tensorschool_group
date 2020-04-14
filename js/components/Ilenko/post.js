@@ -69,6 +69,6 @@ define([
 
   const factory = new AbstractFactory();
 
-  const profileMainInfo = factory.create(Post, { item: model });
-  profileMainInfo.mount(document.body);
+  const post = factory.create(Post, { item: model });
+  post.mount(document.body);
 });
