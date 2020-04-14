@@ -1,7 +1,5 @@
-define(['ProfileInfo'], function (profileInfo) {
+define(['Page/Page'], function (Page) {
     'use strict';
-});
-
-define(['Post'], function (post) {
-    'use strict';
+    const page = factory.create(Page);
+    page.mount(document.body);
 });

@@ -1,16 +1,41 @@
 define([
-    'ProfileInfo/Component',
-    'ProfileInfo/Models',
-    'ProfileInfo/Composite',
-    'ProfileInfo/CssHelper'
-], function () {
+    'Base/Component',
+    'ProfileInfo/ProfileInfoPersonModel',
+    'Base/CssHelper'
+], function (Component, ProfileInfoPersonModel, CssHelper) {
     'use strict';
-    loadCss('js/components/Alsynbaev/profileInfo/css/profileInfo.css')
+    CssHelper.loadCss('js/components/Alsynbaev/profileInfo/css/profileInfo.css');
 
     class ProfileInfo extends Component {
         constructor({ item }) {
             super({ item });
             this.state.item = item;
+        }
+        beforeMount() {
+            if (this.state.item === undefined) {
+                this.state.item = new ProfileInfoPersonModel({
+                    first_name: 'Рональд',
+                    last_name: 'Уизли',
+                    status: 'Статус статусов',
+                    gender: 1,
+                    bdate: '1997-06-01',
+                    city: 'Уфа',
+                    country: 'Россия',
+                    phone: '8 (800) 555-35-35',
+                    email: 'milo@milo.ru',
+                    relation: 2,
+                    education: 'Тензоррр',
+                    interests: "Family, Friends, Dancing, Music",
+                    music: "David Garrett, Bond, Barrage, Michael Jackson, electronic, etc. I like songs from all types and genres of uplifting music except 'country western' and 'heavy metal.'",
+                    activities: "Music, touring, scrapbooking, camping, eating cereal, service for Church of Jesus Christ of Latter day Saints, public speaking, watching movies",
+                    movies: "Anne of Green Gables, That's Dancing",
+                    tv: "The Ellen Degeneres Show",
+                    books: "Harry Potter series, The Book of Mormon",
+                    games: "Village Idiot, Hearts, Who What When Where Why How (I love board games/card games)",
+                    about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                    quotes: "If we did all the things we are capable of, we would literally astound ourselves.-Thomas Edison",
+                });
+            }
         }
 
         afterMount() {
@@ -63,7 +88,7 @@ define([
         }
 
         render(options, { item }) {
-            return `<div class="page-block profile-main-info">
+            return `<div class="profile-main-info">
                     ${this.renderFullName({ item })}
                     ${this.renderStatus({ item })}
                     ${this.childrens.create(ProfileInfoShort, { item })}
@@ -208,30 +233,5 @@ define([
         }
     }
 
-    const model = new ProfileInfoPersonModel({
-        first_name: 'Рональд',
-        last_name: 'Уизли',
-        status: 'Статус статусов',
-        gender: 1,
-        bdate: '1917-06-01',
-        city: 'Уфа',
-        country: 'Россия',
-        phone: '8 (800) 555-35-35',
-        email: 'milo@milo.ru',
-        relation: 2,
-        education: 'Тензоррр',
-        interests: "Family, Friends, Dancing, Music",
-        music: "David Garrett, Bond, Barrage, Michael Jackson, electronic, etc. I like songs from all types and genres of uplifting music except 'country western' and 'heavy metal.'",
-        activities: "Music, touring, scrapbooking, camping, eating cereal, service for Church of Jesus Christ of Latter day Saints, public speaking, watching movies",
-        movies: "Anne of Green Gables, That's Dancing",
-        tv: "The Ellen Degeneres Show",
-        books: "Harry Potter series, The Book of Mormon",
-        games: "Village Idiot, Hearts, Who What When Where Why How (I love board games/card games)",
-        about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-        quotes: "If we did all the things we are capable of, we would literally astound ourselves.-Thomas Edison",
-    });
-
-    const profileMainInfo = factory.create(ProfileInfo, { item: model });
-
-    profileMainInfo.mount(document.body);
+    return ProfileInfo;
 });
