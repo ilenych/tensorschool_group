@@ -1,16 +1,93 @@
 define([
-  "components/Ilenko/component",
-  "components/Ilenko/model",
-  "components/Ilenko/composite",
-  "components/Ilenko/postLike",
-], function (basic) {
+  "Base/Component",
+  "Post/model",
+  "Post/postLike",
+  "Post/postComment",
+  "css!Post/css/post.css",
+], function (Component, model, PostLike, PostComment) {
   "use strict";
-  loadCss("js/components/Ilenko/css/post.css");
 
   class Post extends Component {
     constructor({ item }) {
       super();
       this.state.item = item;
+    }
+
+    beforeMount() {
+      if (this.state.item === undefined) {
+        //Стандартная модель если не передали ничего в конструктор
+        this.state.item = new model({
+          userName: "Джилл Валентайн",
+          userUrlImage: "img/post/ava.png",
+          time: {
+            year: 2020,
+            month: 3,
+            day: 14,
+            hour: 14,
+            minute: 39,
+          },
+          time2: {
+            year: 2020,
+            month: 3,
+            day: 15,
+            hour: 14,
+            minute: 39,
+          },
+          postText:
+            "Сыграем в RE3 remake? 3 апреля 2020 года Capcom выпустила Resident Evil 3 Remake — обновленную версию популярной игры Resident Evil 3: Nemesis 1999 года.",
+          postUrlImage: "img/post/postImage.jpg",
+          likeFire: "132",
+          likeHeartEyes: "24",
+          likeRocket: "26",
+          likeLike: "68",
+          likeBomb: "87",
+          commentLenght: "2",
+          newUserUrlImage: "img/post/newUser.png",
+          newUserName: "Леон Скотт Кеннеди",
+          comments: [
+            {
+              userUrlImage: "img/post/newUser.png",
+              userName: "Леон Скотт Кеннеди",
+              commentText: "Нашу встречу вырезалии с тобой (",
+              commentTime: {
+                year: 2020,
+                month: 3,
+                day: 15,
+                hour: 14,
+                minute: 39,
+              },
+            },
+            {
+              userUrlImage: "img/post/ava.png",
+              userName: "Фэйк Джилл",
+              commentText: "Так может быть ты...",
+              commentTime: {
+                year: 2020,
+                month: 3,
+                day: 15,
+                hour: 14,
+                minute: 39,
+              },
+            },
+          ],
+        });
+      }
+    }
+
+    afterMount() {
+      this._delete = this.getContainer().querySelector(".post_header__delete");
+      this.subscribeTo(this._delete, "click", this.onClose.bind(this));
+    }
+
+    onClose() {
+      this.close();
+    }
+
+    close() {
+      this.unmount();
+    }
+    beforeUnmount() {
+      delete this._delete;
     }
 
     // render header(avatar, name, time and trash)
@@ -30,45 +107,27 @@ define([
             <img class="post_content__img" src="${item.postUrlImage}" alt="Картинка">
         </div>`;
     }
-    // render comment(svatar, name, comment, time)
-    renderComment({ item }) {
-      return `<div class="post_comments">
-            <img class="post_comments__ava" src="${item.newUserUrlImage}" alt="Аватар">
-            <p class="post_comments__name" title="${item.newUserName}">${item.newUserName}</p>
-            <span class="post_comments__text" title="Comment">${item.commentText}</span>
-            <p class="post_comments__time text_lightgray" title="Время">${item.commentTime}</p>
-          </div>`;
-    }
+
     // render sender block(avatar, textarea, create, send)
     renderSenderBlock({ item }) {
       return ` <div class="post_sender">
           <img class="post_sender__ava" src="${item.userUrlImage}" alt="Аватар">
           <textarea class="post_sender__textarea"></textarea>
-          <img class="post_sender__add" src="img/post/plus.png" alt="add">
-          <img class="post_sender__send" src="img/post/send.png" alt="send">
+          <img class="post_sender__add" src="img/post/plus.png" alt="Добавить" title="Добавить">
+          <img class="post_sender__send" src="img/post/send.png" alt="Отправить" title="Отправить">
         </div>`;
     }
+
     // common render
     render(options, { item }) {
       return `<div class="post">
                   ${this.renderUser({ item })}
                   ${this.renderContent({ item })}
                   ${this.childrens.create(PostLike, { item })}
-                  ${this.renderComment({ item })}
+                  ${this.childrens.create(PostComment, { item })}
                   ${this.renderSenderBlock({ item })}
               </div>`;
     }
   }
-  
-  // AbstractFactory
-  class AbstractFactory {
-    create(component, options) {
-      return new component(options || {});
-    }
-  }
-
-  const factory = new AbstractFactory();
-
-  const post = factory.create(Post, { item: model });
-  post.mount(document.body);
+  return Post;
 });

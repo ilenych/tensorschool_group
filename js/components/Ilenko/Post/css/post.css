@@ -1,20 +1,7 @@
-* {
-  margin: 0;
-}
-/* Body */
-
-body {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: #d1cccd;
-  font-size: 14px;
-}
 
 .post {
-  margin: 10px 0;
-  padding: 8px 10px;
-  background-color: white;
-  border-radius: 4px;
-  max-width: 640px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
   cursor: default;
 }
 
@@ -78,8 +65,8 @@ body {
 
 .post_content__img {
   margin-top: 10px;
-  max-width: 640px;
-  max-height: 400px;
+  max-width: 730px;
+  max-height: 410px;
   object-fit: contain;
   border-radius: 5px;
 }
@@ -114,9 +101,10 @@ body {
   margin-left: 3px;
 }
 
+
 .likeIsSelected {
   color: green;
-  font-size: 1em;
+  font-size: 16px;
 }
 
 .post_like_comment {
@@ -124,6 +112,7 @@ body {
   align-items: center;
   justify-content: flex-end;
   flex-grow: 1;
+  cursor: default;
 }
 
 /* Post comments */
@@ -142,6 +131,14 @@ body {
   border-radius: 50%;
   grid-row: span 3 / auto;
   align-self: start;
+}
+
+.post_comments__time {
+  /* line */
+  border-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: lightgray;
+  padding-bottom: 5px;
 }
 
 /* Post sender */
