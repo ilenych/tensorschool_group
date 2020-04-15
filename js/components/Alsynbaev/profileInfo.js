@@ -4,15 +4,28 @@ define([
     'Base/CssHelper'
 ], function (Component, ProfileInfoPersonModel, CssHelper) {
     'use strict';
+
+    //Подключение css файла
     CssHelper.loadCss('js/components/Alsynbaev/profileInfo/css/profileInfo.css');
 
+    /**
+     * Основной модуль с информацией о пользователе
+     */
     class ProfileInfo extends Component {
+        /**
+         * Коструктор модуля
+         * @param {ProfileInfoPersonModel} модель 
+         */
         constructor({ item }) {
             super({ item });
             this.state.item = item;
         }
+        /**
+         * Выполняется до рендера
+         */
         beforeMount() {
             if (this.state.item === undefined) {
+                //Стандартная модель если не передали ничего в конструктор
                 this.state.item = new ProfileInfoPersonModel({
                     first_name: 'Рональд',
                     last_name: 'Уизли',
@@ -38,12 +51,21 @@ define([
             }
         }
 
+        /**
+         * Выполнятеся после рендера
+         */
         afterMount() {
+            //Вешает на кнопку Показать/Скрыть подробности метод toggleFullInfo при клике 
             this.subscribeTo(this.getContainer().querySelector(".profile-main-info__more-info"), 'click', this.toggleFullInfo.bind(this));
         }
 
+        /**
+         * Показывать или скрывать информацию при нажатии на кнопку Показать/Скрыть подробности
+         */
         toggleFullInfo() {
+            //получение блока содержащий полную информацию о пользователе
             const profileInfoFull = document.querySelector(".profile-info__full");
+            //метка "" 
             const profileMainInfoMoreLabel = document.querySelector(".profile-main-info__more-label");
             const profileMainInfoLessLabel = document.querySelector(".profile-main-info__less-label");
 
@@ -58,11 +80,20 @@ define([
             }
         }
 
+        /**
+         * рендер имени и фамилии пользователя
+         * @param {ProfileInfoPersonModel} необходимые поля first_name - имя, last_name - фамимлия 
+         */
         renderFullName({ item }) {
             return `<div class="profile-main-info__name" title = "${item.first_name} ${item.last_name}">
                 ${item.first_name} ${item.last_name}
             </div>`;
         }
+
+        /**
+         * рендер статус пользователя
+         * @param {ProfileInfoPersonModel} рекомендуемые поля status - статус
+         */
 
         renderStatus({ item }) {
             return `<div class="profile-main-info__current-info" title = "${item.status || ''}">
@@ -70,14 +101,9 @@ define([
             </div>`;
         }
 
-        renderInfoField(title, value) {
-            if (value == '' || value == null)
-                return '';
-            else
-                return `<div class="profile-info__title" title = "${title}">${title}</div>
-                        <div class="profile-info__value" title = "${value}">${value}</div>`;
-        }
-
+        /**
+         * рендер кнопки Показать подробности/Скрыть подробности
+         */
         renderFullInfoButton() {
             return `<div class="profile-main-info__more-info">
                 <a class="profile-main-info__more-info-link">
@@ -87,6 +113,11 @@ define([
             </div>`;
         }
 
+        /**
+         * Рендер модуля
+         * @param {*} options 
+         * @param {ProfileInfoPersonModel} модель с информацией
+         */
         render(options, { item }) {
             return `<div class="profile-main-info">
                     ${this.renderFullName({ item })}
@@ -98,13 +129,20 @@ define([
         }
     }
 
+    /**
+     * Подмодуль отвечающий за короткую информацию о пользователе
+     */
     class ProfileInfoShort extends Component {
         constructor({ item }) {
             super({ item });
             this.state.item = item;
         }
 
+        /**
+         * Выполняется до рендера
+         */
         beforeMount() {
+            //Создаем объект с категориями
             this.setState({
                 categories: [{
                     fields: [
@@ -126,12 +164,21 @@ define([
             });
         }
 
+        /**
+         * Рендер модуля
+         * @param {*} options 
+         * @param {*} катеогрии 
+         */
         render(options, { categories }) {
             return `<div class="profile-info profile-info__short">
                 ${categories.map((item) => this.childrens.create(ProfileInfoCategory, item)).join('\n')}
                 </div>`;
         }
     }
+
+    /**
+     * Подмодуль отвечающий за полную информацию о пользователе
+     */
 
     class ProfileInfoFull extends Component {
         constructor({ item }) {
@@ -140,9 +187,12 @@ define([
         }
 
         beforeMount() {
+            //Создаем объект с категориями
             this.setState({
                 categories: [{
+                    //Заголовок категории
                     title: 'Контакты',
+                    //Поля
                     fields: [
                         {
                             title: 'Телефон',
@@ -187,6 +237,9 @@ define([
                             title: 'Любимые игры',
                             value: this.state.item.games
                         }, {
+                            title: 'Любимые фильмы',
+                            value: this.state.item.movies
+                        }, {
                             title: 'Любимые цитаты',
                             value: this.state.item.quotes
                         }
@@ -203,6 +256,11 @@ define([
             });
         }
 
+        /**
+         * Рендер модуля
+         * @param {*} options 
+         * @param {*} категории 
+         */
         render(options, { categories }) {
             return `<div class="profile-info profile-info__full" style="display: none;">
                 ${categories.map((item) => this.childrens.create(ProfileInfoCategory, item)).join('\n')}
@@ -210,7 +268,15 @@ define([
         }
     }
 
+    /**
+     * Подмодуль для рендера катеогрий
+     */
     class ProfileInfoCategory extends Component {
+
+        /**
+         * Рендер подмодуля
+         * @param {*} - title - заголовок поля, fiels - массив с полями {title- заголовок поля, value - значение поля}
+         */
         render({ title, fields }) {
             return `<div class="profile-info-category">
                         <div class="profile-info-category__title">${title}</div>
@@ -220,11 +286,18 @@ define([
                     </div>`;
         }
 
+        /**
+         * Рендер поля категории
+         * @param {*} title - заголовок поля, value - значение поля
+         */
         renderInfoField({ title = '', value = '' }) {
             return `<div class="profile-info__title" title = "${title}">${title}</div>
                         <div class="profile-info__value" title = "${value}">${value}</div>`;
         }
 
+        /**
+         * Опции по умолчанию 
+         */
         getDefaultOptions() {
             return {
                 title: '',
