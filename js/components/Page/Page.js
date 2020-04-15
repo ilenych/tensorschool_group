@@ -1,16 +1,15 @@
 define([
     'Page/Header',
     'Base/Component',
-    'ProfileInfo'
+    'ProfileInfo',
+    'css!Page/css/Page.css'
 ], function (Header, Component, ProfileInfo, Post) {
     'use strict';
 
     class Page extends Component {
         render() {
             return `<div class="page">
-                        
                         ${this.childrens.create(Header)}
-                        
                         <div class="content">
                             <div class="content__main-column">
                                 <div class="module">

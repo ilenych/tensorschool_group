@@ -13,6 +13,8 @@ requirejs.config({
         Modul4: 'components/Saitov/Modul4', // Саитов Роман
         Modul5: 'components/Sagitdinov/Modul5', // Сагитдинов Руслан
         ProfileInfo: 'components/Alsynbaev/profileInfo', // Алсынбаев Фанис
+
+        css: 'lib/require.css.min'
     }
 });
 

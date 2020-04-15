@@ -1,12 +1,9 @@
 define([
     'Base/Component',
     'ProfileInfo/ProfileInfoPersonModel',
-    'Base/CssHelper'
-], function (Component, ProfileInfoPersonModel, CssHelper) {
+    'css!ProfileInfo/css/profileInfo.css'
+], function (Component, ProfileInfoPersonModel) {
     'use strict';
-
-    //Подключение css файла
-    CssHelper.loadCss('js/components/Alsynbaev/profileInfo/css/profileInfo.css');
 
     /**
      * Основной модуль с информацией о пользователе
