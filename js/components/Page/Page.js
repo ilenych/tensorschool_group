@@ -17,9 +17,9 @@ define([
                                     ${this.childrens.create(ProfileInfo)}
                                 </div>
 
-                                <!--<div class="module">
+                                <div class="module">
                                     //модуль в 1 колонке
-                                </div>-->
+                                </div>
                             </div>
 
                             <div class="content__secondary-column">
