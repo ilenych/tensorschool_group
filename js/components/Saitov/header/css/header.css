@@ -1,0 +1,64 @@
+.header__nav {
+    display: flex;
+    justify-content: flex-end;
+    background: #4a76a8;
+    padding: 0 10px;
+    align-items: center;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 1px 1px 5px #999;
+    height: 70px;
+}
+
+.header__activity {
+    margin-right: auto;
+    padding-left: 10px;
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+/* Доп контент для заголовка */
+.header__activity::after {
+    display: inline; /* Выключить если требуется */
+    content: "#stayhome"; /* Текст */
+    color: #fff;
+    background-color: #224b7a; 
+    font-size: 0.9em;
+    padding: 3px;
+}
+
+.header__profile-edit {
+    color: #ccc;
+    text-decoration: none;
+    margin-right: 10px;
+    font-size: 1em;
+}
+
+.header__profile-edit:hover {
+    color: #000;
+    cursor: pointer;
+}
+
+.header__profile-menu {
+    display: flex;
+    align-items: center;
+    font-size: 2em;
+    text-decoration: none;
+    font-weight: 800;
+    align-self: stretch;
+}
+
+.header__profile-avatar_mini {
+    display: block;
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.header__profile-button {
+    display: block;
+    height: 45px;
+    padding: 0 5px;
+    color: #ccc;
+}

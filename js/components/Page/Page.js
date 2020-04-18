@@ -1,10 +1,10 @@
 define([
-    'Page/Header',
     'Base/Component',
+    'Header',
     'ProfileInfo',
     'Post',
     'css!Page/css/Page.css'
-], function (Header, Component, ProfileInfo, Post) {
+], function (Component, Header, ProfileInfo, Post) {
     'use strict';
 
     class Page extends Component {

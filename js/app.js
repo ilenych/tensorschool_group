@@ -10,7 +10,7 @@ requirejs.config({
         Post: 'components/Ilenko/post', // Иленко Алексей
         Modul2: 'components/Timofeev/Modul2', // Тимофеев Павел
         Modul3: 'components/Tugaeva/Modul3', // Тугаева Динара
-        Modul4: 'components/Saitov/Modul4', // Саитов Роман
+        Header: 'components/Saitov/header', // Саитов Роман
         Modul5: 'components/Sagitdinov/Modul5', // Сагитдинов Руслан
         ProfileInfo: 'components/Alsynbaev/profileInfo', // Алсынбаев Фанис
 
