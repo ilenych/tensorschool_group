@@ -1,4 +1,4 @@
-define(['./fullPhoto', './scrollPages', 'Base/Model',  'css!Photo/css/style_photo.css'], function (fullPhoto, scrollPages, Model) {
+define(['./FullPhoto', './ScrollPages', 'Base/Model',  'css!Photo/css/style_photo.css'], function (fullPhoto, scrollPages, Model) {
  // объявляем новый зависимый от основного класс для формирование галереи пользователя (большой)
 // через параметры опции передаем в него номер страницы галереи (galeryPageNumder)
 // по сути, всегда будет передаваться 1, внутри самой галереи переход на другие страницы автоматом заполняет
