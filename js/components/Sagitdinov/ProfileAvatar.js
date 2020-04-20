@@ -12,15 +12,16 @@ define(['./FullPhoto', 'Base/Model',  'css!Photo/css/style_photo.css'], function
     }
     // геттер сформированного HTML-кода ДЛЯ РАЗМЕЩЕНИЯ В БЛОКЕ!!!
     get renderProfileAvatarString(){
+       let profileAvatarString='<div  id="main__userAvatar" class="main__profileAvatar profile__block">';
       if (this.avatar==true){
         //если аватар у пользователя установлен
         return `<img src="img/user${this.id}/avatar.jpg" alt="Аватар пользователя" onclick="getFullPhoto(${this.id}, 'avatar')" class="userAvatarImg">
                 <img src="img/change.png" alt="Изменить фото" onclick="" class="userAvatarImgInstruments userAvatarImgInstruments_left">
-                <img src="img/trash.png" alt="Удалить фото" onclick="dropPhoto(${this.id});" class="userAvatarImgInstruments userAvatarImgInstruments_right">`;
+                <img src="img/trash.png" alt="Удалить фото" onclick="dropPhoto(${this.id});" class="userAvatarImgInstruments userAvatarImgInstruments_right"></div>`;
       } else {
         // если аватар у пользователя не установлен
         return `<img src="img/nophoto.jpg" alt="Фотографии нет!" onclick="" class="userAvatarImg">
-                <img src="img/change.png" alt="Удалить фото" onclick="" class="userAvatarImgInstruments">`;
+                <img src="img/change.png" alt="Удалить фото" onclick="" class="userAvatarImgInstruments"></div>`;
       }
     }
   }
