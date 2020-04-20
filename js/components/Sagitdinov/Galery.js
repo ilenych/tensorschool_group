@@ -1,4 +1,4 @@
-define(['Base/Model', ./BigGalery], function (Model,bigGalery) {
+define(['Base/Model', ./BigGalery,  'css!Photo/css/style_photo.css'], function (Model,bigGalery) {
   
   class ProfileGalery extends User {
     constructor (userID){
