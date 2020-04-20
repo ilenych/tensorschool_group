@@ -1,7 +1,8 @@
-// объявляем новый зависимый от основного класс для формирование галереи пользователя (большой)
+define(['./fullPhoto', './scrollPages', 'Base/Model',  'css!Photo/css/style_photo.css'], function (fullPhoto, scrollPages, Model) {
+ // объявляем новый зависимый от основного класс для формирование галереи пользователя (большой)
 // через параметры опции передаем в него номер страницы галереи (galeryPageNumder)
 // по сути, всегда будет передаваться 1, внутри самой галереи переход на другие страницы автоматом заполняет
-class Galery extends User {
+class Galery extends Model {
   constructor (userID, options){
     super(userID);
     this.galeryPageNumder=options;
@@ -43,7 +44,5 @@ class Galery extends User {
   }
 }
 
-function getBigGalery(userID, options){
-  let forEverything = new Galery(userID, options);
-  forEverything.userGalery();
-}
+    return Galery;
+});
