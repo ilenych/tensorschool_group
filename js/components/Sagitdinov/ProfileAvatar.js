@@ -39,3 +39,5 @@ define(['./FullPhoto', 'Base/Model',  'css!Photo/css/style_photo.css'], function
     forEverything.avatar=false;
     forEverything.profileAvatar();
   }
+  return ProfileAvatar;
+});
