@@ -1,4 +1,4 @@
-define(['Base/Model'], function (Model) {
+define(['Base/Model',  'css!Photo/css/style_photo.css'], function (Model) {
    'use strict';  
    class FullPhoto extends User {
       constructor (userID, options){
