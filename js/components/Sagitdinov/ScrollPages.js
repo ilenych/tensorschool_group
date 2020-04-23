@@ -9,12 +9,12 @@ define(['Base/Model',  'css!Photo/css/style_photo.css'], function (Model) {
     let ellipsisBlockString='<div class="scrollPages_ellipsis">...</div>';
     // функция возврата блока с номером
     function numBlock(funcName, number, userID) {
-      numBlockString =`<div class="scrollPages_number" onclick="${funcName}(${userID},${number});">${number}</div>`;
+      let numBlockString =`<div class="scrollPages_number" onclick="${funcName}(${userID},${number});">${number}</div>`;
       return numBlockString;
     }
     // переменная для подсчета кол-ва отображаемых числовых блоков(разрывы тоже в счет)
     // почему числовые блоки? возможно слева и справа добавим стрелки для перехода на пре/следующую страницу
-    let numberBlock;
+    let numberBlocks;
     // массив числовых блоков, максимум 7, далее расчет в зависимости от количества страниц
     let pagesArray=[0,1,0,0,0,0,0,pagesCount];
     // простейшее заполнение, если число страниц не превышает 7, посто распределяем страницы
