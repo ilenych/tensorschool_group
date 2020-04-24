@@ -3,8 +3,10 @@ define([
     'Base/Component',
     'ProfileInfo',
     'Post',
+    'ProfilePic',
+    'Messages',
     'css!Page/css/Page.css'
-], function (Header, Component, ProfileInfo, Post) {
+], function (Header, Component, ProfileInfo, Post, ProfilePic, Messages) {
     'use strict';
 
     class Page extends Component {
@@ -16,17 +18,18 @@ define([
                                 <div class="module">
                                     ${this.childrens.create(ProfileInfo)}
                                 </div>
+                                <div class="module">gallery</div>
                                 <div class="module">
                                     ${this.childrens.create(Post)}
-                                </div>
-                                <div class="module">
-                                    //модуль в 1 колонке
                                 </div>
                             </div>
 
                             <div class="content__secondary-column">
                                 <div class="module">
-                                    //Модуль во 2 колонке
+                                    ${this.childrens.create(ProfilePic)}
+                                </div>
+                                <div class="module">
+                                    ${this.childrens.create(Messages)}
                                 </div>
                             </div>
                         </div>

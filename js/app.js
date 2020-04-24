@@ -9,7 +9,8 @@ requirejs.config({
         Page: 'components/Page',
         Post: 'components/Ilenko/post', // Иленко Алексей
         Modul2: 'components/Timofeev/Modul2', // Тимофеев Павел
-        Modul3: 'components/Tugaeva/Modul3', // Тугаева Динара
+        ProfilePic: 'components/Tugaeva/profilepic', // Тугаева Динара
+        Messages: 'components/Tugaeva/messages', // Тугаева Динара
         Modul4: 'components/Saitov/Modul4', // Саитов Роман
         Modul5: 'components/Sagitdinov/Modul5', // Сагитдинов Руслан
         ProfileInfo: 'components/Alsynbaev/profileInfo', // Алсынбаев Фанис

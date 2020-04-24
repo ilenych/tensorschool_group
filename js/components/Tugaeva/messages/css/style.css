@@ -1,0 +1,62 @@
+.clear::after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+.picture {
+    display: block;
+}
+
+.picture_userpic {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.messages {
+    font-size: 0.95em;
+}
+
+.messages__title {
+    color: rgb(160, 160, 160);
+    margin-bottom: 5px;
+}
+
+.message {
+    display: grid;
+    grid-template-columns: 37px 1fr;
+    padding: 7px 0;
+    border-top: 1px solid lightgray;
+}
+
+.message:first-of-type {
+    border: none;
+}
+
+.message__picture {
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-right: 7px;
+}
+
+.message__body {
+    float: left;
+}
+
+.message__sender {
+    color: rgb(80, 80, 175);
+    float: left;
+    margin-bottom: 3px;
+}
+
+.message__time {
+    color: rgb(160, 160, 160);
+    float: right;
+}
+
+.message__content {
+    clear: left;
+}
