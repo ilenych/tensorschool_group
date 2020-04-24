@@ -1,0 +1,132 @@
+{
+  "model": [
+    {
+      "id": 1,
+      "userName": "Джилл Валентайн",
+      "userUrlImage": "img/post/ava.png",
+      "time": "2020-04-21T15:59:40.007Z",
+      "postText": "Сыграем в RE3 remake? 3 апреля 2020 года Capcom выпустила Resident Evil 3 Remake — обновленную версию популярной игры Resident Evil 3: Nemesis 1999 года.",
+      "postUrlImage": "img/post/postImage.jpg",
+      "likeFire": "132",
+      "likeHeartEyes": "24",
+      "likeRocket": "26",
+      "likeLike": "68",
+      "likeBomb": "87"
+    },
+    {
+      "id": 2,
+      "userName": "Джилл Валентайн",
+      "userUrlImage": "img/post/ava.png",
+      "time": "2020-04-21T15:59:40.007Z",
+      "postText": "Сыграем в RE3 remake? 3 апреля 2020 года Capcom выпустила Resident Evil 3 Remake — обновленную версию популярной игры Resident Evil 3: Nemesis 1999 года.",
+      "postUrlImage": "img/post/postImage.jpg",
+      "likeFire": "132",
+      "likeHeartEyes": "24",
+      "likeRocket": "26",
+      "likeLike": "68",
+      "likeBomb": "87"
+    }
+  ],
+  "likes": [
+    {
+      "modelId": 1,
+      "likeFire": 133,
+      "likeHeartEyes": 24,
+      "likeRocket": 26,
+      "likeLike": 68,
+      "likeBomb": 87,
+      "id": 1
+    },
+    {
+      "id": 2,
+      "modelId": 2,
+      "likeFire": 132,
+      "likeHeartEyes": 24,
+      "likeRocket": 26,
+      "likeLike": 6,
+      "likeBomb": 8
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "userUrlImage": "img/post/newUser.png",
+      "userName": "Леон Скотт Кеннеди",
+      "commentText": "Нашу встречу вырезалии с тобой (",
+      "commentTime": "2020-04-21T15:59:40.007Z",
+      "modelId": 1
+    },
+    {
+      "id": 2,
+      "userUrlImage": "img/post/ava.png",
+      "userName": "Фэйк Джилл",
+      "commentText": "Так может быть ты...",
+      "commentTime": "2020-04-21T15:59:40.007Z",
+      "modelId": 1
+    },
+    {
+      "id": 4,
+      "userUrlImage": "img/post/newUser.png",
+      "userName": "Леон Скотт Кеннеди",
+      "commentText": "asdegt",
+      "commentTime": "2020-04-22T15:28:46.676Z",
+      "modelId": 1
+    },
+    {
+      "id": 5,
+      "userUrlImage": "img/post/newUser.png",
+      "userName": "Леон Скотт Кеннеди",
+      "commentText": "gthgdfv hyy",
+      "commentTime": "2020-04-22T15:29:23.447Z",
+      "modelId": 2
+    },
+    {
+      "id": 6,
+      "userUrlImage": "img/post/newUser.png",
+      "userName": "Леон Скотт Кеннеди",
+      "commentText": "nbjkhk ",
+      "commentTime": "2020-04-22T15:30:18.091Z",
+      "modelId": 1
+    },
+    {
+      "userUrlImage": "img/post/newUser.png",
+      "userName": "Леон Скотт Кеннеди",
+      "commentText": "qdq qw ",
+      "commentTime": "2020-04-22T15:58:34.166Z",
+      "modelId": 1,
+      "id": 7
+    },
+    {
+      "userUrlImage": "img/post/newUser.png",
+      "userName": "Леон Скотт Кеннеди",
+      "commentText": "qdq qw qw qw d",
+      "commentTime": "2020-04-22T15:58:37.878Z",
+      "modelId": 1,
+      "id": 8
+    },
+    {
+      "userUrlImage": "img/post/newUser.png",
+      "userName": "Леон Скотт Кеннеди",
+      "commentText": "dfjfkd",
+      "commentTime": "2020-04-22T15:58:43.734Z",
+      "modelId": 1,
+      "id": 9
+    },
+    {
+      "userUrlImage": "img/post/newUser.png",
+      "userName": "Леон Скотт Кеннеди",
+      "commentText": "bhjgj ",
+      "commentTime": "2020-04-22T15:59:40.007Z",
+      "modelId": 1,
+      "id": 10
+    },
+    {
+      "userUrlImage": "img/post/newUser.png",
+      "userName": "Леон Скотт Кеннеди",
+      "commentText": "Yeees",
+      "commentTime": "2020-04-22T16:06:59.054Z",
+      "modelId": 1,
+      "id": 11
+    }
+  ]
+}
