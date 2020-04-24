@@ -2,9 +2,9 @@ define([
     'Base/Component',
     'Header',
     'ProfileInfo',
-    'Post',
+    'Wall',
     'css!Page/css/Page.css'
-], function (Component, Header, ProfileInfo, Post) {
+], function (Component, Header, ProfileInfo, Wall) {
     'use strict';
 
     class Page extends Component {
@@ -16,9 +16,7 @@ define([
                                 <div class="module">
                                     ${this.childrens.create(ProfileInfo)}
                                 </div>
-                                <div class="module">
-                                    ${this.childrens.create(Post)}
-                                </div>
+                                    ${this.childrens.create(Wall)}
                                 <div class="module">
                                     //модуль в 1 колонке
                                 </div>
