@@ -1,8 +1,8 @@
   define([
     "Base/Component",
-    "Wall/postLike",
-    "Wall/postComment",
-    "Wall/postSenderBlock",
+    "Wall/PostLike",
+    "Wall/PostComment",
+    "Wall/PostSenderBlock",
     "Wall/TimeConvector",
     "Wall/NetworkService",
     "css!Wall/css/post.css",

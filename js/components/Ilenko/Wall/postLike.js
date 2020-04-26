@@ -37,12 +37,13 @@ define(["Base/Component", "Wall/NetworkService"], function (
       let result = Number(count) + 1;
       // обновляем данные
       this.updateLike(element.previousElementSibling.alt);
+      // Чистим кэш
+      this.beforeUnmount()
       //возвращаем результат
       return (element.innerHTML = result);
     }
 
     beforeUnmount() {
-      //TODO: удалить все элементы(вопрос как?)
       delete this._like;
     }
 

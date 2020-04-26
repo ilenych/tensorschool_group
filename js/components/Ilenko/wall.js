@@ -1,7 +1,8 @@
-define(["Base/Component", "Wall/model", "Wall/post"], function (
+define(["Base/Component", "Wall/model", "Wall/post", "Wall/NetworkService"], function (
   Component,
   model,
-  Post
+  Post,
+  NetworkService
 ) {
   "use strict";
 
@@ -10,9 +11,13 @@ define(["Base/Component", "Wall/model", "Wall/post"], function (
       super();
       this.state.item = item;
     }
-    //TODO: Заменить модель на модель с сервера
-    //Впорос: Если fetch отрабатывает в конце загрузки страницы, а для отображения нужны данные с сервера, как тогда быть?
+
     beforeMount() {
+      NetworkService.fetchData().then((res) => {
+        this.state.item = res
+        this.update()
+      })
+      
       if (this.state.item === undefined) {
         //Стандартная модель если не передали ничего в конструктор
         this.state.item = {
@@ -88,6 +93,16 @@ define(["Base/Component", "Wall/model", "Wall/post"], function (
           ],
         };
       }
+    }
+
+    beforeUpdate() {
+      console.log(this)
+      // this._wall = this.getContainer().innerHTML = this.render(this.options, this.state)
+      // this.beforeUnmount()
+    }
+
+    beforeUnmount() {
+      delete this._wall
     }
 
     render(options, { item }) {

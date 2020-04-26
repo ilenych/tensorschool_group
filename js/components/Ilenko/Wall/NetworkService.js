@@ -1,10 +1,10 @@
 define({
   /**
-   * Возвращает данные с http://localhost:3000/model
+   * Возвращает данные с http://localhost:3000/db
    */
    fetchData: async function () {
     try {
-      let responce = await fetch("http://localhost:3000/model");
+      let responce = await fetch("http://localhost:3000/db");
       let content = await responce.json();
       return content;
     } catch (err) {
@@ -72,23 +72,23 @@ define({
 });
 
 //----------------------------------- ?? -------------------------------------------
-//   var urlencoded = new URLSearchParams();
-//   urlencoded.append('login', 'vasya');
-//   urlencoded.append('password', 'vasya123');
+  // var urlencoded = new URLSearchParams();
+  // urlencoded.append('login', 'vasya');
+  // urlencoded.append('password', 'vasya123');
 
-//   var requestOptions = {
-//     method: 'POST',
-//     headers: {"Content-Type": "application/x-www-form-urlencoded"},
-//     body: urlencoded,
-//     "credentials": "include"
-//   };
+  // var requestOptions = {
+  //   method: 'POST',
+  //   headers: {"Content-Type": "application/x-www-form-urlencoded"},
+  //   body: urlencoded,
+  //   "credentials": "include"
+  // };
 
-//   fetch("https://tensor-school.herokuapp.com/user/login", requestOptions)
-//   .then((res) => {
-//     console.log(res.text())
-//   }).then(rel => console.log(rel))
+  // fetch("https://tensor-school.herokuapp.com/user/login", requestOptions)
+  // .then((res) => {
+  //   console.log(res.text())
+  // }).then(rel => console.log(rel))
 
-//   fetch("https://tensor-school.herokuapp.com/user/current", {'credentials': 'include'})
-//   .then((res) => {
-//     console.log(res.text())
-//   });
+  // fetch("https://tensor-school.herokuapp.com/user/current", {'credentials': 'include'})
+  // .then((res) => {
+  //   console.log(res.text())
+  // });
