@@ -1,11 +1,23 @@
-define(["Base/Component", "Wall/TimeConvector"], function (Component, Time) {
+define([
+  "Base/Component",
+  "Wall/TimeConvector",
+  "Wall/NetworkService",
+], function (Component, Time, NetworkService) {
   class PostComment extends Component {
     constructor(options) {
       super(options);
-      this.state.item = options.item;
       this.state.status;
       this.state.count = -3;
+      this.options.item.comments = [];
     }
+
+    // beforeMount() {
+    //   NetworkService.getDataComments(this.options.item.id).then((res) => {
+    //     this.options.item.comments = res;
+    //     this.update();
+    //     this.afterMount();
+    //   });
+    // }
 
     afterMount() {
       //подписываемся под "Показать еще комментарии"
@@ -41,7 +53,6 @@ define(["Base/Component", "Wall/TimeConvector"], function (Component, Time) {
      * Действие по клику
      */
     onClickMore() {
-      console.log(this.state.status)
       //Присваиваем ивент
       let element = event.currentTarget;
       //Меняем значение в this.state
@@ -51,7 +62,6 @@ define(["Base/Component", "Wall/TimeConvector"], function (Component, Time) {
       //Отображаем par в данном элементе
       element.innerHTML = this.moreAndLessComments();
       //Обновляем содержимое в блоке комментариев
-      console.log(this.state.status)
       this.update();
       return element;
     }
@@ -96,9 +106,9 @@ define(["Base/Component", "Wall/TimeConvector"], function (Component, Time) {
 
     render({ item }) {
       return `<div class="post-comments">
-                <p class="post-comments__more">${this.moreAndLessComments()}</p>
-                ${this.renderCommentsBlock({ item })}
-              </div>`;
+        <p class="post-comments__more">${this.moreAndLessComments()}</p>
+        ${this.renderCommentsBlock({ item })}
+      </div>`;
     }
 
     renderCommentsBlock({ item }) {
@@ -108,9 +118,15 @@ define(["Base/Component", "Wall/TimeConvector"], function (Component, Time) {
     }
 
     renderBody({ item }) {
-      //Срезаем массив под нужнное кол-во
-      let comments = item.comments.slice(this.state.count);
-      return `${comments.map(this.renderComment.bind(this)).join("\n")}`;
+      //Если есть комментарии, отображаем их
+      if (this.options.item.comments.length > 0) {
+        //Срезаем массив под нужнное кол-во
+        let comments = item.comments.slice(this.state.count);
+        return `${comments.map(this.renderComment.bind(this)).join("\n")}`;
+      } else {
+        //Если нет комментариев, ничего не возвращаем
+        return "";
+      }
     }
 
     renderComment({ userUrlImage, userName, commentText, commentTime }) {
