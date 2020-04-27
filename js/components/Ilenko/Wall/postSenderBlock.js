@@ -39,6 +39,7 @@ define(["Base/Component", "Wall/NetworkService"], function (
         commentTime: new Date(),
         modelId: this.options.item.id,
       };
+      this.options.item.comments.push(comment)
       return comment;
     }
 

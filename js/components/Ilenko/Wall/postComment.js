@@ -3,68 +3,121 @@ define(["Base/Component", "Wall/TimeConvector"], function (Component, Time) {
     constructor(options) {
       super(options);
       this.state.item = options.item;
-      this.state.status = false;
+      this.state.status;
       this.state.count = -3;
     }
 
     afterMount() {
-      this._send = this.getContainer().querySelector(".post-comments__more");
-      this.subscribeTo(this._send, "click", this.onClick.bind(this));
+      //подписываемся под "Показать еще комментарии"
+      this._more = this.getContainer().querySelector(".post-comments__more");
+      this.subscribeTo(this._more, "click", this.onClickMore.bind(this));
+
+      //подписываемся под "Отправить"
+      this._send = document.querySelectorAll(".post-sender__send");
+      this._send.forEach((el) => {
+        this.subscribeTo(el, "click", this.onClickSend.bind(this));
+      });
+      // Присваиваем значение после загрузки(Для того, чтобы при нажатии на .post-comments__more менялось значение)
+      this.state.status = false;
+      // Отобпажаем или еще нет .post-comments__more
+      this.showOrHideCommentMore();
+    }
+
+    /**
+     * Действие по клику "Отправить"
+     */
+    onClickSend() {
+      //Делаем задержку для отображения нового поста
+      setTimeout(
+        function () {
+          this.update();
+        }.bind(this),
+        1000
+      );
+      //Отобпажаем или еще нет .post-comments__more
+      this.showOrHideCommentMore();
     }
     /**
      * Действие по клику
      */
-    onClick() {
+    onClickMore() {
+      console.log(this.state.status)
+      //Присваиваем ивент
+      let element = event.currentTarget;
+      //Меняем значение в this.state
+      this.moreAndLessComments();
+      //Присваемываем значения в par
+      let par = this.moreAndLessComments();
+      //Отображаем par в данном элементе
+      element.innerHTML = this.moreAndLessComments();
+      //Обновляем содержимое в блоке комментариев
+      console.log(this.state.status)
       this.update();
+      return element;
     }
 
     /**
      * Обновляем показ комментариев
      */
     update() {
-      super.update();
-      this.unmountChildren();
-      this.getContainer().innerHTML = this.render(this.options);
-      this.updateSubscribe();
+      this.getContainer().querySelector(
+        ".post-comments-block"
+      ).innerHTML = this.renderBody(this.options);
     }
 
     /**
-     * Обновляем event listener 
-     */
-    updateSubscribe() {
-      this.afterMount();
-    }
-
-    /**
-     * Отображение заголовка комментария в завиисимости от кол-во комментов
+     * Отображение заголовка комментария в завиисимости от status(default-при загрузке, status = undefined)
      */
     moreAndLessComments() {
-      if (this.options.item.comments.length < 4) {
-        return `<p class="post-comments__more"></p>`;
-      } else if (this.state.status == false) {
-        this.state.status = true; 
-        this.state.count = 0; // для '.slice' в render
-        return `<p class="post-comments__more">Показать еще комментарии</p>`;
-      } else if (this.state.status == true) {
-        this.state.status = false; 
-        this.state.count = -3; // для '.slice' в render
-        return `<p class="post-comments__more">Скрыть комментарии</p>`;
+      switch (this.state.status) {
+        case false:
+          this.state.status = true;
+          this.state.count = 0; // для '.slice' в render
+          return `Скрыть комментарии`;
+        case true:
+          this.state.status = false;
+          this.state.count = -3; // для '.slice' в render
+          return `Показать еще комментарии`;
+        default:
+          return `Показать еще комментарии`;
+      }
+    }
+
+    /**
+     * Отображение или скрытие post-comments__more в зависимости от кол-во комментарий
+     */
+    showOrHideCommentMore() {
+      if (this.options.item.comments.length < 3) {
+        this._more.style.display = "none";
+      } else {
+        this._more.style.display = "flex";
       }
     }
 
     render({ item }) {
-      let comments = item.comments.slice(this.state.count);
       return `<div class="post-comments">
-              ${this.moreAndLessComments()}
-              ${comments.map(this.renderComment.bind(this)).join("\n")}
+                <p class="post-comments__more">${this.moreAndLessComments()}</p>
+                ${this.renderCommentsBlock({ item })}
               </div>`;
+    }
+
+    renderCommentsBlock({ item }) {
+      return `<div class="post-comments-block">
+                ${this.renderBody({ item })}
+              </div>`;
+    }
+
+    renderBody({ item }) {
+      //Срезаем массив под нужнное кол-во
+      let comments = item.comments.slice(this.state.count);
+      return `${comments.map(this.renderComment.bind(this)).join("\n")}`;
     }
 
     renderComment({ userUrlImage, userName, commentText, commentTime }) {
       return `<div class="post-comments-comment">
                 <img class="post-comments-comment__ava" src="${userUrlImage}" alt="Аватар" title=${userName}>
-                 <p class="post-comments-comment__name" title="${userName}">${userName}</p>
-                 <span class="post-comments-comment__text" title="Комментарий">${commentText}</span>
+                <p class="post-comments-comment__name" title="${userName}">${userName}</p>
+                <span class="post-comments-comment__text" title="Комментарий">${commentText}</span>
                 <p class="post-comments-comment__time text_lightgray" title="Время">${Time.convert(
                   commentTime
                 )}</p>
