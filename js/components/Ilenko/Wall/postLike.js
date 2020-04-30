@@ -94,7 +94,6 @@ define(["Base/Component", "Wall/NetworkService"], function (
     }
 
     render({ item }) {
-      console.log("post loike")
       return `<div class="post-likes">
             ${this.childrens.create(PostLikeSmiles, { item })}
         </div>`;

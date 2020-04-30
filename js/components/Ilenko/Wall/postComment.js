@@ -8,16 +8,7 @@ define([
       super(options);
       this.state.status;
       this.state.count = -3;
-      this.options.item.comments = [];
     }
-
-    // beforeMount() {
-    //   NetworkService.getDataComments(this.options.item.id).then((res) => {
-    //     this.options.item.comments = res;
-    //     this.update();
-    //     this.afterMount();
-    //   });
-    // }
 
     afterMount() {
       //подписываемся под "Показать еще комментарии"
@@ -25,10 +16,11 @@ define([
       this.subscribeTo(this._more, "click", this.onClickMore.bind(this));
 
       //подписываемся под "Отправить"
-      this._send = document.querySelectorAll(".post-sender__send");
-      this._send.forEach((el) => {
+      this._sendButton = document.querySelectorAll(".post-sender__send");
+      this._sendButton.forEach((el) => {
         this.subscribeTo(el, "click", this.onClickSend.bind(this));
       });
+
       // Присваиваем значение после загрузки(Для того, чтобы при нажатии на .post-comments__more менялось значение)
       this.state.status = false;
       // Отобпажаем или еще нет .post-comments__more

@@ -8,7 +8,6 @@
     "css!Wall/css/post.css",
   ], function (Component, PostLike, PostComment, PostSenderBlock, Time, NetworkService) {
   
-
   class Post extends Component {
 
     afterMount() {
