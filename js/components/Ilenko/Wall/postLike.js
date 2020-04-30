@@ -3,11 +3,6 @@ define(["Base/Component", "Wall/NetworkService"], function (
   NetworkService, 
 ) {
   class PostLike extends Component {
-    render({ item }) {
-      return `<div class="post-likes">
-            ${this.childrens.create(PostLikeSmiles, { item })}
-        </div>`;
-    }
     afterMount() {
       this._like = this.getContainer().querySelectorAll(
         ".post-like-smiles__text"
@@ -64,28 +59,22 @@ define(["Base/Component", "Wall/NetworkService"], function (
     }
 
     updateLike(alt) {
-      //TODO: заменить данные с гет запроса NetworkService.getData(this.options.item.id)
-      let likeFire = this.options.item.likeFire;
-      let likeHeartEyes = this.options.item.likeHeartEyes;
-      let likeRocket = this.options.item.likeRocket;
-      let likeLike = this.options.item.likeLike;
-      let likeBomb = this.options.item.likeBomb;
-
+      //Прибавляем один лайк 
       switch (alt) {
         case "fire":
-          likeFire += 1;
+          this.options.item.likes.likeFire += 1;
           break;
         case "heartEyes":
-          likeHeartEyes += 1;
+          this.options.item.likes.likeHeartEyes += 1;
           break;
         case "rocket":
-          likeRocket += 1;
+          this.options.item.likes.likeRocket += 1;
           break;
         case "like":
-          likeLike += 1;
+          this.options.item.likes.likeLike += 1;
           break;
         case "bomb":
-          likeBomb += 1;
+          this.options.item.likes.likeBomb += 1;
           break;
         default:
           console.error("Что то пошло не так с лайками");
@@ -94,14 +83,21 @@ define(["Base/Component", "Wall/NetworkService"], function (
 
       //закидываем в модель
       let likes = this.updateLikeModel(
-        likeFire,
-        likeHeartEyes,
-        likeRocket,
-        likeLike,
-        likeBomb
+        this.options.item.likes.likeFire,
+        this.options.item.likes.likeHeartEyes,
+        this.options.item.likes.likeRocket,
+        this.options.item.likes.likeLike,
+        this.options.item.likes.likeBomb
       );
       // заменяем модель
       NetworkService.putData(this.options.item.id, likes);
+    }
+
+    render({ item }) {
+      console.log("post loike")
+      return `<div class="post-likes">
+            ${this.childrens.create(PostLikeSmiles, { item })}
+        </div>`;
     }
   }
 
@@ -119,35 +115,35 @@ define(["Base/Component", "Wall/NetworkService"], function (
               alt: "fire",
               scr: "img/post/fire.png",
             },
-            count: this.state.item.likeFire,
+            count: this.state.item.likes.likeFire,
           },
           {
             img: {
               alt: "heartEyes",
               scr: "img/post/heartEyes.png",
             },
-            count: this.state.item.likeHeartEyes,
+            count: this.state.item.likes.likeHeartEyes,
           },
           {
             img: {
               alt: "rocket",
               scr: "img/post/rocket.png",
             },
-            count: this.state.item.likeRocket,
+            count: this.state.item.likes.likeRocket,
           },
           {
             img: {
               alt: "like",
               scr: "img/post/like.png",
             },
-            count: this.state.item.likeLike,
+            count: this.state.item.likes.likeLike,
           },
           {
             img: {
               alt: "bomb",
               scr: "img/post/bomb.png",
             },
-            count: this.state.item.likeBomb,
+            count: this.state.item.likes.likeBomb,
           },
         ],
         commentIcon: {
