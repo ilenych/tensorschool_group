@@ -4,17 +4,18 @@ define({
    */
   fetchData: async function () {
     try {
-      let responce = await fetch("http://localhost:3000/db"); 
+      let responce = await fetch("http://localhost:3000/db");
       let content = await responce.json();
+      console.log(content);
       return this.sortArray(content);
     } catch (err) {
       console.error(err);
     }
   },
-/**
- * Сортирует массив комментариев по постам
- * @param {json} content - база данных в json формате
- */
+  /**
+   * Сортирует массив комментариев по постам
+   * @param {json} content - база данных в json формате
+   */
   sortArray: function (content) {
     let arr = [];
     for (let i in content.comments) {
@@ -31,11 +32,11 @@ define({
     }
     return this.createModel(content, arr);
   },
-/**
- * Создает модель для отображения данных
- * @param {json} content -  база данных в json формате
- * @param {Array} comments - отсортированный массив комментариев 
- */
+  /**
+   * Создает модель для отображения данных
+   * @param {json} content -  база данных в json формате
+   * @param {Array} comments - отсортированный массив комментариев
+   */
   createModel: function (content, comments) {
     let arr = [];
     for (let i = 0; i < content.wall.length; i++) {
@@ -68,21 +69,27 @@ define({
       console.error(err);
     }
   },
-/**
+  /**
    * Удаляет данный пост с http://localhost:3000/model/id
    * id
    */
   deleteData: async function (id) {
     try {
-      await fetch("http://localhost:3000/model" + "/" + id, {
+      await fetch("http://localhost:3000/wall/" + id, {
+        method: "DELETE",
+      });
+      await fetch("http://localhost:3000/wall/" + id + "/comments", {
+        method: "DELETE",
+      });
+      await fetch("http://localhost:3000/likes/" + id, {
         method: "DELETE",
       });
     } catch (err) {
       console.error(err);
     }
   },
-/**
-   * Заменяет данные лайков в http://localhost:3000/like/id 
+  /**
+   * Заменяет данные лайков в http://localhost:3000/like/id
    */
   putData: async function (id, likes) {
     try {
@@ -98,35 +105,13 @@ define({
     }
   },
 
-  getDataUser: async function () {
-    try {
-        let responce = await fetch("http://localhost:3000/users/1");
-        let content = await responce.json();
-        return content;
-      } catch (err) {
-        console.error(err);
-      }
-  }
+  // getDataUser: async function () {
+  //   try {
+  //     let responce = await fetch("http://localhost:3000/users/1");
+  //     let content = await responce.json();
+  //     return content;
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // },
 });
-
-//----------------------------------- ?? -------------------------------------------
-  // var urlencoded = new URLSearchParams();
-  // urlencoded.append('login', 'vasya');
-  // urlencoded.append('password', 'vasya123');
-
-  // var requestOptions = {
-  //   method: 'POST',
-  //   headers: {"Content-Type": "application/x-www-form-urlencoded"},
-  //   body: urlencoded,
-  //   "credentials": "include"
-  // };
-
-  // fetch("https://tensor-school.herokuapp.com/user/login", requestOptions)
-  // .then((res) => {
-  //   console.log(res.text())
-  // }).then(rel => console.log(rel))
-
-  // fetch("https://tensor-school.herokuapp.com/user/current", {'credentials': 'include'})
-  // .then((res) => {
-  //   console.log(res.text())
-  // });
