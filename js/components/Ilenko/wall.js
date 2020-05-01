@@ -14,9 +14,51 @@ define(["Base/Component", "Wall/post", "Wall/NetworkService"], function (
 
     beforeMount() {
       NetworkService.fetchData().then((res) => {
-        this.state.item = res;
-        this.update();
+        this.sortArray(res);
       });
+    }
+
+    /**
+     * Сортирует массив комментариев по постам
+     * @param {json} content - база данных в json формате
+     */
+    sortArray(content) {
+      let arr = [];
+      for (let i in content.comments) {
+        for (let n = 0; n < content.wall.length; n++) {
+          let number = n + 1;
+          if (content.comments[i].wallId == number) {
+            if (arr[n] == undefined) {
+              arr[n] = new Array(content.comments[i]);
+            } else {
+              arr[n].push(content.comments[i]);
+            }
+          }
+        }
+      }
+      this.createModel(content, arr);
+    }
+    /**
+     * Создает модель для отображения данных
+     * @param {json} content -  база данных в json формате
+     * @param {Array} comments - отсортированный массив комментариев
+     */
+    createModel(content, comments) {
+      let arr = [];
+      for (let i = 0; i < content.wall.length; i++) {
+        arr.push({
+          id: content.wall[i].id,
+          userName: content.wall[i].userName,
+          userUrlImage: content.wall[i].userUrlImage,
+          time: content.wall[i].time,
+          postText: content.wall[i].postText,
+          postUrlImage: content.wall[i].postUrlImage,
+          likes: content.likes[i],
+          comments: comments[i],
+        });
+      }
+      this.state.item = arr;
+      this.update();
     }
 
     beforeUpdate() {
