@@ -38,6 +38,14 @@
 .profile-main-info__less-label{
 	display: none;
 }
+.profile-info-category__moreLabel{
+	cursor: pointer;
+	font-size: 12px;
+	color: rgb(230, 228, 228);
+}
+.profile-info-category__moreLabel:hover{
+	color: #4da3ff;
+}
 
 .profile-info-category__fields {
 	display: grid;
@@ -47,7 +55,9 @@
 
 .profile-info-category__title{
 	margin: 15px 0;
-	border-bottom: 1px solid #ececec;;
+	border-bottom: 1px solid #ececec;
+	display: flex;
+	justify-content: space-between;
 }
 
 .profile-info__title,
