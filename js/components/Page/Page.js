@@ -13,6 +13,7 @@ define([
 
         constructor(options) {
             super(options);
+            this.state.id = options.id;
         }
 
         render() {
@@ -20,7 +21,7 @@ define([
                         ${this.childrens.create(Header)}
                         <div class="content">
                             <div class="content__main-column">
-                                ${this.childrens.create(ProfileInfo, { page: this, id: 'current' })}
+                                ${this.childrens.create(ProfileInfo, { id: this.state.id })}
                                 <div class="module">
                                     <div class="gallery">
                                         <div class="gallery__photo">

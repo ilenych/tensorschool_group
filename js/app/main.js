@@ -23,8 +23,7 @@ define([
                 ], function (Page) {
                     'use strict';
                     const page = factory.create(Page, {
-                        userId: 22,
-                        currentUserId: result.id
+                        id: result.id
                     });
                     page.mount(document.body);
                 });
