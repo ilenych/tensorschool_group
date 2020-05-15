@@ -55,7 +55,6 @@ define(["Base/Component", "Wall/NetworkService"], function (
     }
 
     render({ item }) {
-      console.log(this);
       return ` <div class="post-sender">
             <img class="post-sender__ava" src="${item.userUrlImage}" alt="Аватар">
             <textarea class="post-sender__textarea"></textarea>
