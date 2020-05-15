@@ -12,11 +12,15 @@ define([
         }
 
         afterMount() {
+            //подписываемя на клик по крестику
             this.subscribeTo(this.getContainer().querySelector(".window__close"), 'click', this.closeWindow.bind(this));
+            // подписываемя на клик по окужающей области
             this.subscribeTo(this.getContainer().querySelector(".shadow"), 'click', this.closeWindow.bind(this));
         }
 
+        // закрыть окно
         closeWindow() {
+            //размонитруем окно
             this.unmount();
         }
 

@@ -14,10 +14,12 @@ define([
             }
         }
 
+        //возвращает модель
         toModel(result) {
             return new this.options.model(result);
         }
 
+        //делает запрос на сервер и возвращает полученную модель
         read(id) {
             if (id == 'current')
                 return Requestor.currentUser().then(response => response.json()).then(result => {

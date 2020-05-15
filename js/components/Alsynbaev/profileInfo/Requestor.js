@@ -7,12 +7,13 @@ define([
         constructor(options) {
             this.options = {
                 ...{
-                    host: ('https://tensor-school.herokuapp.com/'),
+                    host: ('https://tensor-school.herokuapp.com/'),//хост сервера
                 },
                 ...options
             }
         }
 
+        //запрос на сервер
         async request(request, options, params) {
             const defaultOptions = {
                 headers: {
@@ -29,6 +30,7 @@ define([
             return fetch(url, { ...defaultOptions, ...options });
         }
 
+        //обновить данные текущего авторизованного пользователя
         async updateUser(data) {
 
             const requestOptions = {
@@ -43,14 +45,17 @@ define([
             return this.request('user/update', requestOptions);
         }
 
+        //чтение данных по id пользователя
         async readUser(id) {
             return this.request('user/read/' + id, { credentials: 'include' });
         }
 
+        //чтение данных текущего авторизованного пользоваля
         async currentUser() {
             return this.request('user/current', { credentials: 'include' });
         }
 
+        // создать аккаунт
         async createUser({ login, password }) {
             const urlencoded = new URLSearchParams();
             urlencoded.append('login', login);
@@ -67,6 +72,7 @@ define([
             return this.request('user/create', requestOptions);
         }
 
+        //залогиниться
         async login({ login, password }) {
             let urlencoded = new URLSearchParams();
             urlencoded.append('login', login);
@@ -84,6 +90,7 @@ define([
             return this.request('user/login', requestOptions);
         }
 
+        //выйти из аккаунта
         async logout() {
             return this.request('user/logout');
         }

@@ -10,9 +10,10 @@ define([
 
         constructor({ item }) {
             super();
-            this.state.items = item;
+            this.state.items = item; // модель данных
         }
 
+        //рендер радио кнопок "пол" пользователя
         renderGenderInput(num) {
             if (num == 1) {
                 return `<div><input name="gender" type="radio" value="1" checked>Мужской
@@ -26,6 +27,7 @@ define([
             }
         }
 
+        //рендер селектора "семейное положение"
         renderRelationInput(num) {
             const relationStr = ["Не указан", "Не женат/Не замужем", "Есть подруга/Есть друг", "Влюблен/Влюблена", "Женат/Замужем", "В гражданском браке", "Все сложно"];
             let strOptions;
@@ -37,6 +39,7 @@ define([
         }
 
         beforeMount() {
+            //приваиваем модулю модель данных
             this.setState({
                 categories: [{
                     title: 'Основная информация',
@@ -153,12 +156,16 @@ define([
         }
 
         afterMount() {
+
+            //подписываемя на клик по кнопке "сохранить"
             this.subscribeTo(this.getContainer().querySelector(".profile-info-edit__saveBtn"), 'click', this.saveInfo.bind(this));
         }
 
+        // сохраняем данные из формы
         saveInfo() {
+            //форма
             const form = document.forms.profileInfoEditForm;
-
+            //формируем модель данных
             const formModel = new ProfileInfoPersonModel({
                 first_name: form.first_name.value,
                 last_name: form.last_name.value,
@@ -184,7 +191,7 @@ define([
                 about: form.about.value,
                 quotes: form.quotes.value,
             });
-
+            //передаем модель на сервер
             Requestor.updateUser(formModel)
                 .then(function (response) {
                     if (!response.ok) {
@@ -200,6 +207,7 @@ define([
         }
 
         render(options, { categories }) {
+            //рендер полей
             let infoRender = categories.map((item) => this.childrens.create(ProfileInfoCategoryEdit, item)).join('');
 
             return `<div class="profile-info-edit">

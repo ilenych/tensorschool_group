@@ -10,6 +10,7 @@ define([
 ], function (Component, DataSet, ProfileInfoPersonModel, ProfileInfoEdit, Window, View, Requestor) {
     'use strict';
 
+
     class ProfileInfoView extends Component {
 
         constructor(options) {
@@ -17,13 +18,14 @@ define([
         }
 
         render(options) {
+
+            //создаем View
             this.view = this.childrens.create(View, {
                 dataSet: factory.create(DataSet, {
-                    object: options.object,
-                    model: ProfileInfoPersonModel
+                    model: ProfileInfoPersonModel // полученные данные с сервера пробзразуем в этот тип модели данных 
                 }),
-                comp: ProfileInfo,
-                id: options.id
+                comp: ProfileInfo, // комнонент для монитрования и куда передадим модель данных
+                id: options.id // id пользователя данные которого нужно загрузить
             });
 
             return `<div class="module">
@@ -90,6 +92,7 @@ define([
             this.subscribeTo(this.getContainer().querySelector(".profile-main-info__edit"), 'click', this.createWindow.bind(this));
         }
 
+        //создать окно редактирования
         createWindow() {
 
             const window = this.childrens.create(Window, {
