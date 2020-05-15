@@ -20,7 +20,7 @@ define([
                         ${this.childrens.create(Header)}
                         <div class="content">
                             <div class="content__main-column">
-                                ${this.childrens.create(ProfileInfo, { object: 'user/read', id: '22' })}
+                                ${this.childrens.create(ProfileInfo, { page: this, id: 'current' })}
                                 <div class="module">
                                     <div class="gallery">
                                         <div class="gallery__photo">

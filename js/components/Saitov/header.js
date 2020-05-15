@@ -6,12 +6,12 @@ define([
     'use strict';
 
     class Header extends Component {
-        
+
         constructor({ item }) {
             super({ item });
             this.state.item = item;
         }
-        
+
         beforeMount() {
             if (this.state.item === undefined) {
                 this.state.item = new HeaderPersonModel({
@@ -21,19 +21,19 @@ define([
                 });
             }
         }
-        
+
         afterMount() {
             this.subscribeTo(this.getContainer().querySelector(".header__profile-edit"), 'click', this.onClickHandler);
         }
-        
+
         /* 
          * Обработчик нажатия кнопки в шапке
          * Будет передавать родителю информацию о срабатывании события
          */
         onClickHandler() {
-                
+
         }
-        
+
         render(options, { item }) {
             return `
                 <header class="header">
@@ -46,11 +46,13 @@ define([
                             <img class="header__profile-avatar header__profile-avatar_mini" src="${this.state.item.getPhotoUrl()}" alt="avatar">
                             <span class="header__profile-button">&#8942;</span>
                         </a>
+
+                        <a style="cursor: pointer;color: #ccc;" onclick="fetch('https://tensor-school.herokuapp.com/user/logout', {credentials: 'include'}).then(response => {console.log(response.text()); response.ok?location.reload():alert(response.text())});">ВЫЙТИ</a>
                     </nav>
                 </header>
             `;
         }
-        
+
     }
 
     return Header;

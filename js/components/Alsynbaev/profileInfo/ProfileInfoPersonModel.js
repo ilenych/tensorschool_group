@@ -16,6 +16,9 @@ define(['Base/Model'], function (Model) {
                         email: почта / Пример: 'milo@milo.ru',
                         relation: 2, 0 - не указан, .........
                         education: Образование,
+                        work: Работа,
+                        alcohol: Алкоголь,
+                        smoking: Курение,
                         interests: Интересы,
                         music: Любимая музыка,
                         activities: Деятельность,
@@ -29,15 +32,16 @@ define(['Base/Model'], function (Model) {
      */
 
     class ProfileInfoPersonModel extends Model {
-        //семейное положение
-        relationStr = [["Не женат", "Есть подруга", "Влюблен", "Женат", "В гражданском браке", "Все сложно"], ["Не замужем", "Есть друг", "Влюблена", "Замужем", "В гражданском браке", "Все сложно"]];
 
         /**
          * Возвращает строку с семейным положением с учетом пола пользователя
          */
         getRelationStr() {
+            //семейное положение
+            const relationStr = [["Не женат", "Есть подруга", "Влюблен", "Женат", "В гражданском браке", "Все сложно"], ["Не замужем", "Есть друг", "Влюблена", "Замужем", "В гражданском браке", "Все сложно"]];
+
             if (this.gender >= 1 && this.relation >= 1) {
-                return this.relationStr[this.gender - 1][this.relation - 1];
+                return relationStr[this.gender - 1][this.relation - 1];
             }
             return '';
         }
@@ -59,8 +63,12 @@ define(['Base/Model'], function (Model) {
                 month: "long",
                 day: "numeric",
             };
+            const bday = datetime.toLocaleString("ru", options);
+            const age = this.getAge();
+            if (bday && age)
+                return bday + ", " + age + " лет";
 
-            return datetime.toLocaleString("ru", options) + ", " + this.getAge() + " лет";
+            return '';
         }
 
         /**

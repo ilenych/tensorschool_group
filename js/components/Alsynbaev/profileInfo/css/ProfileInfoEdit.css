@@ -1,0 +1,22 @@
+.profile-info-category-edit textarea{
+	max-width: 450px;
+	min-width: 420px;
+	max-height: 100px;
+	min-height: 20px;
+	font-family: 'Segoe UI', sans-serif;
+}
+
+.profile-info-category-edit__fields input{
+	padding: 3px;
+}
+
+.profile-info-edit__saveBtn{
+	margin: 10px auto;
+	background: #4a76a8;
+	color: #fff;
+	box-shadow: 1px 1px 5px #999;
+	border: none;
+	border-radius: 5px;
+	padding: 10px;
+	cursor: pointer;
+}
