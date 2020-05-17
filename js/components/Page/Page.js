@@ -3,10 +3,11 @@ define([
     'Header',
     'ProfileInfo',
     'Wall',
+    'CreatePost',
     'ProfilePic',
     'Messages',
     'css!Page/css/Page.css'
-], function (Component, Header, ProfileInfo, Wall, ProfilePic, Messages) {
+], function (Component, Header, ProfileInfo, Wall, CreatePost, ProfilePic, Messages) {
     'use strict';
 
     class Page extends Component {
@@ -38,6 +39,7 @@ define([
                                         </div>
                                     </div>
                                 </div>
+                               ${this.childrens.create(CreatePost)}
                                 ${this.childrens.create(Wall)}
                             </div>
 

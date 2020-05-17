@@ -1,0 +1,74 @@
+/*Craete Post  */
+.createPost {
+  display: flex;
+  flex-direction: column;
+}
+/* Content */
+.createPost-content {
+  display: flex;
+}
+
+.createPost-content__post {
+  flex-grow: 1;
+  margin: 5px 0;
+  margin-left: 10px;
+  padding: 5px;
+  max-width: 675px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px #999;
+}
+
+.createPost-content__ava {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+/* Picture */
+.createPost-picture {
+  display: none;
+}
+
+.createPost-picture__link {
+  margin: 10px 0;
+  margin-left: 20px;
+  padding: 5px;
+  min-width: 300px;
+  max-width: 613px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px #999;
+}
+
+[contenteditable="true"]:empty:before {
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block;
+  color: lightgrey;
+}
+
+.createPost-picture__img {
+  align-self: center;
+  width: 30px;
+  height: 30px;
+}
+
+/* Publish */
+.createPost-buttons {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.button-settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: white;
+  background-color: #4a76a8;
+}
