@@ -90,7 +90,7 @@ define(["Base/Component", "Wall/NetworkService"], function (
         this.options.item.likes.likeBomb
       );
       // заменяем модель
-      NetworkService.putData(this.options.item.id, likes);
+      NetworkService.putDataLikes(this.options.item.id, likes);
     }
 
     render({ item }) {

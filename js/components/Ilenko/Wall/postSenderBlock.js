@@ -27,7 +27,7 @@ define(["Base/Component", "Wall/NetworkService"], function (
       //создает коммент
       let comment = this.createComment(text);
       //пушит на сервер
-      NetworkService.postData(comment);
+      NetworkService.postDataComment(comment);
       //чистим textarea
       this._text.value = '';
     }
@@ -37,9 +37,8 @@ define(["Base/Component", "Wall/NetworkService"], function (
      */
     createComment(text) {
       let comment = {
-        //TODO: Заменить userUrlImage и userName
-        userUrlImage: "img/post/newUser.png", // зависит от sign in пользователя
-        userName: "ZZ", // зависит от sign in пользователя
+        userUrlImage: this.options.item.user.userUrlImage, 
+        userName: this.options.item.user.userName, 
         commentText: text,
         commentTime: new Date(),
         wallId: this.options.item.id,
@@ -56,7 +55,7 @@ define(["Base/Component", "Wall/NetworkService"], function (
 
     render({ item }) {
       return ` <div class="post-sender">
-            <img class="post-sender__ava" src="${item.userUrlImage}" alt="Аватар">
+            <img class="post-sender__ava" src="${item.user.userUrlImage}" alt="Аватар" title=${item.user.userName}>
             <textarea class="post-sender__textarea"></textarea>
             <img class="post-sender__add" src="img/post/plus.png" alt="Добавить" title="Добавить">
             <img class="post-sender__send" src="img/post/send.png" alt="Отправить" title="Отправить">
