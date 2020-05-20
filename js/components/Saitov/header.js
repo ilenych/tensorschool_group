@@ -17,7 +17,7 @@ define([
                 this.state.item = new HeaderPersonModel({
                     online: true,
                     lastActivity: new Date(2020, 3, 17, 16, 30),
-                    photoUrl: 'img/2.jpg',
+                    photoUrl: 'img/post/newUser.png',
                 });
             }
         }

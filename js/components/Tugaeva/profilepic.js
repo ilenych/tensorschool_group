@@ -5,7 +5,7 @@ define([
     class ProfilePic extends Component {
         render () {
             return `
-                <img class="picture picture_profile" src="./js/components/Tugaeva/profilepic/img/ygritte.jpg" title="Name Surname" alt="Name Surname">
+                <img class="picture picture_profile" src="img/post/newUser.png" title="Name Surname" alt="Name Surname">
             `;
         }
     }
