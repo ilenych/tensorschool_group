@@ -23,8 +23,7 @@ define([
         }
 
         afterMount() {
-            this.subscribeTo(this.getContainer().querySelector(".header__profile-edit"), 'click', this.onClickHandler);
-            this.subscribeTo(this.getContainer().querySelector(".header__profile-button"), 'click', this.onLClickButton);
+            // this.subscribeTo(this.getContainer().querySelector(".header__profile-edit"), 'click', this.onClickHandler);
         }
 
         /* 
