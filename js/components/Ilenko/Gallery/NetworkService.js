@@ -5,6 +5,7 @@ define({
   fetchData: async function (id) {
     try {
       let responce = await fetch("http://localhost:3000/gallery/" + id);
+      //let responce = await fetch("https://tensorschool.herokuapp.com/gallery" + id);
       let content = await responce.json();
       return content;
     } catch (err) {
