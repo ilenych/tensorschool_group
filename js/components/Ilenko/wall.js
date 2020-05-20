@@ -31,7 +31,7 @@ define(["Base/Component", "Wall/post", "Wall/NetworkService"], function (
             this.onClickButtonPublish.bind(this)
           );
         }.bind(this),
-        1000
+        5000
       );
     }
 

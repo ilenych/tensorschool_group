@@ -24,6 +24,7 @@ define([
 
         afterMount() {
             this.subscribeTo(this.getContainer().querySelector(".header__profile-edit"), 'click', this.onClickHandler);
+            this.subscribeTo(this.getContainer().querySelector(".header__profile-button"), 'click', this.onLClickButton);
         }
 
         /* 
@@ -41,7 +42,6 @@ define([
                         <p class="header__activity">
                             ${this.state.item.getActivity()}
                         </p>
-                        <div class="header__profile-edit">Редактировать</div>
                         <a class="header__profile-menu" href="#">
                             <img class="header__profile-avatar header__profile-avatar_mini" src="${this.state.item.getPhotoUrl()}" alt="avatar">
                             <span class="header__profile-button">&#8942;</span>

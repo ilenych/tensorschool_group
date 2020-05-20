@@ -1,0 +1,74 @@
+/* Блок галереи в профиле пользователя */
+.photoGallery{
+	object-fit: cover;
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	max-height: 10em;
+}
+
+.photoGallery__photo {
+	object-fit: cover;
+	margin: 0 0.2em;
+	border-radius: 5%;
+	max-width: 24%;
+	cursor: pointer; /* me */
+}
+
+/*Блоки большой галереи*/
+
+.bigGalery{
+	display: grid;
+	align-items: stretch;
+	justify-content: stretch;
+	width: 100%;
+	grid-template-columns: repeat(3, 33%);
+	grid-gap: 0.3em;
+	padding: 1em 0;
+}
+
+.bigGallery-header {
+	display: flex;
+	justify-content: space-between;
+}
+.bigGallery-header__title {
+
+}
+
+.bigGalery__photo{
+	object-fit: cover;
+	border-radius: 3px;
+	width: 100%;
+	max-height: 400px;
+}
+.bigGalery__photo:hover{
+	cursor: default;
+	box-shadow: 0 0 10px rgb(36, 33, 33);
+}
+
+/* блоки переходов страниц scrollPages*/
+.scrollPages{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	height: 3em;
+}
+
+.scrollPages_number{
+	border-radius: 10%;
+	text-align: center;
+	width: 40px;
+}
+.scrollPages_numberIsSelected {
+	color: cornflowerblue;
+}
+
+.scrollPages_caption{
+	width: 10em;
+}
+.scrollPages_number:hover{
+	cursor: pointer;
+	font-size: 2em;
+	box-shadow: 0px 5px 5px grey;
+}

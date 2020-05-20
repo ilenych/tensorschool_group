@@ -6,8 +6,9 @@ define([
     'CreatePost',
     'ProfilePic',
     'Messages',
+    'Gallery',
     'css!Page/css/Page.css'
-], function (Component, Header, ProfileInfo, Wall, CreatePost, ProfilePic, Messages) {
+], function (Component, Header, ProfileInfo, Wall, CreatePost, ProfilePic, Messages, Gallery) {
     'use strict';
 
     class Page extends Component {
@@ -18,27 +19,14 @@ define([
         }
 
         render() {
+            console.log(this.state.id)
             return `<div class="page">
                         ${this.childrens.create(Header)}
                         <div class="content">
                             <div class="content__main-column">
                                 ${this.childrens.create(ProfileInfo, { id: this.state.id })}
-                                <div class="module">
-                                    <div class="gallery">
-                                        <div class="gallery__photo">
-                                            <img src="img/1.jpg" alt="" class="page__image page__image__rounded">
-                                        </div>
-                                        <div class="gallery__photo">
-                                            <img src="img/3.jpg" alt="" class="page__image page__image__rounded">
-                                        </div>
-                                        <div class="gallery__photo">
-                                            <img src="img/5.jpg" alt="" class="page__image page__image__rounded">
-                                        </div>
-                                        <div class="gallery__photo">
-                                            <img src="img/4.jpg" alt="" class="page__image page__image__rounded">
-                                        </div>
-                                    </div>
-                                </div>
+                                ${this.childrens.create(Gallery, { id: this.state.id })}
+                            
                                ${this.childrens.create(CreatePost)}
                                 ${this.childrens.create(Wall)}
                             </div>
