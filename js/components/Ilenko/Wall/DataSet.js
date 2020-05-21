@@ -21,7 +21,6 @@ define(["Base/Model", "Wall/NetworkService"], function (
     //делает запрос на сервер и возвращает полученную модель
     read() {
       return NetworkService.fetchData().then((result) => {
-        console.log(result);
         return this.toModel(result);
       });
     }

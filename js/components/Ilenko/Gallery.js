@@ -16,7 +16,6 @@ define([
     }
 
     render(options) {
-        console.log(options)
         //создаем View
         this.view = this.childrens.create(View, {
             dataSet: factory.create(DataSet, {
@@ -51,7 +50,6 @@ define([
     }
 
     openBigGallery() {
-      console.log(this)
       const window = this.childrens.create(Window, {
         title: "Фотогаллерея",
         content: this.childrens.create(View, {

@@ -8,6 +8,44 @@ define([
   "use strict";
 
   class FetcherManager extends Component {
+    afterMount() {
+      //AddEventListener на кнопку "опубликовать"
+      setTimeout(
+        function () {
+          this._publish = document.querySelector(
+            ".createPost-buttons__publish"
+          );
+          this.subscribeTo(
+            this._publish,
+            "click",
+            this.onClickButtonPublish.bind(this)
+          );
+        }.bind(this),
+        3000
+      );
+    }
+
+    onClickButtonPublish() {
+      this._wallBasis = document.querySelector(
+        ".wallBasis"
+      );
+
+       setTimeout(
+        function () {
+          this._wallBasis.innerHTML = "";
+
+          this.view = this.childrens.create(View, {
+            dataSet: factory.create(DataSet, {
+              model: PostModel,
+            }),
+            comp: Wall,
+          });
+          this._wallBasis.innerHTML = this.view;
+        }.bind(this),
+        2000
+      );
+    }
+
     render() {
       //создаем View
       this.view = this.childrens.create(View, {
@@ -17,7 +55,7 @@ define([
         comp: Wall,
       });
 
-      return `<div class="wall basis">
+      return `<div class="wallBasis">
                   ${this.view}
               </div>`;
     }
@@ -27,12 +65,9 @@ define([
     constructor({ item }) {
       super();
       this.state.item = item;
-      console.log(item)
     }
 
     render(options, { item }) {
-      console.log(item)
-
       return `<div class="wall">
                 ${item.map(this.renderPost.bind(this)).join("\n")}
               </div>`

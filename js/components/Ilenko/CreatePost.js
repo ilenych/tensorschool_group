@@ -52,13 +52,14 @@ define([
         "click",
         this.onClickButtonPublish.bind(this)
       );
+
+      this._link = this.getContainer().querySelector(
+        ".createPost-picture__link"
+      );
     }
 
     onClickButtonAddPicture() {
       this._picture = this.getContainer().querySelector(".createPost-picture");
-      this._link = this.getContainer().querySelector(
-        ".createPost-picture__link"
-      );
       this.changeTitleOnButtonAddPicture();
       this.showOrHideLinkForPicture();
     }
@@ -107,6 +108,7 @@ define([
      */
     createPost() {
         //Создаем модель
+        console.log(this)
       let post = {
         userName: this.options.item.userName,
         userUrlImage: this.options.item.userUrlImage,

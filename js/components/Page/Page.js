@@ -19,7 +19,6 @@ define([
         }
 
         render() {
-            console.log(this.state.id)
             return `<div class="page">
                         ${this.childrens.create(Header)}
                         <div class="content">

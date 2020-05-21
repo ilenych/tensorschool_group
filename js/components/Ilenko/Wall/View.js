@@ -1,4 +1,7 @@
-define(["Base/Component"], function (Component) {
+define(["Base/Component", "Wall/NetworkService"], function (
+  Component,
+  NetworkService
+) {
   "use strict";
 
   class View extends Component {
@@ -18,11 +21,11 @@ define(["Base/Component"], function (Component) {
     loadData() {
       this.options.dataSet.read().then((item) => {
         // this.setItems(item);
-        this.sortArray(item)
+        this.sortArray(item);
         // this.setItems(item);
       });
     }
-       /**
+    /**
      * Сортирует массив комментариев по постам
      * @param {json} content - база данных в json формате
      */
@@ -120,11 +123,10 @@ define(["Base/Component"], function (Component) {
     }
 
     setItems(item) {
-      console.log(item);
-      
-      this.setState({item});
+      this.setState({ item });
       this.update();
     }
+
     update() {
       super.update();
       this.unmountChildren(); //размонитруем дочерние модули
