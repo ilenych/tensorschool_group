@@ -1,8 +1,8 @@
 define([
   "Base/Component",
-  "Wall/PostLike",
-  "Wall/PostComment",
-  "Wall/PostSenderBlock",
+  "Wall/postLike",
+  "Wall/postComment",
+  "Wall/postSenderBlock",
   "components/Ilenko/Common/TimeConvector",
   "components/Ilenko/Service/NetworkService",
   "css!Wall/css/post.css",
