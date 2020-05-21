@@ -3,8 +3,8 @@ define([
   "Wall/PostLike",
   "Wall/PostComment",
   "Wall/PostSenderBlock",
-  "Wall/TimeConvector",
-  "Wall/NetworkService",
+  "components/Ilenko/Common/TimeConvector",
+  "components/Ilenko/Service/NetworkService",
   "css!Wall/css/post.css",
 ], function (
   Component,
@@ -29,7 +29,8 @@ define([
     }
 
     deletePost(comments) {
-      NetworkService.deleteData(this.options.item.id)
+      NetworkService.deleteDataPost(this.options.item.id);
+      NetworkService.deleteDataLikes(this.options.item.id);
       for (let i in comments) {
         NetworkService.deleteDataComment(comments[i].id);
       }
@@ -49,10 +50,10 @@ define([
                     item.userUrlImage
                   }" alt="Аватар">
                   <p class="post-header__name" title="${item.userName}">${
-        item.userName
-      }</p>
+                      item.userName
+                  }</p>
                   <p class="post-header__time text_lightgray" title="Время">${Time.convert(
-                    item.time
+                      item.time
                   )}</p>
                   <img class="post-header__delete" src="img/post/trash.png" alt="delete">
               </div>`;

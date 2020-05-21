@@ -1,4 +1,4 @@
-define(["Base/Component", "Wall/NetworkService"], function (
+define(["Base/Component", "components/Ilenko/Service/NetworkService"], function (
   Component,
   NetworkService, 
 ) {

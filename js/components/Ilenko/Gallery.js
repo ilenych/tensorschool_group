@@ -2,14 +2,14 @@ define([
   "Gallery/GalleryModel",
   "Base/Component",
   "Gallery/BigGallery",
-  "Gallery/View",
+  "components/Ilenko/Common/View",
+  "components/Ilenko/Common/DataSet",
   "Gallery/Window",
-  "Gallery/DataSet",
   "css!Gallery/css/Gallery.css",
-], function (GalleryModel, Component, BigGallery, View, Window, DataSet) {
+], function (GalleryModel, Component, BigGallery, View,  DataSet, Window) {
   "use strict";
 
-  class ProfileGaleryView extends Component {
+  class ProfileGalleryView extends Component {
 
     constructor(options) {
         super(options);
@@ -89,5 +89,5 @@ define([
       return stringImage;
     }
   }
-  return ProfileGaleryView;
+  return ProfileGalleryView;
 });

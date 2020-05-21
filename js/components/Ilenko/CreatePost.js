@@ -1,6 +1,6 @@
 define([
   "Base/Component",
-  "Wall/NetworkService",
+  "components/Ilenko/Service/NetworkService",
   "css!CreatePost/css/CreatePost.css",
 ], function (Component, NetworkService) {
   "use strict";

@@ -1,8 +1,7 @@
 define([
   "Base/Component",
-  "Wall/TimeConvector",
-  "Wall/NetworkService",
-], function (Component, Time, NetworkService) {
+  "components/Ilenko/Common/TimeConvector",
+], function (Component, Time) {
   class PostComment extends Component {
     constructor(options) {
       super(options);

@@ -1,10 +1,10 @@
 define([
   "Base/Component",
   "Wall/post",
-  "Wall/View",
   "Wall/PostModel",
-  "Wall/DataSet"
-], function (Component, Post, View, PostModel, DataSet) {
+  "components/Ilenko/Common/View",
+  "components/Ilenko/Common/DataSet",
+], function (Component, Post, PostModel, View, DataSet) {
   "use strict";
 
   class FetcherManager extends Component {
