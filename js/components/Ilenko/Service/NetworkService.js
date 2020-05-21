@@ -4,7 +4,7 @@ define({
    */
   fetchData: async function () {
     try {
-      let responce = await fetch("http://localhost:3000/db");
+      let responce = await fetch("https://tensorschool.herokuapp.com/db");
       let content = await responce.json();
       return content;
     } catch (err) {
@@ -18,7 +18,7 @@ define({
   getDataComments: async function (id) {
     try {
       let responce = await fetch(
-        "http://localhost:3000/wall/" + id + "/comments"
+        "https://tensorschool.herokuapp.com/wall/" + id + "/comments"
       );
       let content = await responce.json();
       return content;
@@ -31,7 +31,7 @@ define({
    */
   postDataComment: async function (comment) {
     try {
-      await fetch("http://localhost:3000/comments", {
+      await fetch("https://tensorschool.herokuapp.com/comments", {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
@@ -48,7 +48,7 @@ define({
    */
   deleteDataPost: async function (id) {
     try {
-      await fetch("http://localhost:3000/wall/" + id, {
+      await fetch("https://tensorschool.herokuapp.com/wall/" + id, {
         method: "DELETE",
       });
     } catch (err) {
@@ -61,7 +61,7 @@ define({
    */
   deleteDataLikes: async function (id) {
     try {
-      await fetch("http://localhost:3000/likes/" + id, {
+      await fetch("https://tensorschool.herokuapp.com/likes/" + id, {
         method: "DELETE",
       });
     } catch (err) {
@@ -74,7 +74,7 @@ define({
    */
   deleteDataComment: async function (id) {
     try {
-      await fetch("http://localhost:3000/comments/" + id, {
+      await fetch("https://tensorschool.herokuapp.com/comments/" + id, {
         method: "DELETE",
       });
     } catch (err) {
@@ -86,7 +86,7 @@ define({
    */
   putDataLikes: async function (id, likes) {
     try {
-      await fetch("http://localhost:3000/likes/" + id, {
+      await fetch("https://tensorschool.herokuapp.com/likes/" + id, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
@@ -103,7 +103,7 @@ define({
    */
   postDataLikes: async function (likes) {
     try {
-      await fetch("http://localhost:3000/likes", {
+      await fetch("https://tensorschool.herokuapp.com/likes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
@@ -120,7 +120,7 @@ define({
    */
   postData: async function (post) {
     try {
-      await fetch("http://localhost:3000/wall", {
+      await fetch("https://tensorschool.herokuapp.com/wall", {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
@@ -136,7 +136,7 @@ define({
    */
   getDataUser: async function () {
     try {
-      let responce = await fetch("http://localhost:3000/users/1");
+      let responce = await fetch("https://tensorschool.herokuapp.com/users/1");
       let content = await responce.json();
       return content;
     } catch (err) {
