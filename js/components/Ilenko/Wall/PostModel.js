@@ -2,7 +2,6 @@ define(["Base/Model", "components/Ilenko/Service/NetworkService"], function (Mod
     class PostModel extends Model {
 
       getContent() {
-        console.log("model")
         return this.sortArray();
       }
 
@@ -40,7 +39,6 @@ define(["Base/Model", "components/Ilenko/Service/NetworkService"], function (Mod
             }
           }
         }
-        console.log(arr)
         this.createLikes();
         return this.createModel(arr);
       }

@@ -20,7 +20,6 @@ define(["Base/Model", "components/Ilenko/Service/NetworkService"], function (
   
       //делает запрос на сервер и возвращает полученную модель
       read() {
-          console.log("yes")
         return NetworkService.fetchData().then((result) => {
           return this.toModel(result);
         });

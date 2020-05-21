@@ -17,7 +17,6 @@ define(["Base/Component"], function (Component) {
       //загружаем данные из сервера
       loadData() {
         this.options.dataSet.read().then((item) => {
-          console.log(item.getContent())
           this.setItems(item.getContent());
         });
       }
