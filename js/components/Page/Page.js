@@ -26,7 +26,7 @@ define([
                                 ${this.childrens.create(ProfileInfo, { id: this.state.id })}
                                 ${this.childrens.create(Gallery, { id: this.state.id })}
                                 ${this.childrens.create(CreatePost)}
-
+                                ${this.childrens.create(Wall)}
                             </div>
 
                             <div class="content__secondary-column">

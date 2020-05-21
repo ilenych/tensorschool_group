@@ -7,7 +7,7 @@ requirejs.config({
         Comp: 'components',
         Base: 'components/Base',
         Page: 'components/Page',
-        Wall: 'components/Ilenko/wall', // Иленко Алексей
+        Wall: 'components/Ilenko/Wall', // Иленко Алексей
         CreatePost: 'components/Ilenko/CreatePost', // Иленко Алексей
         Gallery: 'components/Ilenko/Gallery', // Иленко Алексей
         Modul2: 'components/Timofeev/Modul2', // Тимофеев Павел
