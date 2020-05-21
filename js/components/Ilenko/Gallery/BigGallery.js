@@ -88,8 +88,8 @@ define(["Base/Component", "Gallery/ScrollPages"], function (
               <p class="bigGallery-header__title">Текущая страница: ${this.pageNumder}</p>`;
     }
 
-    renderGalleryImages({ img }) {
-      return `<img src=${img} class="bigGalery__photo">`;
+    renderGalleryImages({ img, id }) {
+      return `<img src=${img} class="bigGalery__photo" alt="Фото ${id}">`;
     }
   }
 
