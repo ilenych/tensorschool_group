@@ -15,12 +15,13 @@ define([
 
         constructor(options) {
             super(options);
-            this.state.id = options.id;
+            this.state.id = options.id || options.curUserId;
+            this.state.curUserId = options.options.curUserId;
         }
 
         render() {
             return `<div class="page">
-                        ${this.childrens.create(Header)}
+                        ${this.childrens.create(Header, { id: this.state.curUserId })}
                         <div class="content">
                             <div class="content__main-column">
                                 ${this.childrens.create(ProfileInfo, { id: this.state.id })}
@@ -31,7 +32,7 @@ define([
 
                             <div class="content__secondary-column">
                                 <div class="module">
-                                    ${this.childrens.create(ProfilePic)}
+                                    ${this.childrens.create(ProfilePic, { id: this.state.id })}
                                 </div>
 
                                 <div class="module">

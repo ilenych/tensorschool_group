@@ -18,7 +18,8 @@ define([
             const defaultOptions = {
                 headers: {
                     'Origin': `${this.options.host}`,
-                }
+                },
+                credentials: 'include'
             }
             let url = new URL(this.options.host);
             url.pathname = request;
@@ -36,7 +37,6 @@ define([
             const requestOptions = {
                 method: 'POST',
                 body: JSON.stringify(data),
-                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 }
@@ -47,12 +47,12 @@ define([
 
         //чтение данных по id пользователя
         async readUser(id) {
-            return this.request('user/read/' + id, { credentials: 'include' });
+            return this.request('user/read/' + id);
         }
 
         //чтение данных текущего авторизованного пользоваля
         async currentUser() {
-            return this.request('user/current', { credentials: 'include' });
+            return this.request('user/current');
         }
 
         // создать аккаунт
@@ -66,7 +66,6 @@ define([
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: urlencoded,
-                credentials: 'include'
             }
 
             return this.request('user/create', requestOptions);
@@ -83,11 +82,32 @@ define([
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: urlencoded,
-                credentials: 'include'
+                body: urlencoded
             }
 
             return this.request('user/login', requestOptions);
+        }
+
+        async getPhotosList(id) {
+            const requestOptions = {
+                headers: {
+                    'Content-Type': 'image/png',
+                },
+            }
+
+            return this.request(`/photo/list/${id}`, requestOptions);
+        }
+
+        //загрузка фото для профайла
+        async uploadProfilePhoto(value) {
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'image/png',
+                },
+                body: value
+            }
+            return this.request('user/upload_photo', requestOptions);
         }
 
         //выйти из аккаунта

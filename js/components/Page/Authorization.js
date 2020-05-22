@@ -21,24 +21,7 @@ define([
                 .then(result => console.log(result))
                 .catch(error => console.log("error", error));
 
-            //перезагружем страницу
-            location.reload();
-        }
-
-        //создание аккаунта пользователя
-        async create() {
-            //получение логина и пароля из формы
-            const login = document.forms.authorizationForm.login.value;
-            const password = document.forms.authorizationForm.password.value;
-
-            //запрос на сервер на создание аккааунта
-            await Requestor.createUser({ login, password })
-                .then(response => response.text())
-                .then(result => console.log(result))
-                .catch(error => console.log("error", error));
-
-            // перезагружем страницу
-            location.reload();
+            location.search = "";
         }
 
         //после монитироавния
@@ -46,8 +29,6 @@ define([
 
             //подписываемя на событие клика кнопки "войти"
             this.subscribeTo(this.getContainer().querySelector(".authorization__enterBtn"), 'click', this.authorize.bind(this));
-            //подписываемя на событие клика кнопки "создать"
-            this.subscribeTo(this.getContainer().querySelector(".authorization__createBtn"), 'click', this.create.bind(this));
         }
 
         render() {
@@ -61,7 +42,7 @@ define([
                             <input name="password" type="password" maxlength="25" >
                         <input class="authorization__enterBtn" type="button" value="Войти">
                         Нет аккаунта?
-                        <input class="authorization__createBtn" type="button" value="Создать">
+                        <input onclick="location.search='?creation'" class="authorization__createBtn" type="button" value="Создать">
                     </form>
             </div>`;
         }

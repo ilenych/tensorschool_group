@@ -67,6 +67,9 @@ define([
                     }, {
                         title: 'Семейное положение',
                         value: this.renderRelationInput(this.state.items.relation || 0)
+                    }, {
+                        title: 'Фото профиля',
+                        value: `<input name="profile_photo" type="file">`
                     }
                     ]
                 }, {
@@ -162,9 +165,11 @@ define([
         }
 
         // сохраняем данные из формы
-        saveInfo() {
+        async saveInfo() {
             //форма
             const form = document.forms.profileInfoEditForm;
+
+
             //формируем модель данных
             const formModel = new ProfileInfoPersonModel({
                 first_name: form.first_name.value,
@@ -191,19 +196,28 @@ define([
                 about: form.about.value,
                 quotes: form.quotes.value,
             });
+
             //передаем модель на сервер
-            Requestor.updateUser(formModel)
+            await Requestor.updateUser(formModel)
                 .then(function (response) {
                     if (!response.ok) {
 
                     } else {
                         return response.text()
                     }
-                }).then(function (result) {
-                    location.reload();
                 })
                 .catch(error => console.log("error", error));
 
+            if (form.profile_photo.files[0])
+                await Requestor.uploadProfilePhoto(form.profile_photo.files[0]).then(function (response) {
+                    if (!response.ok) {
+
+                    } else {
+                        return response.text()
+                    }
+                }).catch(error => alert("error", error));
+
+            location.reload();
         }
 
         render(options, { categories }) {

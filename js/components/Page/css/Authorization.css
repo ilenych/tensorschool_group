@@ -8,6 +8,17 @@ body {
 	background: #f8f8fa;
 }
 
+.authorization a{
+    color: #ccc;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.authorization a:hover{
+    text-decoration: underline;
+}
+
+
 .authorization {
 	margin-top: 250px;
 }
@@ -21,10 +32,14 @@ body {
 
 .authorization__form{
 	display: grid;
-	/*grid-template-columns: 0.5fr 1fr;*/
+	grid-template-columns: 1fr 1fr;
 	grid-gap: 10px 0;
 	color: #c4c4c4;
 	align-items: center;
+}
+
+.authorization__backLink{
+	grid-column-end: span 2;
 }
 
 .authorization__createBtn,

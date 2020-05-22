@@ -7,6 +7,7 @@ requirejs.config({
         Comp: 'components',
         Base: 'components/Base',
         Page: 'components/Page',
+        Router: 'Page/Router',
         Wall: 'components/Ilenko/Wall', // Иленко Алексей
         CreatePost: 'components/Ilenko/CreatePost', // Иленко Алексей
         Gallery: 'components/Ilenko/Gallery', // Иленко Алексей
@@ -16,6 +17,7 @@ requirejs.config({
         Header: 'components/Saitov/header', // Саитов Роман
         Modul5: 'components/Sagitdinov/Modul5', // Сагитдинов Руслан
         ProfileInfo: 'components/Alsynbaev/profileInfo', // Алсынбаев Фанис
+
 
         css: 'lib/require.css.min'
     }
@@ -29,6 +31,7 @@ class AbstractFactory {
         return new component(options || {});
     }
 }
+
 
 const factory = new AbstractFactory();
 

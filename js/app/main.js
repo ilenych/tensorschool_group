@@ -1,7 +1,10 @@
 define([
     'ProfileInfo/Requestor',
-], function (Requestor) {
+    'Page/Router'
+], function (Requestor, Router) {
     'use strict';
+
+    const url = new URL(window.location.href);
 
     //запрос на червер на получение данных текущего авторизованного пользователя
     Requestor.currentUser()
@@ -11,27 +14,19 @@ define([
                 //возврщаем полученные данные
                 return response.json();
             } else {
-                //если нет, загружаем страницу авторизации
-                require([
-                    'Page/Authorization'
-                ], function (Authorization) {
-                    'use strict';
-                    const autorization = factory.create(Authorization);
-                    autorization.mount(document.body);
-                });
+                if (url.searchParams.has('authorization') || url.searchParams.has('creation')) {
+                    Router.loadPage(url.search);
+                } else {
+                    Router.loadPage('?authorization');
+                }
             }
         }).then(function (result) {
             if (result) {
-                //загружаем основную страницу
-                require([
-                    'Page/Page'
-                ], function (Page) {
-                    'use strict';
-                    const page = factory.create(Page, {
-                        id: result.id // id авторизованного подльзователя
-                    });
-                    page.mount(document.body);
-                });
+                if (!url.search) {
+                    Router.loadPage(`?page=${result.id}`, { curUserId: result.id });
+                } else {
+                    Router.loadPage(url.search, { curUserId: result.id });
+                }
             }
         }).catch(error => console.log("error", error));
 

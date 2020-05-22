@@ -2,15 +2,10 @@ define([
     'Base/Component',
     'ProfileInfo/DataSet',
     'ProfileInfo/ProfileInfoPersonModel',
-    'ProfileInfo/ProfileInfoEdit',
-    'ProfileInfo/Window',
     'ProfileInfo/View',
-    'ProfileInfo/Requestor',
     'css!ProfileInfo/css/profileInfo.css'
-], function (Component, DataSet, ProfileInfoPersonModel, ProfileInfoEdit, Window, View, Requestor) {
+], function (Component, DataSet, ProfileInfoPersonModel, View) {
     'use strict';
-
-
     class ProfileInfoView extends Component {
 
         constructor(options) {
@@ -84,29 +79,8 @@ define([
         renderFullName({ item }) {
             return `<div class="profile-main-info__name">
                 ${item.first_name || 'Неизвестно'} ${item.last_name || 'Неизвестно'}
-                <input class="profile-main-info__edit" type=button value="РЕДАКТИРОВАТЬ">
+                
             </div>`;
-        }
-
-        afterMount() {
-            this.subscribeTo(this.getContainer().querySelector(".profile-main-info__edit"), 'click', this.createWindow.bind(this));
-        }
-
-        //создать окно редактирования
-        createWindow() {
-
-            const window = this.childrens.create(Window, {
-                title: 'Редактировать',
-                content: this.childrens.create(View, {
-                    dataSet: this.childrens.create(DataSet, {
-                        object: 'user',
-                        model: ProfileInfoPersonModel
-                    }),
-                    comp: ProfileInfoEdit,
-                    id: 'current'
-                })
-            });
-            window.mount(document.body);
         }
 
         /**
@@ -292,6 +266,8 @@ define([
             const profileInfoFull = document.querySelector(".profile-info__full");
             const profileMainInfoMoreLabel = document.querySelector(".profile-main-info__more-label");
             const profileMainInfoLessLabel = document.querySelector(".profile-main-info__less-label");
+
+
 
             if (profileInfoFull.style.display == 'none') {
                 profileInfoFull.style.display = 'grid';
