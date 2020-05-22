@@ -50,11 +50,6 @@ define([
 
         //создать окно редактирования
         createWindow() {
-
-            Requestor.currentUser().then(response => response.text()).then(result => {
-                console.log(result);
-            });
-
             const window = this.childrens.create(Window, {
                 title: 'Редактировать',
                 content: this.childrens.create(View, {
