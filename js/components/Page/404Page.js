@@ -16,7 +16,7 @@ define([
                         <div class="page404__module">
                             <h1 class="page404__title">404</h1>
                             <h2 class="page404__text">Страница не найдена!</h2>
-                            <a href="https://ksupipr.github.io/tensorschool_group/">Вернуться на домашнюю страницу</a>
+                            <a href="${location.pathname}">Вернуться на домашнюю страницу</a>
                         </div>
                     </div>`;
         }
