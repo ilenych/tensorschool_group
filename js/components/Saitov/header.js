@@ -77,7 +77,7 @@ define([
                             ${state.item.getActivity()}
                         </p>
                         <a class="header__profile-edit">Редактировать</a>
-                        <a class="header__profile-menu" href="${location.host}">
+                        <a class="header__profile-menu" href="${location.pathname}">
                             <img class="header__profile-avatar header__profile-avatar_mini" src="https://tensor-school.herokuapp.com/user/photo/${state.id}" alt="avatar">
                             <span class="header__profile-button">&#8942;</span>
                         </a>
