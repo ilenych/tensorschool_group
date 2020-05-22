@@ -72,7 +72,7 @@ define([
 
                         <input class="authorization__enterBtn" type="button" value="Создать">
 
-                        <a href="/?authorization" class="authorization__backLink" >Вернуться к странице авторизации</a>
+                        <a href="https://ksupipr.github.io/tensorschool_group/?authorization" class="authorization__backLink" >Вернуться к странице авторизации</a>
                     </form>
             </div>`;
         }
