@@ -1,11 +1,44 @@
-define(["Base/Component", "components/Ilenko/Service/NetworkService"], function (
-  Component,
-  NetworkService
-) {
+define([
+  "Base/Component",
+  "components/Ilenko/Service/NetworkService",
+  "components/Alsynbaev/ProfileInfo/DataSet",
+  "components/Ilenko/Common/View",
+  "CreatePost/CreatePostModel",
+], function (Component, NetworkService, DataSet, View, CreatePostModel) {
+
+  class PostSenderBlockView extends Component {
+    constructor(options) {
+      super(options);
+    }
+
+    render(options) {
+      //создаем View
+      this.view = this.childrens.create(View, {
+        dataSet: factory.create(DataSet, {
+          model: CreatePostModel, // полученные данные с сервера пробзразуем в этот тип модели данных
+        }),
+        comp: PostSenderBlock, // комнонент для монитрования и куда передадим модель данных
+        id: options.item.userId, // id пользователя данные которого нужно загрузить
+        items: options.item
+      });
+
+      return `<div class="sender-block">
+                    ${this.view}
+                </div>`;
+    }
+  }
+
   class PostSenderBlock extends Component {
     afterMount() {
       this._send = this.getContainer().querySelector(".post-sender__send");
       this.subscribeTo(this._send, "click", this.onClick.bind(this));
+      //AddEventListener на image
+      const image = this.getContainer().querySelector(".post-sender__ava");
+      this.subscribeTo(image, "error", this.onErrorLoadImage.bind(this, image));
+    }
+
+    onErrorLoadImage(image) {
+      image.src = "img/nophoto.jpg";
     }
 
     onClick() {
@@ -29,7 +62,7 @@ define(["Base/Component", "components/Ilenko/Service/NetworkService"], function 
       //пушит на сервер
       NetworkService.postDataComment(comment);
       //чистим textarea
-      this._text.value = '';
+      this._text.value = "";
     }
     /**
      * Создает модель для пуша на сервер
@@ -37,14 +70,14 @@ define(["Base/Component", "components/Ilenko/Service/NetworkService"], function 
      */
     createComment(text) {
       let comment = {
-        userUrlImage: this.options.item.user.userUrlImage, 
-        userName: this.options.item.user.userName, 
+        userUrlImage: `https://tensor-school.herokuapp.com/user/photo/${this.options.items.userId}`,
+        userName: this.options.item,
         commentText: text,
         commentTime: new Date(),
-        wallId: this.options.item.id,
+        wallId: this.options.items.id,
       };
 
-      this.options.item.comments.push(comment);
+      this.options.items.comments.push(comment);
       return comment;
     }
 
@@ -53,9 +86,9 @@ define(["Base/Component", "components/Ilenko/Service/NetworkService"], function 
       delete this._text;
     }
 
-    render({ item }) {
+    render() {
       return ` <div class="post-sender">
-            <img class="post-sender__ava" src="${item.user.userUrlImage}" alt="Аватар" title=${item.user.userName}>
+            <img class="post-sender__ava" src="https://tensor-school.herokuapp.com/user/photo/${this.options.items.userId}" alt="Аватар" title=${this.options.item}>
             <textarea class="post-sender__textarea"></textarea>
             <img class="post-sender__add" src="img/post/plus.png" alt="Добавить" title="Добавить">
             <img class="post-sender__send" src="img/post/send.png" alt="Отправить" title="Отправить">
@@ -63,5 +96,5 @@ define(["Base/Component", "components/Ilenko/Service/NetworkService"], function 
     }
   }
 
-  return PostSenderBlock;
+  return PostSenderBlockView;
 });
