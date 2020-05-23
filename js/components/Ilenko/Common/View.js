@@ -16,12 +16,18 @@ define(["Base/Component"], function (Component) {
   
       //загружаем данные из сервера
       loadData() {
-        this.options.dataSet.read().then((item) => {
+        this.options.dataSet.read(this.options.id).then((item) => {
           this.setItems(item.getContent());
         });
       }
   
       setItems(item) {
+        //если приходит массив закидываем current useer id
+        if(Array.isArray(item)) {
+          for(let i in item){
+            item[i].userId = this.options.curId
+          }
+        }
         this.setState({ item });
         this.update();
       }
@@ -32,10 +38,21 @@ define(["Base/Component"], function (Component) {
         this.getContainer().innerHTML = "";
   
         //монтируем модуль и передаем данные
-        const view = this.childrens.create(this.options.comp, {
-          item: this.state.item,
-        });
-        view.mount(this.getContainer());
+        if(typeof this.state.item === 'string' || this.state.item instanceof String){
+          //Это для sender block
+          const view = this.childrens.create(this.options.comp, {
+            item: this.state.item,
+            items: this.options.items
+          });
+          view.mount(this.getContainer())
+        }else{
+          //Это для всех
+          const view = this.childrens.create(this.options.comp, {
+            item: this.state.item,
+          });
+          view.mount(this.getContainer());
+        }
+       
       }
   
       //пока данные не загружены, будет надпись "Загрузка..."
