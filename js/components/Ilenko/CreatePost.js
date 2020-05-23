@@ -1,7 +1,7 @@
 define([
   "Base/Component",
-  "components/Alsynbaev/ProfileInfo/DataSet",
-  "components/Alsynbaev/ProfileInfo/View",
+  "components/Alsynbaev/profileInfo/DataSet",
+  "components/Alsynbaev/profileInfo/View",
   "components/Ilenko/Service/NetworkService",
   "CreatePost/CreatePostModel",
   "css!CreatePost/css/CreatePost.css",
