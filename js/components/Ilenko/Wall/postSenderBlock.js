@@ -1,7 +1,7 @@
 define([
   "Base/Component",
   "components/Ilenko/Service/NetworkService",
-  "components/Alsynbaev/profileInfo/DataSet",
+  "ProfileInfo/DataSet",
   "components/Ilenko/Common/View",
   "CreatePost/CreatePostModel",
 ], function (Component, NetworkService, DataSet, View, CreatePostModel) {
