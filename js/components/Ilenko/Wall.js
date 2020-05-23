@@ -8,6 +8,11 @@ define([
   "use strict";
 
   class FetcherManager extends Component {
+    constructor(options) {
+      super(options);
+      this.id = options.id
+      this.curId = options.curId
+  }
     afterMount() {
       //AddEventListener на кнопку "опубликовать"
       setTimeout(
@@ -29,16 +34,18 @@ define([
       this._wallBasis = document.querySelector(
         ".wallBasis"
       );
-
        setTimeout(
         function () {
           this._wallBasis.innerHTML = "";
-
+          console.log(this)
           this.view = this.childrens.create(View, {
             dataSet: factory.create(DataSet, {
+              object: `wall`,
               model: PostModel,
             }),
             comp: Wall,
+            id: this.id,
+            curId: this.curId
           });
           this._wallBasis.innerHTML = this.view;
         }.bind(this),
@@ -50,9 +57,12 @@ define([
       //создаем View
       this.view = this.childrens.create(View, {
         dataSet: factory.create(DataSet, {
+          object: `wall`,
           model: PostModel,
         }),
         comp: Wall,
+        id: this.id,
+        curId: this.curId
       });
 
       return `<div class="wallBasis">
