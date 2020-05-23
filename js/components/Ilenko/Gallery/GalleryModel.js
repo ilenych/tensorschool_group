@@ -1,10 +1,13 @@
 define(["Base/Model"], function (Model) {
   class GalleryModel extends Model {
-
-   getContent() {
-      return this.gallery[0]//TODO: зависимость от пользователя
+    getContent() {
+      //Проверка на пустого json
+      if(JSON.stringify(this) === JSON.stringify({})){
+        return  { gallery: [] }
+      }else {
+        return this
+      }
     }
   }
-
   return GalleryModel;
 });

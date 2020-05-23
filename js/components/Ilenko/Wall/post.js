@@ -16,8 +16,16 @@ define([
 ) {
   class Post extends Component {
     afterMount() {
-      this._delete = this.getContainer().querySelector(".post-header__delete");
-      this.subscribeTo(this._delete, "click", this.onClose.bind(this));
+      //Отключил из-за бага в json server вместо одного объекта удаляет все объекты
+      // this._delete = this.getContainer().querySelector(".post-header__delete");
+      // this.subscribeTo(this._delete, "click", this.onClose.bind(this));
+      //AddEventListener на image
+      const image = this.getContainer().querySelector(".post-header__ava");
+      this.subscribeTo(image, "error", this.onErrorLoadImage.bind(this, image));
+    }
+
+    onErrorLoadImage(image) {
+      image.src = "img/nophoto.jpg";
     }
 
     onClose() {
@@ -50,10 +58,10 @@ define([
                     item.userUrlImage
                   }" alt="Аватар">
                   <p class="post-header__name" title="${item.userName}">${
-                      item.userName
-                  }</p>
+        item.userName
+      }</p>
                   <p class="post-header__time text_lightgray" title="Время">${Time.convert(
-                      item.time
+                    item.time
                   )}</p>
                   <img class="post-header__delete" src="img/post/trash.png" alt="delete">
               </div>`;

@@ -19,10 +19,18 @@ define(["Base/Model", "components/Ilenko/Service/NetworkService"], function (
       }
   
       //делает запрос на сервер и возвращает полученную модель
-      read() {
-        return NetworkService.fetchData().then((result) => {
-          return this.toModel(result);
-        });
+      read(id) {
+        if(this.options.object == "gallery") {
+          return NetworkService.getDataGallery(id).then((result) => {
+            return this.toModel(result);
+          });
+        }
+
+        if(this.options.object == "wall") {
+          return NetworkService.fetchData(id).then((result) => {
+            return this.toModel(result);
+          });
+        }
       }
     }
   

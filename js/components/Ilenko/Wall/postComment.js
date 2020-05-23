@@ -1,7 +1,7 @@
-define([
-  "Base/Component",
-  "components/Ilenko/Common/TimeConvector",
-], function (Component, Time) {
+define(["Base/Component", "components/Ilenko/Common/TimeConvector"], function (
+  Component,
+  Time
+) {
   class PostComment extends Component {
     constructor(options) {
       super(options);
@@ -15,15 +15,37 @@ define([
       this.subscribeTo(this._more, "click", this.onClickMore.bind(this));
 
       //подписываемся под "Отправить"
-      this._sendButton = document.querySelectorAll(".post-sender__send");
-      this._sendButton.forEach((el) => {
-        this.subscribeTo(el, "click", this.onClickSend.bind(this));
-      });
+      setTimeout(
+        function () {
+          this._sendButton = document.querySelectorAll(".post-sender__send");
+          this._sendButton.forEach((el) => {
+            this.subscribeTo(el, "click", this.onClickSend.bind(this));
+          });
+        }.bind(this),
+        1500
+      );
+   
 
       // Присваиваем значение после загрузки(Для того, чтобы при нажатии на .post-comments__more менялось значение)
       this.state.status = false;
       // Отобпажаем или еще нет .post-comments__more
       this.showOrHideCommentMore();
+
+      //AddEventListener на image
+      this.addEventListenerOnLoadImage()
+      
+    }
+    //Для замены изображение если его нет
+    addEventListenerOnLoadImage() {
+      const image = this.getContainer().querySelectorAll(".post-comments-comment__ava");
+      image.forEach((el) => {
+        this.subscribeTo(el, "error", this.onErrorLoadImage.bind(this, el));
+      });
+      
+    }
+
+    onErrorLoadImage(image) {
+      image.src = "img/nophoto.jpg";
     }
 
     /**
@@ -54,6 +76,8 @@ define([
       element.innerHTML = this.moreAndLessComments();
       //Обновляем содержимое в блоке комментариев
       this.update();
+      //Для замены изображение если его нет
+      this.addEventListenerOnLoadImage()
       return element;
     }
 
@@ -64,6 +88,8 @@ define([
       this.getContainer().querySelector(
         ".post-comments-block"
       ).innerHTML = this.renderBody(this.options);
+       //Для замены изображение если его нет
+       this.addEventListenerOnLoadImage()
     }
 
     /**
@@ -88,7 +114,7 @@ define([
      * Отображение или скрытие post-comments__more в зависимости от кол-во комментарий
      */
     showOrHideCommentMore() {
-      if (this.options.item.comments.length < 3) {
+      if (this.options.item.comments.length < 4) {
         this._more.style.display = "none";
       } else {
         this._more.style.display = "flex";

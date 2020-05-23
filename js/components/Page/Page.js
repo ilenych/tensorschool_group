@@ -26,8 +26,8 @@ define([
                             <div class="content__main-column">
                                 ${this.childrens.create(ProfileInfo, { id: this.state.id })}
                                 ${this.childrens.create(Gallery, { id: this.state.id })}
-                                ${this.childrens.create(CreatePost)}
-                                ${this.childrens.create(Wall)}
+                                ${this.childrens.create(CreatePost, { id: this.state.curUserId })}
+                                ${this.childrens.create(Wall, { id: this.state.id, curId: this.state.curUserId })}
                             </div>
 
                             <div class="content__secondary-column">

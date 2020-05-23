@@ -1,38 +1,46 @@
 define([
   "Base/Component",
+  "components/Alsynbaev/ProfileInfo/DataSet",
+  "components/Alsynbaev/ProfileInfo/View",
   "components/Ilenko/Service/NetworkService",
+  "CreatePost/CreatePostModel",
   "css!CreatePost/css/CreatePost.css",
-], function (Component, NetworkService) {
+], function (Component, DataSet, View, NetworkService, CreatePostModel) {
   "use strict";
 
-  class FetcherManagerCreatePost extends Component {
-    constructor({ item }) {
-      super();
-      this.state.item = item;
-      this.options.view;
+  class CreatePostView extends Component {
+    constructor(options) {
+      super(options);
     }
-    beforeMount() {
-      NetworkService.getDataUser().then((res) => {
-        this.state.item = res;
-        this.update();
+
+    render(options) {
+      //создаем View
+      this.view = this.childrens.create(View, {
+        dataSet: factory.create(DataSet, {
+          model: CreatePostModel, // полученные данные с сервера пробзразуем в этот тип модели данных
+        }),
+        comp: CreatePost, // комнонент для монитрования и куда передадим модель данных
+        id: options.id, // id пользователя данные которого нужно загрузить
       });
-    }
 
-    beforeUpdate() {
-      this.getContainer().innerHTML = "";
-
-      this.options.view = this.childrens.create(CreatePost, this.state);
-      this.options.view.mount(this.getContainer());
-    }
-
-    render() {
       return `<div class="module">
-                ${this.options.view}
+                  ${this.view}
               </div>`;
     }
   }
 
   class CreatePost extends Component {
+    constructor(options) {
+      super(options);
+      this.state.id = options.parent.options.id;
+      this.state.item = options.item;
+    }
+
+    beforeMount() {
+      this.setState({
+        fullName: this.state.item.first_name + " " + this.state.item.last_name,
+      });
+    }
     afterMount() {
       //AddEventListener на кнопку "добавить картинку"
       this._addPicture = this.getContainer().querySelector(
@@ -53,9 +61,20 @@ define([
         this.onClickButtonPublish.bind(this)
       );
 
+      //AddEventListener на image
+      const image = this.getContainer().querySelector(
+        ".createPost-content__ava"
+      );
+      this.subscribeTo(image, "error", this.onErrorLoadImage.bind(this, image));
+
       this._link = this.getContainer().querySelector(
         ".createPost-picture__link"
       );
+      this._wallId = document.querySelector(".wallBasis")
+    }
+
+    onErrorLoadImage(image) {
+      image.src = "img/nophoto.jpg";
     }
 
     onClickButtonAddPicture() {
@@ -107,15 +126,15 @@ define([
      * Создает модель и пушит на сервер
      */
     createPost() {
-        //Создаем модель
-        console.log(this)
-      let post = {
-        userName: this.options.item.userName,
-        userUrlImage: this.options.item.userUrlImage,
+      //Создаем модель
+      let post =  new CreatePostModel ({
+        userName: this.state.fullName,
+        userUrlImage: `https://tensor-school.herokuapp.com/user/photo/${this.state.id}`,
         time: new Date(),
         postText: this._content.innerHTML,
         postUrlImage: this._link.innerHTML,
-      };
+        userId: this._wallId.id
+      });
       //Пушим на сервер
       NetworkService.postData(post);
       //Чистим textarea
@@ -124,10 +143,10 @@ define([
       return post;
     }
     //Рендер createPost
-    render(options, { item }) {
+    render() {
       return `<div class="createPost">
                 <div class="createPost-content">
-                    <img class="createPost-content__ava" src=${this.options.item.userUrlImage} alt="Аватарка" title=${this.options.item.userName}>
+                    <img class="createPost-content__ava" src="https://tensor-school.herokuapp.com/user/photo/${this.state.id}" alt=${this.state.fullName} title=${this.state.fullName}>
                      <div contenteditable="true" class="createPost-content__post" placeholder="Чем хотите поделиться?"></div>
                 </div>
                 <div class="createPost-picture">
@@ -142,5 +161,5 @@ define([
     }
   }
 
-  return FetcherManagerCreatePost;
+  return CreatePostView;
 });

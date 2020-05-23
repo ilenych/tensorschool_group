@@ -2,8 +2,9 @@ define([
     'Base/Component',
     'ProfileInfo/Requestor',
     'ProfileInfo/ProfileInfoPersonModel',
+    'components/Ilenko/Service/NetworkService',
     'css!Page/css/Authorization.css'
-], function (Component, Requestor, ProfileInfoPersonModel) {
+], function (Component, Requestor, ProfileInfoPersonModel, NetworkService) {
 
     class Creation extends Component {
 
@@ -29,8 +30,18 @@ define([
 
             //запрос на сервер на создание аккааунта
             await Requestor.createUser({ login, password })
-                .then(response => response.text())
-                .then(result => console.log(result))
+                .then(response => response.json())
+                .then((result) => {
+                    NetworkService.postDataUser({
+                        id: result.id,
+                        userName: form.first_name.value + " " +  form.last_name.value,
+                    })
+                    NetworkService.postDataGallery({
+                        id: result.id,
+                        gallery: []
+                    })
+                    console.log(result)}
+                    )
                 .catch(error => console.log("error", error));
 
             //передаем модель на сервер

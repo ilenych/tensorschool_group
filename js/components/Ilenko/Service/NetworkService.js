@@ -1,146 +1,199 @@
-define({
-  /**
-   * Возвращает все данные с сервера
-   */
-  fetchData: async function () {
-    try {
-      let responce = await fetch("https://tensorschool.herokuapp.com/db");
-      let content = await responce.json();
-      return content;
-    } catch (err) {
-      console.error(err);
-    }
-  },
-  /**
-   * Получение комментариев по id
-   * @param {Number} id - id элемента
-   */
-  getDataComments: async function (id) {
-    try {
-      let responce = await fetch(
-        "https://tensorschool.herokuapp.com/wall/" + id + "/comments"
-      );
-      let content = await responce.json();
-      return content;
-    } catch (err) {
-      console.error(err);
-    }
-  },
-  /**
-   * Пушит данные с комментами в https://tensorschool.herokuapp.com/comments
-   */
-  postDataComment: async function (comment) {
-    try {
-      await fetch("https://tensorschool.herokuapp.com/comments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
+define([], function () {
+  "use strict";
+
+  class NetworkService {
+    constructor(options) {
+      this.options = {
+        ...{
+          host: "https://tensorschool.herokuapp.com/", //хост сервера
         },
-        body: JSON.stringify(comment),
-      });
-    } catch (err) {
-      console.error(err);
+        ...options,
+      };
     }
-  },
-  /**
-   * Удаляет данные с сервера по id
-   * @param {Number} id - id элемента
-   */
-  deleteDataPost: async function (id) {
-    try {
-      await fetch("https://tensorschool.herokuapp.com/wall/" + id, {
-        method: "DELETE",
-      });
-    } catch (err) {
-      console.error(err);
+    /**
+     * Запрос на сервер
+     * @param {String} path - конец url строки
+     */
+    async request(path) {
+      try {
+        let responce = await fetch(this.options.host + path);
+        let content = await responce.json();
+        return content;
+      } catch (err) {
+        console.error(err);
+      }
     }
-  },
- /**
-   * Удаляет данные с сервера по id
-   * @param {Number} id - id элемента
-   */
-  deleteDataLikes: async function (id) {
-    try {
-      await fetch("https://tensorschool.herokuapp.com/likes/" + id, {
-        method: "DELETE",
-      });
-    } catch (err) {
-      console.error(err);
+    /**
+     * Пуш на сервер
+     * @param {String} path - конец url строки
+     * @param {*} model - модель, для передачи на сервер
+     */
+    async post(path, model) {
+      try {
+        await fetch(this.options.host + path, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+          },
+          body: JSON.stringify(model),
+        });
+      } catch (err) {
+        console.error(err);
+      }
     }
-  },
-  /**
-   * Удаляет комментарии с сервера по wallId
-   * @param {Number} id - id элемента
-   */
-  deleteDataComment: async function (id) {
-    try {
-      await fetch("https://tensorschool.herokuapp.com/comments/" + id, {
-        method: "DELETE",
-      });
-    } catch (err) {
-      console.error(err);
+    /**
+     * Удаление данных с сервера
+     * @param {String} path - конец url строки
+     */
+    async delete(path) {
+      try {
+        await fetch(this.options.host + path, {
+          method: "DELETE",
+        });
+      } catch (err) {
+        console.error(err);
+      }
     }
-  },
-  /**
-   * Заменяет данные лайков на сервера в зависиимости от id
-   */
-  putDataLikes: async function (id, likes) {
-    try {
-      await fetch("https://tensorschool.herokuapp.com/likes/" + id, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-        },
-        body: JSON.stringify(likes),
-      });
-    } catch (err) {
-      console.error(err);
+    /**
+     * Заменяет данные на сервере
+     * @param {String} path - конец url строки
+     * @param {{*} model - модель, для передачи на сервер
+     */
+    async put(path, model) {
+      try {
+        await fetch(this.options.host + path, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+          },
+          body: JSON.stringify(model),
+        });
+      } catch (err) {
+        console.error(err);
+      }
     }
-  },
-  /**
-   * Пушит модель данных лайков на сервер
-   * @param {Object} likes - модель лайков
-   */
-  postDataLikes: async function (likes) {
-    try {
-      await fetch("https://tensorschool.herokuapp.com/likes", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-        },
-        body: JSON.stringify(likes),
-      });
-    } catch (err) {
-      console.error(err);
+    /**
+     * Получение комментариев по id
+     * @param {String} id - id пользователся
+     */
+    async getDataComments(id) {
+      const path = "wall/" + id + "/comments";
+      this.request(path);
     }
-  },
-  /**
-   * Пущит модель данный нового поста на сервер
-   * @param {Object} post
-   */
-  postData: async function (post) {
-    try {
-      await fetch("https://tensorschool.herokuapp.com/wall", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-        },
-        body: JSON.stringify(post),
-      });
-    } catch (err) {
-      console.error(err);
+    /**
+     * Получение фотографий по id
+     * @param {String} id - id пользователся
+     */
+    async getDataGallery(id) {
+      const path = "gallery/" + id;
+      return this.request(path).then((result) => {
+        return result;
+      })
     }
-  },
-  /**
-   * Получение данных о пользователе
-   */
-  getDataUser: async function () {
-    try {
-      let responce = await fetch("https://tensorschool.herokuapp.com/users/1");
-      let content = await responce.json();
-      return content;
-    } catch (err) {
-      console.error(err);
+    /**
+     * Полуяение всех данных по id
+     * @param {String} id - id пользователся
+     */
+    async fetchData(id) {
+      try {
+        let arr = [];
+        let responce = await fetch(
+          this.options.host + "users/" + id + "/wall"
+        );
+        let content = await responce.json();
+        arr = content;
+        for (let i in content) {
+          let responceLikes = await fetch(
+            this.options.host + "likes/" + content[i].id
+          );
+          let contentLikes = await responceLikes.json();
+
+          let responceComments = await fetch(
+            this.options.host + "wall/" + content[i].id + "/comments"
+          );
+          let contentComments = await responceComments.json();
+          arr.push(contentLikes, contentComments);
+        }
+        // console.log(content)
+        return arr;
+      } catch (err) {
+        console.error(err);
+      }
     }
-  },
+    /**
+     * Пуш комментариев
+     * @param {Object} comment - модель комментариев
+     */
+    async postDataComment(comment) {
+      const path = "comments";
+      this.post(path, comment);
+    }
+    /**
+     * Пуш поста
+     * @param {Object} post
+     */
+    async postData(post) {
+      const path = "wall";
+      this.post(path, post);
+    }
+    /**
+     * Пуш пользователя
+     * @param {Object} user
+     */
+    async postDataUser(user) {
+      const path = "users";
+      this.post(path, user);
+    }
+    /**
+     * Пуш фото
+     * @param {Object} gallery
+     */
+    async postDataGallery(gallery) {
+      const path = "gallery";
+      this.post(path, gallery);
+    }
+    /**
+     * Пуш лайков
+     * @param {Object} likes
+     */
+    async postDataLikes(likes) {
+      const path = "likes";
+      this.post(path, likes);
+    }
+    /**
+     * Удалениие поста
+     * @param {String} id - id пользователся
+     */
+    async deleteDataPost(id) {
+      const path = "wall/" + id;
+      this.delete(path);
+    }
+    /**
+     * Удаление лайков
+     * @param {String} id - id пользователся
+     */
+    async deleteDataLikes(id) {
+      const path = "likes/" + id;
+      this.delete(path);
+    }
+    /**
+     * Удаление комментарий с сервера по wallId
+     * @param {Number} id - id элемента
+     */
+    async deleteDataComment(id) {
+      const path = "comments/" + id;
+      this.delete(path);
+    }
+    /**
+     * Заменяет данные лайков на сервера в зависиимости от id
+     */
+    async putDataLikes(id, likes) {
+      const path = "likes/" + id;
+      this.put(path, likes)
+    }
+  }
+
+  const networService = factory.create(NetworkService);
+
+  return networService;
 });
