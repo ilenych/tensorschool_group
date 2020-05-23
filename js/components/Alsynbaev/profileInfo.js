@@ -277,11 +277,15 @@ define([
                 profileMainInfoMoreLabel.style.display = 'none';
                 profileMainInfoLessLabel.style.display = 'block';
                 profileInfoFull.classList.add('profile-info__full--show');
+                profileInfoFull.classList.remove('profile-info__full--hide');
             } else {
+
                 profileMainInfoMoreLabel.style.display = 'block';
                 profileMainInfoLessLabel.style.display = 'none';
                 profileInfoFull.classList.remove('profile-info__full--show');
+                profileInfoFull.classList.add('profile-info__full--hide');
             }
+
         }
 
         /**
@@ -305,7 +309,7 @@ define([
 
             let fullInfoRender = categories.map((item) => this.childrens.create(ProfileInfoCategory, item)).join('');
 
-            return ` ${fullInfoRender ? this.renderFullInfoButton() : ''}<div class="profile-info profile-info__full">
+            return ` ${fullInfoRender ? this.renderFullInfoButton() : ''}<div class="profile-info profile-info__full profile-info__full--hide">
                             ${fullInfoRender}
                         </div>`;
 
