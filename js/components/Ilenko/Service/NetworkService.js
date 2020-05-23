@@ -86,7 +86,9 @@ define([], function () {
      */
     async getDataGallery(id) {
       const path = "gallery/" + id;
-      this.request(path);
+      return this.request(path).then((result) => {
+        return result;
+      })
     }
     /**
      * Полуяение всех данных по id
