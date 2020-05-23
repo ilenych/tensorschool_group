@@ -51,6 +51,8 @@ body {
 	border-radius: 5px;
 	padding: 10px;
 	cursor: pointer;
+	transition: all 0.1s linear;
+	transform: scale(1);
 }
 
 .authorization__enterBtn{
@@ -65,7 +67,12 @@ body {
 }
 .authorization__enterBtn:hover,
 .authorization__createBtn:hover{
-	color: #ccc;
+	transform: scale(1.1);
+}
+
+.authorization__enterBtn:active,
+.authorization__createBtn:active{
+	transform: scale(0.95);
 }
 
 .module{

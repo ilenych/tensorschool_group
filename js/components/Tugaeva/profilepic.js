@@ -1,7 +1,8 @@
 define([
     'Base/Component',
+    'ProfileInfo/Window',
     'css!ProfilePic/css/style.css'
-], function (Component) {
+], function (Component, Window) {
     class ProfilePic extends Component {
 
         constructor(options) {
@@ -11,16 +12,21 @@ define([
 
         afterMount() {
             const image = this.getContainer().querySelector(".picture_profile");
-            this.subscribeTo(image, "error", this.onErrorLoadImage.bind(this, image));
+            this.subscribeTo(image, "click", this.onPhotoClick.bind(this));
         }
 
-        onErrorLoadImage(image) {
-            image.src = "img/nophoto.jpg";
+        renderPhoto() {
+            return `<img onerror="this.src='img/nophoto.jpg'" style="cursor: pointer" class="picture picture_profile" src="https://tensor-school.herokuapp.com/user/photo/${this.state.id}" alt="Фото профиля">`;
+        }
+
+        onPhotoClick() {
+            const window = this.childrens.create(Window, { title: '', content: this.renderPhoto() });
+            window.mount(document.body);
         }
 
         render(options, state) {
             return `<div>
-                    <img class="picture picture_profile" src="https://tensor-school.herokuapp.com/user/photo/${state.id}" title="Name Surname" alt="Name Surname">
+                    ${this.renderPhoto()}
                 </div>
             `;
         }

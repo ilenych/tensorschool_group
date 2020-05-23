@@ -23,11 +23,11 @@ define([
         read(id) {
             if (id == 'current')
                 return Requestor.currentUser().then(response => response.json()).then(result => {
-                    return this.toModel(result.data);
+                    return this.toModel({ ...result.data, ...result.computed_data });
                 });
             else
                 return Requestor.readUser(id).then(response => response.json()).then(result => {
-                    return this.toModel(result.data);
+                    return this.toModel({ ...result.data, ...result.computed_data });
                 });
         }
     }

@@ -15,7 +15,7 @@ define([
 
         constructor(options) {
             super(options);
-            this.state.id = options.id || options.curUserId;
+            this.state.id = options.id || options.options.curUserId;
             this.state.curUserId = options.options.curUserId;
         }
 

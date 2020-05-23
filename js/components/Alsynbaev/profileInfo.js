@@ -94,6 +94,10 @@ define([
             </div>`;
         }
 
+        renderActivity({ item }) {
+            return `<div class="profile-main-info__last-activity"> ${item.getLastActivity()}</div>`
+        }
+
         /**
          * Рендер модуля
          * @param {*} options 
@@ -101,6 +105,7 @@ define([
          */
         render(options, { item }) {
             return `<div class="profile-main-info">
+                        ${this.renderActivity({ item })}
                         ${this.renderFullName({ item })}
                         ${this.renderStatus({ item })}
                         ${this.childrens.create(ProfileInfoShort, { item })}
@@ -267,16 +272,15 @@ define([
             const profileMainInfoMoreLabel = document.querySelector(".profile-main-info__more-label");
             const profileMainInfoLessLabel = document.querySelector(".profile-main-info__less-label");
 
+            if (!profileInfoFull.classList.contains('profile-info__full--show')) {
 
-
-            if (profileInfoFull.style.display == 'none') {
-                profileInfoFull.style.display = 'grid';
                 profileMainInfoMoreLabel.style.display = 'none';
                 profileMainInfoLessLabel.style.display = 'block';
+                profileInfoFull.classList.add('profile-info__full--show');
             } else {
-                profileInfoFull.style.display = 'none';
                 profileMainInfoMoreLabel.style.display = 'block';
                 profileMainInfoLessLabel.style.display = 'none';
+                profileInfoFull.classList.remove('profile-info__full--show');
             }
         }
 
@@ -301,7 +305,7 @@ define([
 
             let fullInfoRender = categories.map((item) => this.childrens.create(ProfileInfoCategory, item)).join('');
 
-            return ` ${fullInfoRender ? this.renderFullInfoButton() : ''}<div class="profile-info profile-info__full" style="display: none;">
+            return ` ${fullInfoRender ? this.renderFullInfoButton() : ''}<div class="profile-info profile-info__full">
                             ${fullInfoRender}
                         </div>`;
 
@@ -326,7 +330,7 @@ define([
                         : ``}
                         </div>
                         
-                        <div class="profile-info-category__fields">
+                        <div class="profile-info-category__fields profile-info__full--show">
                             ${fieldsRender}
                         </div>
                     </div>`;
@@ -346,11 +350,18 @@ define([
         toggleCategoryInfo() {
             //получение блока содержащий полную информацию о пользователе
             const profileInfoFull = this.getContainer().querySelector(".profile-info-category__fields");
-            if (profileInfoFull.style.display == 'none') {
-                profileInfoFull.style.display = 'grid';
+
+            if (!profileInfoFull.classList.contains('profile-info__full--show')) {
+                profileInfoFull.classList.add('profile-info__full--show');
             } else {
-                profileInfoFull.style.display = 'none';
+                profileInfoFull.classList.remove('profile-info__full--show');
             }
+
+            // if (profileInfoFull.style.display == 'none') {
+            //     profileInfoFull.style.display = 'grid';
+            // } else {
+            //     profileInfoFull.style.display = 'none';
+            // }
         }
 
         /**

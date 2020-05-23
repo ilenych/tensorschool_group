@@ -34,11 +34,6 @@ define([
             this.subscribeTo(this.getContainer().querySelector(".header__profile-exit"), 'click', this.logout.bind(this));
 
             const image = this.getContainer().querySelector(".header__profile-avatar");
-            this.subscribeTo(image, "error", this.onErrorLoadImage.bind(this, image));
-        }
-
-        onErrorLoadImage(image) {
-            image.src = "img/nophoto.jpg";
         }
 
         logout() {
@@ -50,11 +45,6 @@ define([
 
         //создать окно редактирования
         createWindow() {
-
-            Requestor.currentUser().then(response => response.text()).then(result => {
-                console.log(result);
-            });
-
             const window = this.childrens.create(Window, {
                 title: 'Редактировать',
                 content: this.childrens.create(View, {
@@ -77,8 +67,8 @@ define([
                             ${state.item.getActivity()}
                         </p>
                         <a class="header__profile-edit">Редактировать</a>
-                        <a class="header__profile-menu" href="https://ksupipr.github.io/tensorschool_group/">
-                            <img class="header__profile-avatar header__profile-avatar_mini" src="https://tensor-school.herokuapp.com/user/photo/${state.id}" alt="avatar">
+                        <a class="header__profile-menu" href="${location.pathname}">
+                            <img class="header__profile-avatar header__profile-avatar_mini" onerror="this.src='img/nophoto.jpg'" src="https://tensor-school.herokuapp.com/user/photo/${state.id}" alt="avatar">
                             <span class="header__profile-button">&#8942;</span>
                         </a>
 
