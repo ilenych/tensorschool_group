@@ -92,6 +92,29 @@ define(['Base/Model'], function (Model) {
             else
                 return (this.city || '') + ", " + (this.country);
         }
+
+        textDate(date, now) {
+            let out = 'неизвестно';
+            const days = Math.floor((date - now) / 86400000) * -1;
+            const daysStr = ['сегодня', 'вчера', 'позавчера'];
+            if (date) {
+                out = `${daysStr[days - 1] || date.toLocaleDateString()} в ${date.toTimeString().replace(/:[0-9]{2,2} .*/, '')}`;
+            }
+
+            return `Был${this.gender == 2 ? 'а' : ''} в сети ` + out;
+        }
+
+        getLastActivity() {
+            const curTime = new Date();
+            const last_activity = new Date(this.last_activity);
+            last_activity.setMinutes(last_activity.getMinutes() - curTime.getTimezoneOffset());
+            const offset = (curTime.getMinutes() * 60 + curTime.getSeconds()) - (last_activity.getMinutes() * 60 + last_activity.getSeconds());
+            if (Math.abs(offset) > 5 * 60) {
+                return this.textDate(last_activity, curTime);
+            } else {
+                return "online";
+            }
+        }
     }
 
     return ProfileInfoPersonModel;

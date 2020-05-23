@@ -53,6 +53,10 @@
 .profile-main-info__less-label{
 	display: none;
 }
+.profile-main-info__last-activity{
+	float: right;
+	color:#c4c4c4;
+}
 .profile-info-category__moreLabel{
 	cursor: pointer;
 	font-size: 12px;

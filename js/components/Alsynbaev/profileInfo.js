@@ -94,6 +94,10 @@ define([
             </div>`;
         }
 
+        renderActivity({ item }) {
+            return `<div class="profile-main-info__last-activity"> ${item.getLastActivity()}</div>`
+        }
+
         /**
          * Рендер модуля
          * @param {*} options 
@@ -101,6 +105,7 @@ define([
          */
         render(options, { item }) {
             return `<div class="profile-main-info">
+                        ${this.renderActivity({ item })}
                         ${this.renderFullName({ item })}
                         ${this.renderStatus({ item })}
                         ${this.childrens.create(ProfileInfoShort, { item })}
