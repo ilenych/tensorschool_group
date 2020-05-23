@@ -45,10 +45,28 @@ define([], function () {
      * Удаление данных с сервера
      * @param {String} path - конец url строки
      */
-    async delete(parh) {
+    async delete(path) {
       try {
-        await fetch(this.options.host + parh, {
+        await fetch(this.options.host + path, {
           method: "DELETE",
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    /**
+     * Заменяет данные на сервере
+     * @param {String} path - конец url строки
+     * @param {{*} model - модель, для передачи на сервер
+     */
+    async put(path, model) {
+      try {
+        await fetch(this.options.host + path, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+          },
+          body: JSON.stringify(model),
         });
       } catch (err) {
         console.error(err);
@@ -61,15 +79,6 @@ define([], function () {
     async getDataComments(id) {
       const path = "wall/" + id + "/comments";
       this.request(path);
-      try {
-        let responce = await fetch(
-          "http://localhost:3000/wall/" + id + "/comments"
-        );
-        let content = await responce.json();
-        return content;
-      } catch (err) {
-        console.error(err);
-      }
     }
     /**
      * Получение фотографий по id
@@ -78,13 +87,6 @@ define([], function () {
     async getDataGallery(id) {
       const path = "gallery/" + id;
       this.request(path);
-      try {
-        let responce = await fetch("http://localhost:3000/gallery/" + id);
-        let content = await responce.json();
-        return content;
-      } catch (err) {
-        console.error(err);
-      }
     }
     /**
      * Полуяение всех данных по id
@@ -94,23 +96,24 @@ define([], function () {
       try {
         let arr = [];
         let responce = await fetch(
-          "http://localhost:3000/users/" + id + "/wall"
+          this.options.host + "users/" + id + "/wall"
         );
         let content = await responce.json();
         arr = content;
         for (let i in content) {
           let responceLikes = await fetch(
-            "http://localhost:3000/likes/" + content[i].id
+            this.options.host + "likes/" + content[i].id
           );
           let contentLikes = await responceLikes.json();
 
           let responceComments = await fetch(
-            "http://localhost:3000/wall/" + content[i].id + "/comments"
+            this.options.host + "wall/" + content[i].id + "/comments"
           );
           let contentComments = await responceComments.json();
           arr.push(contentLikes, contentComments);
         }
-        return content;
+        // console.log(content)
+        return arr;
       } catch (err) {
         console.error(err);
       }
@@ -160,40 +163,31 @@ define([], function () {
      * @param {String} id - id пользователся
      */
     async deleteDataPost(id) {
-      const patch = "wall/" + id;
-      this.delete(patch);
+      const path = "wall/" + id;
+      this.delete(path);
     }
     /**
      * Удаление лайков
      * @param {String} id - id пользователся
      */
     async deleteDataLikes(id) {
-      const patch = "likes/" + id;
-      this.delete(patch);
+      const path = "likes/" + id;
+      this.delete(path);
     }
     /**
      * Удаление комментарий с сервера по wallId
      * @param {Number} id - id элемента
      */
     async deleteDataComment(id) {
-      const patch = "comments/" + id;
-      this.delete(patch);
+      const path = "comments/" + id;
+      this.delete(path);
     }
     /**
      * Заменяет данные лайков на сервера в зависиимости от id
      */
     async putDataLikes(id, likes) {
-      try {
-        await fetch("http://localhost:3000/likes/" + id, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-          },
-          body: JSON.stringify(likes),
-        });
-      } catch (err) {
-        console.error(err);
-      }
+      const path = "likes/" + id;
+      this.put(path, likes)
     }
   }
 
