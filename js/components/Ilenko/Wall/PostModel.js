@@ -80,6 +80,7 @@ define(["Base/Model", "components/Ilenko/Service/NetworkService"], function (
       for (let i = 0; i < content.posts.length; i++) {
         arr.push({
           id: content.posts[i].id,
+          idUser: content.posts[i].idUser,
           userName: content.posts[i].userName,
           userUrlImage: content.posts[i].userUrlImage,
           time: content.posts[i].time,

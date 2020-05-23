@@ -54,16 +54,14 @@ define([
     // render header(avatar, name, time and trash)
     renderUser({ item }) {
       return `<div class="post-header">
-                  <img class="post-header__ava" src="${
-                    item.userUrlImage
-                  }" alt="Аватар">
-                  <p class="post-header__name" title="${item.userName}">${
-        item.userName
-      }</p>
-                  <p class="post-header__time text_lightgray" title="Время">${Time.convert(
+                <a class="post-header__link"href=\"https://ksupipr.github.io/tensorschool_group/?page=${item.userId}\">
+                  <img class="post-header__ava" src="${item.userUrlImage}" alt="${item.userName}" title="${item.userName}">
+                </a>
+                <p class="post-header__name" title="${item.userName}">${item.userName}</p>
+                <p class="post-header__time text_lightgray" title="Время">${Time.convert(
                     item.time
                   )}</p>
-                  <img class="post-header__delete" src="img/post/trash.png" alt="delete">
+                <img class="post-header__delete" src="img/post/trash.png" alt="delete">
               </div>`;
     }
 

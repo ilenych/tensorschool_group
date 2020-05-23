@@ -74,6 +74,7 @@ define([
         userName: this.options.item,
         commentText: text,
         commentTime: new Date(),
+        idUser: this.options.items.userId,
         wallId: this.options.items.id,
       };
 

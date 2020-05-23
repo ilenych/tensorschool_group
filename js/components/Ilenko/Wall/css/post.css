@@ -18,13 +18,15 @@
   align-items: center;
   margin-bottom: 10px;
 }
+.post-header__link {
+  grid-row: span 2 / auto;
+}
 
 .post-header__ava {
   width: 60px;
   height: 60px;
   object-fit: cover;
   border-radius: 50%;
-  grid-row: span 2 / auto;
 }
 
 .post-header__name {
@@ -145,6 +147,9 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
+}
+
+.post-comments-comment__link {
   grid-row: span 3 / auto;
   align-self: start;
 }
