@@ -17,8 +17,8 @@ define([
   class Post extends Component {
     afterMount() {
       //Отключил из-за бага в json server вместо одного объекта удаляет все объекты
-      // this._delete = this.getContainer().querySelector(".post-header__delete");
-      // this.subscribeTo(this._delete, "click", this.onClose.bind(this));
+      this._delete = this.getContainer().querySelector(".post-header__delete");
+      this.subscribeTo(this._delete, "click", this.onClose.bind(this));
       //AddEventListener на image
       const image = this.getContainer().querySelector(".post-header__ava");
       this.subscribeTo(image, "error", this.onErrorLoadImage.bind(this, image));
@@ -54,7 +54,7 @@ define([
     // render header(avatar, name, time and trash)
     renderUser({ item }) {
       return `<div class="post-header">
-                <a class="post-header__link"href=\"https://ksupipr.github.io/tensorschool_group/?page=${item.userId}\">
+                <a class="post-header__link"href=\"https://ksupipr.github.io/tensorschool_group/?page=${item.idUser}\">
                   <img class="post-header__ava" src="${item.userUrlImage}" alt="${item.userName}" title="${item.userName}">
                 </a>
                 <p class="post-header__name" title="${item.userName}">${item.userName}</p>

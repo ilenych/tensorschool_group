@@ -34,6 +34,7 @@ define([
       super(options);
       this.state.id = options.parent.options.id;
       this.state.item = options.item;
+      console.log(this)
     }
 
     beforeMount() {
@@ -133,6 +134,7 @@ define([
         time: new Date(),
         postText: this._content.innerHTML,
         postUrlImage: this._link.innerHTML,
+        idUser: this.state.id,
         userId: this._wallId.id
       });
       //Пушим на сервер
