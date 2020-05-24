@@ -32,16 +32,16 @@ define([
   class CreatePost extends Component {
     constructor(options) {
       super(options);
-      this.state.id = options.parent.options.id;
-      this.state.item = options.item;
-      console.log(this)
+      this.options = {
+        ...{
+          host: `https://tensor-school.herokuapp.com/user/photo/`,
+          id: options.parent.options.id,
+          fullName: options.item.first_name + " " + options.item.last_name,
+        },
+        ...options,
+      };
     }
 
-    beforeMount() {
-      this.setState({
-        fullName: this.state.item.first_name + " " + this.state.item.last_name,
-      });
-    }
     afterMount() {
       //AddEventListener на кнопку "добавить картинку"
       this._addPicture = this.getContainer().querySelector(
@@ -53,11 +53,11 @@ define([
         this.onClickButtonAddPicture.bind(this)
       );
       //AddEventListener на кнопку "опубликовать"
-      this._publish = this.getContainer().querySelector(
+      const publish = this.getContainer().querySelector(
         ".createPost-buttons__publish"
       );
       this.subscribeTo(
-        this._publish,
+        publish,
         "click",
         this.onClickButtonPublish.bind(this)
       );
@@ -67,6 +67,10 @@ define([
         ".createPost-content__ava"
       );
       this.subscribeTo(image, "error", this.onErrorLoadImage.bind(this, image));
+      
+      //AddEventListener на delete
+      const deleteLink = this.getContainer().querySelector(".createPost-picture__delete");
+      this.subscribeTo(deleteLink, "click", this.onClikcDelete.bind(this));
 
       this._link = this.getContainer().querySelector(
         ".createPost-picture__link"
@@ -82,6 +86,10 @@ define([
       this._picture = this.getContainer().querySelector(".createPost-picture");
       this.changeTitleOnButtonAddPicture();
       this.showOrHideLinkForPicture();
+    }
+
+    onClikcDelete() {
+      this._link.innerHTML = "";
     }
 
     onClickButtonPublish() {
@@ -129,12 +137,12 @@ define([
     createPost() {
       //Создаем модель
       let post =  new CreatePostModel ({
-        userName: this.state.fullName,
-        userUrlImage: `https://tensor-school.herokuapp.com/user/photo/${this.state.id}`,
+        userName: this.options.fullName,
+        userUrlImage: this.options.host + this.options.id,
         time: new Date(),
         postText: this._content.innerHTML,
         postUrlImage: this._link.innerHTML,
-        idUser: this.state.id,
+        idUser: this.options.id,
         userId: this._wallId.id
       });
       //Пушим на сервер
@@ -148,12 +156,13 @@ define([
     render() {
       return `<div class="createPost">
                 <div class="createPost-content">
-                    <img class="createPost-content__ava" src="https://tensor-school.herokuapp.com/user/photo/${this.state.id}" alt=${this.state.fullName} title=${this.state.fullName}>
+                    <img class="createPost-content__ava" src="${this.options.host + this.options.id}" alt=${this.options.fullName} title=${this.options.fullName}>
                      <div contenteditable="true" class="createPost-content__post" placeholder="Чем хотите поделиться?"></div>
                 </div>
                 <div class="createPost-picture">
                     <img class="createPost-picture__img" src="img/post/link.png" alt="ССылка" title="ССылка">
                     <div contenteditable="true" class="createPost-picture__link" placeholder="ССылка"></div>
+                    <p class="createPost-picture__delete">×</p>
                 </div>
             </>
             <div class="createPost-buttons">

@@ -34,7 +34,10 @@
   margin-left: 20px;
   padding: 5px;
   min-width: 300px;
-  max-width: 613px;
+  max-width: 300px;
+  max-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 1px 1px 1px #999;
@@ -45,6 +48,13 @@
   pointer-events: none;
   display: block;
   color: lightgrey;
+}
+.createPost-picture__delete {
+  align-self: center;
+  margin-left: 10px;
+  color: #aaa;
+  font-size: 38px;
+  cursor: pointer;
 }
 
 .createPost-picture__img {

@@ -5,6 +5,12 @@ define(["Base/Component", "components/Ilenko/Common/TimeConvector"], function (
   class PostComment extends Component {
     constructor(options) {
       super(options);
+      this.options = {
+        ...{
+          host: `https://ksupipr.github.io/tensorschool_group/?page=`,
+        },
+        ...options,
+      };
       this.state.status;
       this.state.count = -3;
     }
@@ -147,7 +153,7 @@ define(["Base/Component", "components/Ilenko/Common/TimeConvector"], function (
 
     renderComment({ userUrlImage, userName, commentText, commentTime, idUser }) {
       return `<div class="post-comments-comment">
-                <a class="post-comments-comment__link"href=\"https://ksupipr.github.io/tensorschool_group/?page=${idUser}\"><img class="post-comments-comment__ava" src="${userUrlImage}" alt="Аватар" title=${userName}></a>        
+                <a class="post-comments-comment__link"href=\"${this.options.host + idUser}\"><img class="post-comments-comment__ava" src="${userUrlImage}" alt=${userName} title=${userName}></a>        
                 <p class="post-comments-comment__name" title="${userName}">${userName}</p>
                 <span class="post-comments-comment__text" title="Комментарий">${commentText}</span>
                 <p class="post-comments-comment__time text_lightgray" title="Время">${Time.convert(

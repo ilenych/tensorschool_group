@@ -29,9 +29,22 @@ define([
   }
 
   class PostSenderBlock extends Component {
+    constructor(options) {
+      super(options);
+      this.options = {
+        ...{
+          host: `https://tensor-school.herokuapp.com/user/photo/`,
+          idUser: this.options.items.userId,
+          wallId: this.options.items.id,
+          userName: this.options.item,
+        },
+        ...options,
+      };
+      
+    }
     afterMount() {
-      this._send = this.getContainer().querySelector(".post-sender__send");
-      this.subscribeTo(this._send, "click", this.onClick.bind(this));
+      const send = this.getContainer().querySelector(".post-sender__send");
+      this.subscribeTo(send, "click", this.onClick.bind(this));
       //AddEventListener на image
       const image = this.getContainer().querySelector(".post-sender__ava");
       this.subscribeTo(image, "error", this.onErrorLoadImage.bind(this, image));
@@ -70,26 +83,21 @@ define([
      */
     createComment(text) {
       let comment = {
-        userUrlImage: `https://tensor-school.herokuapp.com/user/photo/${this.options.items.userId}`,
-        userName: this.options.item,
+        userUrlImage: this.options.host + this.options.idUser,
+        userName: this.options.userName,
         commentText: text,
         commentTime: new Date(),
-        idUser: this.options.items.userId,
-        wallId: this.options.items.id,
+        idUser: this.options.idUser,
+        wallId: this.options.wallId,
       };
 
       this.options.items.comments.push(comment);
       return comment;
     }
 
-    beforeUnmount() {
-      delete this._send;
-      delete this._text;
-    }
-
     render() {
       return ` <div class="post-sender">
-            <img class="post-sender__ava" src="https://tensor-school.herokuapp.com/user/photo/${this.options.items.userId}" alt="Аватар" title=${this.options.item}>
+            <img class="post-sender__ava" src="${this.options.host + this.options.idUser}" alt="Аватар" title=${this.options.item}>
             <textarea class="post-sender__textarea"></textarea>
             <img class="post-sender__add" src="img/post/plus.png" alt="Добавить" title="Добавить">
             <img class="post-sender__send" src="img/post/send.png" alt="Отправить" title="Отправить">
