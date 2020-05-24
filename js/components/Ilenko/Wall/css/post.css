@@ -1,4 +1,3 @@
-
 .post {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 14px;
@@ -7,6 +6,26 @@
 
 .text_lightgray {
   color: lightgray;
+}
+
+.post-deleted {
+  animation: post-delete 1s 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes post-delete {
+  0% {
+    opacity: 0;
+    max-height: 1000px;
+  }
+  50% {
+    padding: 0;
+  }
+  100% {
+    padding: 0;
+    opacity: 0;
+    max-height: 0px;
+  }
 }
 
 /* Post header */
@@ -44,6 +63,12 @@
   justify-self: end;
   align-self: start;
   cursor: pointer;
+  transition: all 0.1s linear;
+  transform: scale(1);
+}
+
+.post-header__delete:hover {
+  transform: scale(1.3);
 }
 
 /* Post content */
@@ -71,6 +96,7 @@
   max-height: 410px;
   object-fit: contain;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 /* Post like */
@@ -84,13 +110,22 @@
   padding-bottom: 10px;
 }
 
-
 .post-like-smiles {
   width: 60px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   margin: 0 10px;
+  transition: all 0.1s linear;
+  transform: scale(1);
+}
+
+.post-like-smiles:hover {
+  transform: scale(1.1);
+}
+
+.post-like-smiles:active {
+  transform: scale(0.98);
 }
 
 .post-like-smiles__img {
@@ -103,7 +138,6 @@
   font-size: 0.9em;
   margin-left: 3px;
 }
-
 
 .likeIsSelected {
   color: green;
@@ -140,6 +174,17 @@
   grid-template-rows: 30px 1fr;
   align-items: center;
   font-size: 0.9em;
+  animation: post-comment-show 2s 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes post-comment-show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .post-comments-comment__ava {
@@ -197,4 +242,14 @@
   width: 25px;
   height: 25px;
   cursor: pointer;
+  transition: all 0.1s linear;
+  transform: scale(1);
+}
+
+.post-sender__send:hover {
+  transform: scale(1.1);
+}
+
+.post-sender__send:active {
+  transform: scale(0.98);
 }

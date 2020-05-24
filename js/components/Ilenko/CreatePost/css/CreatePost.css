@@ -28,6 +28,44 @@
 .createPost-picture {
   display: none;
 }
+.createPost-picture-showen{
+  display: flex;
+  animation: createPost-picture-show 2s 1;
+	animation-fill-mode: forwards;
+}
+
+.createPost-picture-hidden {
+  display: flex;
+	animation: createPost-picture-hide 1s 1;
+	animation-fill-mode: forwards;
+}
+
+@keyframes createPost-picture-show{
+	0%{
+		opacity: 0;
+		max-height: 0;
+	}
+	50%{
+		max-height: 100px;
+	}
+	100% {
+    opacity:1;
+	}
+}
+
+@keyframes createPost-picture-hide{
+	0%{
+    opacity:1;
+  }
+  50%{
+		max-height: 500px;
+	}
+	100% {
+    opacity: 0;
+		max-height: 0;
+	}
+}
+
 
 .createPost-picture__link {
   margin: 10px 0;
@@ -81,4 +119,15 @@
   cursor: pointer;
   color: white;
   background-color: #4a76a8;
+  transition: all 0.1s linear;
+  transform: scale(1);
+  box-shadow: 1px 1px 5px #999;
+}
+
+.button-settings:hover{
+	transform: scale(1.03);
+}
+
+.button-settings:active{
+	transform: scale(0.98);
 }

@@ -28,6 +28,7 @@
     cursor: pointer;
     line-height: 40px;
     width: 40px;
+    z-index: 1000;
 }
 .window__title{
     text-align: center;
@@ -35,13 +36,4 @@
 	margin: 0 0 15px;
 	font-size: 30px;
     border-bottom: 1px solid #ececec;
-}
-.profile-info-category-edit__fields {
-	display: grid;
-	grid-template-columns: .5fr 1fr;
-	grid-gap: 12px;
-}
-.profile-info-category-edit__title{
-	margin: 15px 0;
-	border-bottom: 1px solid #ececec;;
 }
