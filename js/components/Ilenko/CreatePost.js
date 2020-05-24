@@ -56,26 +56,26 @@ define([
       const publish = this.getContainer().querySelector(
         ".createPost-buttons__publish"
       );
-      this.subscribeTo(
-        publish,
-        "click",
-        this.onClickButtonPublish.bind(this)
-      );
+      this.subscribeTo(publish, "click", this.onClickButtonPublish.bind(this));
 
       //AddEventListener на image
       const image = this.getContainer().querySelector(
         ".createPost-content__ava"
       );
       this.subscribeTo(image, "error", this.onErrorLoadImage.bind(this, image));
-      
+
       //AddEventListener на delete
-      const deleteLink = this.getContainer().querySelector(".createPost-picture__delete");
+      const deleteLink = this.getContainer().querySelector(
+        ".createPost-picture__delete"
+      );
       this.subscribeTo(deleteLink, "click", this.onClikcDelete.bind(this));
 
       this._link = this.getContainer().querySelector(
         ".createPost-picture__link"
       );
-      this._wallId = document.querySelector(".wallBasis")
+      this._wallId = document.querySelector(".wallBasis");
+
+      this._picture = this.getContainer().querySelector(".createPost-picture");
     }
 
     onErrorLoadImage(image) {
@@ -83,7 +83,6 @@ define([
     }
 
     onClickButtonAddPicture() {
-      this._picture = this.getContainer().querySelector(".createPost-picture");
       this.changeTitleOnButtonAddPicture();
       this.showOrHideLinkForPicture();
     }
@@ -109,6 +108,7 @@ define([
         this.createPost();
       }
     }
+
     /**
      * Меняет название кнопки при нажатии
      */
@@ -123,12 +123,15 @@ define([
      * Скрывает илии отображает блок с ссылкой для картинки
      */
     showOrHideLinkForPicture() {
-      if (this._picture.style.display == "") {
-        this._picture.style.display = "flex";
-      } else {
-        this._picture.style.display = "";
+      if (this._picture.classList.contains("createPost-picture-showen")) {
+        this._picture.classList.remove("createPost-picture-showen");
+        this._picture.classList.add("createPost-picture-hidden");
         //Чистим textarea
         this._link.innerHTML = "";
+      } else {
+        this._picture.classList.remove("createPost-picture");
+        this._picture.classList.remove("createPost-picture-hidden");
+        this._picture.classList.add("createPost-picture-showen");
       }
     }
     /**
@@ -136,14 +139,14 @@ define([
      */
     createPost() {
       //Создаем модель
-      let post =  new CreatePostModel ({
+      let post = new CreatePostModel({
         userName: this.options.fullName,
         userUrlImage: this.options.host + this.options.id,
         time: new Date(),
         postText: this._content.innerHTML,
         postUrlImage: this._link.innerHTML,
         idUser: this.options.id,
-        userId: this._wallId.id
+        userId: this._wallId.id,
       });
       //Пушим на сервер
       NetworkService.postData(post);
@@ -156,7 +159,11 @@ define([
     render() {
       return `<div class="createPost">
                 <div class="createPost-content">
-                    <img class="createPost-content__ava" src="${this.options.host + this.options.id}" alt=${this.options.fullName} title=${this.options.fullName}>
+                    <img class="createPost-content__ava" src="${
+                      this.options.host + this.options.id
+                    }" alt=${this.options.fullName} title=${
+        this.options.fullName
+      }>
                      <div contenteditable="true" class="createPost-content__post" placeholder="Чем хотите поделиться?"></div>
                 </div>
                 <div class="createPost-picture">

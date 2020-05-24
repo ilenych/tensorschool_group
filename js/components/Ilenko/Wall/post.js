@@ -5,6 +5,7 @@ define([
   "Wall/postSenderBlock",
   "components/Ilenko/Common/TimeConvector",
   "components/Ilenko/Service/NetworkService",
+  "components/Ilenko/Common/FullPhoto",
   "css!Wall/css/post.css",
 ], function (
   Component,
@@ -12,16 +13,31 @@ define([
   PostComment,
   PostSenderBlock,
   Time,
-  NetworkService
+  NetworkService,
+  FullPhoto
 ) {
   class Post extends Component {
+    constructor(options) {
+      super(options);
+      this.options = {
+        ...{
+          host: `https://ksupipr.github.io/tensorschool_group/?page=`,
+        },
+        ...options,
+      };
+    }
+
     afterMount() {
-      //Отключил из-за бага в json server вместо одного объекта удаляет все объекты
       this._delete = this.getContainer().querySelector(".post-header__delete");
       this.subscribeTo(this._delete, "click", this.onClose.bind(this));
       //AddEventListener на image
       const image = this.getContainer().querySelector(".post-header__ava");
       this.subscribeTo(image, "error", this.onErrorLoadImage.bind(this, image));
+
+      if (this.options.item.postUrlImage != "") {
+       this.contentImage = this.getContainer().querySelector(".post-content__img");
+       this.subscribeTo(this.contentImage, "click", this.onClickImage.bind(this));
+      }
     }
 
     onErrorLoadImage(image) {
@@ -36,6 +52,17 @@ define([
       this.close();
     }
 
+    onClickImage(contentImage) {
+      const view = this.childrens.create(FullPhoto, {
+        content: this.renderPhoto(this.options.item.postUrlImage),
+        target: this.contentImage
+      });
+      view.mount(document.body);
+    }
+    /**
+     * Удаляет пост с комментариемя с сервера
+     * @param {Object} comments - модель комментариев
+     */
     deletePost(comments) {
       NetworkService.deleteDataPost(this.options.item.id);
       NetworkService.deleteDataLikes(this.options.item.id);
@@ -45,22 +72,35 @@ define([
     }
 
     close() {
-      this.unmount();
+      this.getContainer().classList.add("post-deleted");
+      setTimeout(
+        function () {
+          this.unmount();
+        }.bind(this),
+        990
+      );
     }
+
     beforeUnmount() {
       delete this._delete;
     }
 
-    // render header(avatar, name, time and trash)
+    // Рендер заголовок посат(avatar, name, time and trash)
     renderUser({ item }) {
       return `<div class="post-header">
-                <a class="post-header__link"href=\"https://ksupipr.github.io/tensorschool_group/?page=${item.idUser}\">
-                  <img class="post-header__ava" src="${item.userUrlImage}" alt="${item.userName}" title="${item.userName}">
+                <a class="post-header__link"href=\"${
+                  this.options.host + item.idUser
+                }\">
+                  <img class="post-header__ava" src="${
+                    item.userUrlImage
+                  }" alt="${item.userName}" title="${item.userName}">
                 </a>
-                <p class="post-header__name" title="${item.userName}">${item.userName}</p>
+                <p class="post-header__name" title="${item.userName}">${
+        item.userName
+      }</p>
                 <p class="post-header__time text_lightgray" title="Время">${Time.convert(
-                    item.time
-                  )}</p>
+                  item.time
+                )}</p>
                 <img class="post-header__delete" src="img/post/trash.png" alt="delete">
               </div>`;
     }
@@ -72,6 +112,14 @@ define([
                 ${this.renderImageInContent({ item })}
               </div>`;
     }
+    /**
+     * Рендер для отображение полной фотографии
+     * @param {String} src - путь картинки
+     * @param {String} alt - описание картинки
+     */
+    renderPhoto(src) {
+      return `<img class="fullPhoto" src="${src}" alt="Картинка с поста">`;
+    }
     //Рендер картнинки, если есть ссылка на нее)
     renderImageInContent({ item }) {
       if (item.postUrlImage != "") {
@@ -82,7 +130,7 @@ define([
     }
 
     render({ item }) {
-      return `<div class="post">
+      return `<div class="module post">
                   ${this.renderUser({ item })}
                   ${this.renderContent({ item })} 
                   ${this.childrens.create(PostLike, { item })}

@@ -37,7 +37,6 @@ define([
        setTimeout(
         function () {
           this._wallBasis.innerHTML = "";
-          console.log(this)
           this.view = this.childrens.create(View, {
             dataSet: factory.create(DataSet, {
               object: `wall`,
@@ -84,7 +83,7 @@ define([
             
     }
     renderPost(item) {
-      return `<div class="module">
+      return `<div class="posts">
                 ${this.childrens.create(Post, { item })} 
               </div>`;
     }

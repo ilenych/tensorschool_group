@@ -114,6 +114,7 @@ define(["Base/Component", "components/Ilenko/Service/NetworkService"], function 
               alt: "fire",
               scr: "img/post/fire.png",
             },
+            // smile: "🔥",
             count: this.state.item.likes.likeFire,
           },
           {
@@ -121,6 +122,7 @@ define(["Base/Component", "components/Ilenko/Service/NetworkService"], function 
               alt: "heartEyes",
               scr: "img/post/heartEyes.png",
             },
+            // smile: "😍",
             count: this.state.item.likes.likeHeartEyes,
           },
           {
@@ -128,6 +130,7 @@ define(["Base/Component", "components/Ilenko/Service/NetworkService"], function 
               alt: "rocket",
               scr: "img/post/rocket.png",
             },
+            // smile: "🚀",
             count: this.state.item.likes.likeRocket,
           },
           {
@@ -135,6 +138,7 @@ define(["Base/Component", "components/Ilenko/Service/NetworkService"], function 
               alt: "like",
               scr: "img/post/like.png",
             },
+            // smile: "👍",
             count: this.state.item.likes.likeLike,
           },
           {
@@ -142,6 +146,7 @@ define(["Base/Component", "components/Ilenko/Service/NetworkService"], function 
               alt: "bomb",
               scr: "img/post/bomb.png",
             },
+            // smile: "💣",
             count: this.state.item.likes.likeBomb,
           },
         ],
