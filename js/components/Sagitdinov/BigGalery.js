@@ -33,7 +33,6 @@ class Galery extends Model {
     thisPageCount>=this.numberPhotoOnPage ? thisPageCount = this.numberPhotoOnPage : thisPageCount =thisPageCount;
     //цикл формирования сетки картинок для данной страницы
       for (let i=ziroPhotoNumber+1; i<=ziroPhotoNumber+thisPageCount; i++) {
-        //console.log(i);
         stringUserGalery+=`<img src="img/user${this.id}/galery/${i}.jpg" alt="Фото ${i}" class="bigGalery__photo" onclick="getFullPhoto(${this.id}, 'galery/${i}')">`;
       }
     // оборачиваем всю полученную строку в блок галереи (с параметрами общего стиля главных блоков профиля)
