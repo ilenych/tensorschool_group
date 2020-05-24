@@ -36,7 +36,7 @@ define([
                                 <div class="module">
                                     ${this.childrens.create(ProfilePic, { id: this.state.id })}
                                 </div>
-
+                                ${(this.state.curUserId != this.state.id) ? this.childrens.create(FriendsAction, { id: this.state.id, curUserId: this.state.curUserId }) : ''}
                                 <div class="module">
                                     <!--Модуль ссылок-->
                                     <div class="page-links">
@@ -91,7 +91,7 @@ define([
                                         </div>
                                     </div>
                                 </div>
-                                ${(this.state.curUserId != this.state.id) ? this.childrens.create(FriendsAction, { id: this.state.id, curUserId: this.state.curUserId }) : ''}
+                
                                 ${(this.state.curUserId == this.state.id) ? this.childrens.create(Friends, { curUserId: this.state.curUserId }) : ''}
                                 <div class="module">
                                     ${this.childrens.create(Messages)}

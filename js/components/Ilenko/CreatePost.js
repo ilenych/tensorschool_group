@@ -95,7 +95,7 @@ define([
       this._content = this.getContainer().querySelector(
         ".createPost-content__post"
       );
-      this.checkContentToEmpty(this._content);
+      this.checkContentToEmpty(this._content.innerHTML);
     }
     /**
      * Проверка пустого контента
