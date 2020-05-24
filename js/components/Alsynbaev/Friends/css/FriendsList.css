@@ -1,0 +1,35 @@
+.friendsList__friends{
+    display: grid;    
+    grid-template-columns: 150px 1fr;
+    align-items: center;
+    grid-gap: 15px;
+}
+
+.friendsList__friend{
+    display: flex;
+}
+
+.friendsList__image{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    justify-self: center;
+}
+.friendsList__linkImage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.friendsList__linkName{
+    text-align: left;
+    color: #000;
+    text-decoration: none;
+}
+.friendsList__linkName:hover{
+    text-decoration: underline;
+}
+.friendsList__title{
+    text-align: center;
+    margin: 5px 0;
+}

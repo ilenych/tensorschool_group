@@ -1,0 +1,73 @@
+.friends__title{
+    margin-bottom: 15px;
+    color: rgb(160, 160, 160);
+    cursor: pointer;
+}
+.friends__friends{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* grid-template-columns: repeat(auto-fit,1fr); */
+    grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: 10px;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+}
+.friends__name{
+    text-align: center;
+}
+.friends__friend{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #000;
+    text-decoration: none;
+}
+.friends__friend:hover{
+    text-decoration: underline;
+}
+.friends__image{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+}
+.friendsAction{
+    display: grid;
+    grid-gap: 15px;
+}
+.friendsAction__button--add{
+    background: #4a76a8;
+	color: #fff;
+}
+.friendsAction__button--remove{
+    background:#e6f2ff;
+	color:  #4a76a8;
+}
+.friendsAction__button{
+	box-shadow: 1px 1px 5px #999;
+	border: none;
+	border-radius: 5px;
+	padding: 10px;
+	cursor: pointer;
+	transition: all 0.1s linear;
+    transform: scale(1);
+    text-align: center;
+}
+.friendsAction__button{
+	justify-self: center;
+	padding: 10px 20px;
+}
+.friendsAction__button:hover{
+	transform: scale(1.03);
+}
+
+.friendsAction__button:active{
+	transform: scale(0.98);
+}
+.friendsAction__title{
+    text-align: center;
+    margin: 0 0 7px 0;
+}

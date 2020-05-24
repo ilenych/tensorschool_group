@@ -77,8 +77,13 @@ define([
          * @param {ProfileInfoPersonModel} необходимые поля first_name - имя, last_name - фамимлия 
          */
         renderFullName({ item }) {
+            let name = (item.first_name || '') + " " + (item.last_name || '');
+
+            if (name == " ")
+                name = item.name || 'Неизвестно';
+
             return `<div class="profile-main-info__name">
-                ${item.first_name || 'Неизвестно'} ${item.last_name || 'Неизвестно'}
+                ${name}
                 
             </div>`;
         }

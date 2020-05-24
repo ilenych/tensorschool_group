@@ -110,6 +110,58 @@ define([
             return this.request('user/upload_photo', requestOptions);
         }
 
+        async getUserLinks() {
+            return this.request('user_link/list');
+        }
+
+        async createUserLink(user_id, link_type) {
+            let urlencoded = new URLSearchParams();
+            urlencoded.append('user_id', user_id);
+            urlencoded.append('link_type', link_type);
+
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: urlencoded
+            }
+
+            return this.request('user_link/create', requestOptions);
+        }
+
+        async updateUserLink(id, user_to, link_type) {
+            let urlencoded = new URLSearchParams();
+            urlencoded.append('id', id);
+            urlencoded.append('user_to', user_to);
+            urlencoded.append('link_type', link_type);
+
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: urlencoded
+            }
+
+            return this.request('user_link/update', requestOptions);
+        }
+
+        async deleteUserLink(user) {
+            let urlencoded = new URLSearchParams();
+            urlencoded.append('user', user);
+
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: urlencoded
+            }
+
+            return this.request('user_link/delete', requestOptions);
+        }
+
         //выйти из аккаунта
         async logout() {
             return this.request('user/logout');

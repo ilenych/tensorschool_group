@@ -17,7 +17,7 @@ requirejs.config({
         Header: 'components/Saitov/header', // Саитов Роман
         Modul5: 'components/Sagitdinov/Modul5', // Сагитдинов Руслан
         ProfileInfo: 'components/Alsynbaev/profileInfo', // Алсынбаев Фанис
-
+        Friends: 'components/Alsynbaev/Friends', // Алсынбаев Фанис
 
         css: 'lib/require.css.min'
     }
