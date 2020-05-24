@@ -84,7 +84,6 @@ define([
                 },
                 body: urlencoded
             }
-
             return this.request('user/login', requestOptions);
         }
 
@@ -116,7 +115,7 @@ define([
 
         async createUserLink(user_id, link_type) {
             let urlencoded = new URLSearchParams();
-            urlencoded.append('user_id', user_id);
+            urlencoded.append('user', user_id);
             urlencoded.append('link_type', link_type);
 
             const requestOptions = {
@@ -126,14 +125,13 @@ define([
                 },
                 body: urlencoded
             }
-
             return this.request('user_link/create', requestOptions);
         }
 
-        async updateUserLink(id, user_to, link_type) {
+        async updateUserLink(id, user_id, link_type) {
             let urlencoded = new URLSearchParams();
             urlencoded.append('id', id);
-            urlencoded.append('user_to', user_to);
+            urlencoded.append('user_to', user_id);
             urlencoded.append('link_type', link_type);
 
             const requestOptions = {

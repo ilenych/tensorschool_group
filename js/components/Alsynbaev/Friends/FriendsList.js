@@ -8,20 +8,30 @@ define([
 
         constructor(options) {
             super(options);
+            this.state.curUserId = options.curUserId;
             this.friendList = options.friendList;
+            this.sendRequests = options.sendRequests;
+            this.requests = options.requests;
+            this.friends = options.friends;
+            this.subscribers = options.subscribers;
         }
 
         renderUser(title, data) {
-
             return `<div class="friendsList__title">${title}</div>
             <div class="friendsList__friends">
             ${data.map(user => {
+
+                let name = (user.data.first_name || '') + " " + (user.data.last_name || '');
+
+                if (name == " ")
+                    name = user.data.name || 'Неизвестно';
+
                 return `<a class="friendsList__linkImage" href="${location.pathname}?page=${user.id}">
                             <img class="page__image friendsList__image" onerror="this.src='img/nophoto.jpg'" src="https://tensor-school.herokuapp.com/user/photo/${user.id}">
                         </a>
                         <div class="friendsList__name">
-                            <a class="friendsList__link" href="${location.pathname}?page=${user.id}">
-                                ${user.data.name || 'Неизвестно'}
+                            <a class="friendsList__linkName" href="${location.pathname}?page=${user.id}">
+                                ${name}
                             </a>
                         </div>`;
             }).join('')}
@@ -31,24 +41,10 @@ define([
         }
 
         renderFriends() {
-            let requests = [];
-            let friends = [];
-            let subscribers = [];
-
-            for (let friendData of this.friendList) {
-                if (friendData.user_link.type == "friendship_request")
-                    requests.push(friendData);
-
-                if (friendData.user_link.type == "friend")
-                    friends.push(friendData);
-
-                if (friendData.user_link.type == "subscriber")
-                    subscribers.push(friendData);
-            }
-
-            return `${(requests.length != 0) ? this.renderUser(`Заявки в друзья <span class="friends__count">${requests.length}</span>`, requests) : ''}
-                ${(friends.length != 0) ? this.renderUser(`Друзей <span class="friends__count">${friends.length}</span>`, friends) : ''}
-                ${(subscribers.length != 0) ? this.renderUser(`Подписчики <span class="friends__count">${subscribers.length}</span>`, subscribers) : ''}           
+            return `${(this.sendRequests.length != 0) ? this.renderUser(`Отправленные заявки в друзья <span class="friends__count">${this.sendRequests.length}</span>`, this.sendRequests) : ''}
+            ${(this.requests.length != 0) ? this.renderUser(`Заявки в друзья <span class="friends__count">${this.requests.length}</span>`, this.requests) : ''}
+                ${(this.friends.length != 0) ? this.renderUser(`Друзья <span class="friends__count">${this.friends.length}</span>`, this.friends) : ''}
+                ${(this.subscribers.length != 0) ? this.renderUser(`Подписчики <span class="friends__count">${this.subscribers.length}</span>`, this.subscribers) : ''}           
             `;
         }
 

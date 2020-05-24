@@ -28,6 +28,9 @@
 .friends__friend:hover{
     text-decoration: underline;
 }
+.friends__request{
+    font-weight: bold;
+}
 .friends__image{
     width: 80px;
     height: 80px;

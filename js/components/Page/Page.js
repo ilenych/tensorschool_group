@@ -92,7 +92,7 @@ define([
                                     </div>
                                 </div>
                                 ${(this.state.curUserId != this.state.id) ? this.childrens.create(FriendsAction, { id: this.state.id, curUserId: this.state.curUserId }) : ''}
-                                ${(this.state.curUserId == this.state.id) ? this.childrens.create(Friends) : ''}
+                                ${(this.state.curUserId == this.state.id) ? this.childrens.create(Friends, { curUserId: this.state.curUserId }) : ''}
                                 <div class="module">
                                     ${this.childrens.create(Messages)}
                                 </div>
