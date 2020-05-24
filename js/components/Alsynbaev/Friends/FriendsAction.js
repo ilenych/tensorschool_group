@@ -21,7 +21,7 @@ define([
             for (let i = 0; i < user_links.user_links.length; i++) {
                 const link = user_links.user_links[i];
 
-                if (link.user_from == this.state.id) {
+                if (link.user_from == this.state.id || link.user_to == this.state.id) {
                     this.user_link = link;
                     break;
                 }
@@ -57,7 +57,7 @@ define([
 
                 if ((this.user_link.type == "subscriber" || this.user_link.type == "friendship_request") && this.user_link.user_from == this.state.curUserId && this.user_link.user_to == this.state.id) {
                     renderAction = `
-                    <div class="friendsAction__title">Заяка отправлена</div>
+                    <div class="friendsAction__title">Заявка отправлена</div>
                     <div class="friendsAction__button friendsAction__button--remove">
                         Отменить
                     </div>`;
@@ -122,10 +122,16 @@ define([
         }
 
         async removeFriend() {
-            if (this.user_link.type == "friend") {
+            if (this.user_link.type == "friend" || (this.user_link.type == "friendship_request" && this.user_link.user_from == this.state.id)) {
                 let response = await Requestor.updateUserLink(this.user_link.id, this.user_link.user_to, 'subscriber');
                 let user_link = await response.json();
                 this.user_link = user_link;
+            }
+
+            if ((this.user_link.type == "friendship_request" || this.user_link.type == "subscriber") && this.user_link.user_from == this.state.curUserId) {
+                let response = await Requestor.deleteUserLink(this.user_link.user_to);
+                if (response.ok)
+                    this.user_link = null;
             }
 
             this.update();
