@@ -18,6 +18,7 @@ requirejs.config({
         Router: 'components/Base/Router',// Алсынбаев Фанис
         ProfileInfo: 'components/Alsynbaev/profileInfo', // Алсынбаев Фанис
         Friends: 'components/Alsynbaev/Friends', // Алсынбаев Фанис
+        MessagesInfo: 'components/Alsynbaev/MessagesInfo', // Алсынбаев Фанис
 
         css: 'lib/require.css.min'
     }

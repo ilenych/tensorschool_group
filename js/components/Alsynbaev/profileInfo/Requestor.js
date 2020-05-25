@@ -87,6 +87,11 @@ define([
             return this.request('user/login', requestOptions);
         }
 
+        //выйти из аккаунта
+        async logout() {
+            return this.request('user/logout');
+        }
+
         async getPhotosList(id) {
             const requestOptions = {
                 headers: {
@@ -160,9 +165,73 @@ define([
             return this.request('user_link/delete', requestOptions);
         }
 
-        //выйти из аккаунта
-        async logout() {
-            return this.request('user/logout');
+        async getMessageAddresseList(page, pageSize) {
+
+            let urlencoded = new URLSearchParams();
+            urlencoded.append('page', page || 0);
+            urlencoded.append('pageSize', pageSize || 10);
+
+            return this.request('message/addressee_list');
+
+        }
+
+        async getMessageList(addressee, page, pageSize) {
+            let urlencoded = new URLSearchParams();
+            urlencoded.append('page', page || 0);
+            urlencoded.append('pageSize', pageSize || 10);
+
+            return this.request(`message/list/${addressee}`);
+        }
+
+        async createMessage(id, author, addressee, message, image) {
+            let urlencoded = new URLSearchParams();
+            urlencoded.append('id', id);
+            urlencoded.append('author', author);
+            urlencoded.append('addressee', addressee);
+            urlencoded.append('message', message);
+            urlencoded.append('image', image);
+
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: urlencoded
+            }
+
+            return this.request('message/create', requestOptions);
+        }
+
+        async updateMessage(id, author, message) {
+            let urlencoded = new URLSearchParams();
+            urlencoded.append('id', id);
+            urlencoded.append('author', author);
+            urlencoded.append('message', message);
+
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: urlencoded
+            }
+
+            return this.request('message/update', requestOptions);
+        }
+
+        async deleteMessage(message_id) {
+            let urlencoded = new URLSearchParams();
+            urlencoded.append('message_id', message_id);
+
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: urlencoded
+            }
+
+            return this.request('message/delete', requestOptions);
         }
     }
 

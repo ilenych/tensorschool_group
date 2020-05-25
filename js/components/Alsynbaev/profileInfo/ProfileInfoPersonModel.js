@@ -104,6 +104,15 @@ define(['Base/Model'], function (Model) {
             return `Был${this.gender == 2 ? 'а' : ''} в сети ` + out;
         }
 
+        getName() {
+            let name = (this.first_name || '') + " " + (this.last_name || '');
+
+            if (name == " ")
+                name = this.name || 'Неизвестно';
+
+            return name;
+        }
+
         getLastActivity() {
             const curTime = new Date();
             const last_activity = new Date(this.last_activity);
