@@ -17,17 +17,11 @@ define([
         }
 
         async loadData() {
-            // let response = await Requestor.getMessageAddresseList();
-            // // let response = await Requestor.createMessage(0, this.state.curUserId, this.state.id, "Hihi", '');
-            // let messageList = await response.json();
-            // console.log(messageList);
-
             let response = await Requestor.getMessageList(this.state.id);
             let messageList = await response.json();
             this.messages = messageList.messages.sort((a, b) => {
                 return a.id - b.id;
             });
-            console.log(this.messages);
             this.update();
         }
 
@@ -97,7 +91,6 @@ define([
                 const messagesInput = document.querySelector('.messages__input');
                 let response = await Requestor.createMessage(0, this.state.curUserId, this.state.id, messagesInput.value, '');
                 let message = await response.json();
-                console.log(message);
 
                 await this.loadData();
             }
