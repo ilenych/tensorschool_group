@@ -28,8 +28,13 @@ define([
     }
 
     afterMount() {
+       //AddEventListener на delete
       this._delete = this.getContainer().querySelector(".post-header__delete");
       this.subscribeTo(this._delete, "click", this.onClose.bind(this));
+
+      //скрывает кнопку удаления, если пользователь не на своей странице
+      this.options.item.flag == false ? this._delete.style.display = 'none' : ''
+      
       //AddEventListener на image
       const image = this.getContainer().querySelector(".post-header__ava");
       this.subscribeTo(image, "error", this.onErrorLoadImage.bind(this, image));

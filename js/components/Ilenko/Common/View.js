@@ -22,10 +22,14 @@ define(["Base/Component"], function (Component) {
       }
   
       setItems(item) {
+        if(this.options.curId == this.options.id) {
+          this.flag = true
+        }
         //если приходит массив закидываем current useer id
         if(Array.isArray(item)) {
           for(let i in item){
             item[i].userId = this.options.curId
+            item[i].flag = this.flag || false;
           }
         }
         this.setState({ item });
