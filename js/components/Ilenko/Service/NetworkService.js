@@ -5,7 +5,7 @@ define([], function () {
     constructor(options) {
       this.options = {
         ...{
-          host: "tensorschool.herokuapp.com/", //хост сервера //"http://localhost:3000/"
+          host: "https://tensorschool.herokuapp.com/", //хост сервера //"http://localhost:3000/"
         },
         ...options,
       };
