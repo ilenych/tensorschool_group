@@ -8,7 +8,7 @@ define([
       this.options = {
         ...{
           gallery: options.item.gallery,
-          id: options.item.id,
+          id: options.idUser
         },
         ...options,
       };
@@ -62,7 +62,8 @@ define([
      */
     addPhoto() {
       const model = this.createModel();
-      NetworkService.putDataGallery(this.options.id, model);
+      this.options.item.id == undefined ? NetworkService.postDataGallery(model) : NetworkService.putDataGallery(this.options.id, model);
+      console.log(this.options.item.i)
       this.clearStirng();
     }
     /**

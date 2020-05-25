@@ -49,6 +49,7 @@ define(["Base/Component"], function (Component) {
           const view = this.childrens.create(this.options.comp, {
             item: this.state.item,
             object: this.options.object,
+            idUser: this.options.id
           });
           view.mount(this.getContainer());
         }
