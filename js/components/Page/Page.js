@@ -40,7 +40,7 @@ define([
                                     ${this.childrens.create(ProfilePic, { id: this.state.id })}
                                 </div>
                                 ${(this.state.curUserId != this.state.id) ? this.childrens.create(FriendsAction, { id: this.state.id, curUserId: this.state.curUserId }) : ''}
-                                ${this.childrens.create(PhotoInfo, { id: this.state.id })}
+                                ${(this.state.curUserId == this.state.id) ? this.childrens.create(PhotoInfo, { id: this.state.id }) : ''}
                 
                                 ${(this.state.curUserId == this.state.id) ? this.childrens.create(Friends, { curUserId: this.state.curUserId }) : ''}
                                 ${this.childrens.create(MessagesInfo, { id: this.state.id, curUserId: this.state.curUserId })}
