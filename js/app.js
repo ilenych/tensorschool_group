@@ -10,6 +10,7 @@ requirejs.config({
         Wall: 'components/Ilenko/Wall', // Иленко Алексей
         CreatePost: 'components/Ilenko/CreatePost', // Иленко Алексей
         Gallery: 'components/Ilenko/Gallery', // Иленко Алексей
+        PhotoInfo: 'components/Ilenko/PhotoInfo', // Иленко Алексей
         Modul2: 'components/Timofeev/Modul2', // Тимофеев Павел
         ProfilePic: 'components/Tugaeva/profilepic', // Тугаева Динара
         Messages: 'components/Tugaeva/messages', // Тугаева Динара

@@ -9,8 +9,9 @@ define([
     'Gallery',
     'Friends',
     'Friends/FriendsAction',
+    'PhotoInfo',
     'css!Page/css/Page.css'
-], function (Component, Header, ProfileInfo, Wall, CreatePost, ProfilePic, Messages, Gallery, Friends, FriendsAction) {
+], function (Component, Header, ProfileInfo, Wall, CreatePost, ProfilePic, Messages, Gallery, Friends, FriendsAction, PhotoInfo) {
     'use strict';
 
     class Page extends Component {
@@ -37,6 +38,7 @@ define([
                                     ${this.childrens.create(ProfilePic, { id: this.state.id })}
                                 </div>
                                 ${(this.state.curUserId != this.state.id) ? this.childrens.create(FriendsAction, { id: this.state.id, curUserId: this.state.curUserId }) : ''}
+                                ${this.childrens.create(PhotoInfo, { id: this.state.id })}
                                 <div class="module">
                                     <!--Модуль ссылок-->
                                     <div class="page-links">
