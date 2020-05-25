@@ -81,6 +81,7 @@ define([
         }
 
         afterUpdate() {
+            this.canClick = true;
             const buttonAdd = document.querySelector('.friendsAction__button--add');
 
             if (buttonAdd)
@@ -93,34 +94,40 @@ define([
         }
 
         async addFriend() {
-            if (!this.user_link) {
-                let response = await Requestor.createUserLink(parseInt(this.state.id), 'friendship_request');
-                let user_link = await response.json();
-                this.user_link = user_link;
-            } else {
-                if (this.user_link.type == "subscriber" || this.user_link.type == "friendship_request") {
-                    let response = await Requestor.updateUserLink(this.user_link.id, this.state.id, 'friend');
+            if (this.canClick) {
+                this.canClick = false;
+                if (!this.user_link) {
+                    let response = await Requestor.createUserLink(parseInt(this.state.id), 'friendship_request');
                     let user_link = await response.json();
                     this.user_link = user_link;
+                } else {
+                    if (this.user_link.type == "subscriber" || this.user_link.type == "friendship_request") {
+                        let response = await Requestor.updateUserLink(this.user_link.id, this.state.id, 'friend');
+                        let user_link = await response.json();
+                        this.user_link = user_link;
+                    }
                 }
-            }
 
-            this.update();
+                this.update();
+            }
         }
 
         async removeFriend() {
-            if (this.user_link.type == "friend" || this.user_link.type == "friendship_request" && this.user_link.user_from == this.state.id) {
-                let response = await Requestor.deleteUserLink(this.state.id);
-                response = await Requestor.createUserLink(this.state.id, 'subscriber');
-                let user_link = await response.json();
-                this.user_link = user_link;
-            } else if (this.user_link.type == "friendship_request" || this.user_link.type == "subscriber") {
-                let response = await Requestor.deleteUserLink(this.state.id);
-                if (response.ok)
-                    this.user_link = null;
-            }
+            if (this.canClick) {
+                this.canClick = false;
+                if (this.user_link.type == "friend" || this.user_link.type == "friendship_request" && this.user_link.user_from == this.state.id) {
+                    let response = await Requestor.deleteUserLink(this.state.id);
+                    response = await Requestor.createUserLink(this.state.id, 'subscriber');
+                    let user_link = await response.json();
+                    this.user_link = user_link;
+                } else if (this.user_link.type == "friendship_request" || this.user_link.type == "subscriber") {
+                    let response = await Requestor.deleteUserLink(this.state.id);
+                    if (response.ok)
+                        this.user_link = null;
+                }
 
-            this.update();
+                this.update();
+            }
         }
 
         render(options, state) {
