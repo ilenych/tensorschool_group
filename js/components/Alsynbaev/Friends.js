@@ -43,8 +43,14 @@ define([
                 if (friendData.user_link.type == "friend")
                     this.friends.push(friendData);
 
-                if (friendData.user_link.type == "subscriber")
-                    this.subscribers.push(friendData);
+                if (friendData.user_link.type == "subscriber") {
+                    if (friendData.user_link.user_from == this.state.curUserId) {
+                        this.subscribers.push(friendData);
+                    } else {
+                        this.sendRequests.push(friendData);
+
+                    }
+                }
             }
 
             this.update();

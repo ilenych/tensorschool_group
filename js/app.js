@@ -7,7 +7,6 @@ requirejs.config({
         Comp: 'components',
         Base: 'components/Base',
         Page: 'components/Page',
-        Router: 'Page/Router',
         Wall: 'components/Ilenko/Wall', // Иленко Алексей
         CreatePost: 'components/Ilenko/CreatePost', // Иленко Алексей
         Gallery: 'components/Ilenko/Gallery', // Иленко Алексей
@@ -16,6 +15,7 @@ requirejs.config({
         Messages: 'components/Tugaeva/messages', // Тугаева Динара
         Header: 'components/Saitov/header', // Саитов Роман
         Modul5: 'components/Sagitdinov/Modul5', // Сагитдинов Руслан
+        Router: 'components/Base/Router',// Алсынбаев Фанис
         ProfileInfo: 'components/Alsynbaev/profileInfo', // Алсынбаев Фанис
         Friends: 'components/Alsynbaev/Friends', // Алсынбаев Фанис
 

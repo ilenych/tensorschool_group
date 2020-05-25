@@ -1,6 +1,6 @@
 define([
     'ProfileInfo/Requestor',
-    'Base/Router'
+    'Router'
 ], function (Requestor, Router) {
     'use strict';
 
