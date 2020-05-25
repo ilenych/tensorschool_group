@@ -5,7 +5,7 @@ define([], function () {
     constructor(options) {
       this.options = {
         ...{
-          host: "https://tensorschool.herokuapp.com/", //хост сервера
+          host: "tensorschool.herokuapp.com/", //хост сервера //"http://localhost:3000/"
         },
         ...options,
       };
@@ -190,6 +190,13 @@ define([], function () {
     async putDataLikes(id, likes) {
       const path = "likes/" + id;
       this.put(path, likes)
+    }
+     /**
+     * Заменяет данные фотографий на сервера в зависиимости от id
+     */
+    async putDataGallery(id, Gallery) {
+      const path = "gallery/" + id;
+      this.put(path, Gallery)
     }
   }
 

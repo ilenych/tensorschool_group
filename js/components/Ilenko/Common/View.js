@@ -36,7 +36,6 @@ define(["Base/Component"], function (Component) {
         this.unmountChildren(); //размонитруем дочерние модули
   
         this.getContainer().innerHTML = "";
-  
         //монтируем модуль и передаем данные
         if(typeof this.state.item === 'string' || this.state.item instanceof String){
           //Это для sender block
@@ -49,6 +48,7 @@ define(["Base/Component"], function (Component) {
           //Это для всех
           const view = this.childrens.create(this.options.comp, {
             item: this.state.item,
+            object: this.options.object,
           });
           view.mount(this.getContainer());
         }

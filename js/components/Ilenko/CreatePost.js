@@ -113,11 +113,9 @@ define([
      * Меняет название кнопки при нажатии
      */
     changeTitleOnButtonAddPicture() {
-      if (this._addPicture.innerHTML == "Добавить картинку") {
-        this._addPicture.innerHTML = "Убрать картинку";
-      } else {
-        this._addPicture.innerHTML = "Добавить картинку";
-      }
+      this._addPicture.innerHTML == "Добавить картинку"
+        ? (this._addPicture.innerHTML = "Убрать картинку")
+        : (this._addPicture.innerHTML = "Добавить картинку");
     }
     /**
      * Скрывает илии отображает блок с ссылкой для картинки

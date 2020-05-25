@@ -4,10 +4,10 @@ define([
   "Gallery/PhotoList",
 ], function (Component, ScrollPages, PhotoList) {
   class BigGallery extends Component {
-    constructor({ item }) {
+    constructor(item) {
       super();
       // модель данных
-      this.state.item = item;
+      this.state.item = item.item;
       // Преобразуем массив
       this.state.item.gallery.reverse();
       // номер страницы
@@ -18,6 +18,7 @@ define([
       this.pageCount = Math.ceil(
         this.state.item.gallery.length / this.numberPhotosOnPage
       );
+      this.state.item.object = item.object
     }
 
     afterMount() {
@@ -75,7 +76,8 @@ define([
                 this.pageCount,
                 this.id
               )}
-            </div>`;
+             
+            </>`;
     }
   }
   return BigGallery;

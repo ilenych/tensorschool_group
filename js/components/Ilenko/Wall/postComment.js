@@ -36,17 +36,6 @@ define(["Base/Component", "components/Ilenko/Common/TimeConvector"], function (
       // Отобпажаем или еще нет .post-comments__more
       this.showOrHideCommentMore();
 
-      //AddEventListener на image
-      this.addEventListenerOnLoadImage();
-    }
-    //Для замены изображение если его нет
-    addEventListenerOnLoadImage() {
-      const image = this.getContainer().querySelectorAll(
-        ".post-comments-comment__ava"
-      );
-      image.forEach((el) => {
-        this.subscribeTo(el, "error", this.onErrorLoadImage.bind(this, el));
-      });
     }
 
     onErrorLoadImage(image) {
@@ -81,8 +70,6 @@ define(["Base/Component", "components/Ilenko/Common/TimeConvector"], function (
       element.innerHTML = this.moreAndLessComments();
       //Обновляем содержимое в блоке комментариев
       this.update();
-      //Для замены изображение если его нет
-      this.addEventListenerOnLoadImage();
       return element;
     }
 
@@ -93,8 +80,6 @@ define(["Base/Component", "components/Ilenko/Common/TimeConvector"], function (
       this.getContainer().querySelector(
         ".post-comments-block"
       ).innerHTML = this.renderBody(this.options);
-      //Для замены изображение если его нет
-      this.addEventListenerOnLoadImage();
     }
 
     /**
@@ -153,7 +138,7 @@ define(["Base/Component", "components/Ilenko/Common/TimeConvector"], function (
 
     renderComment({ userUrlImage, userName, commentText, commentTime, idUser }) {
       return `<div class="post-comments-comment">
-                <a class="post-comments-comment__link"href=\"${this.options.host + idUser}\"><img class="post-comments-comment__ava" src="${userUrlImage}" alt=${userName} title=${userName}></a>        
+                <a class="post-comments-comment__link"href=\"${this.options.host + idUser}\"><img class="post-comments-comment__ava" onerror="this.src='img/nophoto.jpg'" src="${userUrlImage}" alt=${userName} title=${userName}></a>        
                 <p class="post-comments-comment__name" title="${userName}">${userName}</p>
                 <span class="post-comments-comment__text" title="Комментарий">${commentText}</span>
                 <p class="post-comments-comment__time text_lightgray" title="Время">${Time.convert(
