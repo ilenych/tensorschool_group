@@ -10,8 +10,10 @@ define([
     'Friends',
     'Friends/FriendsAction',
     'PhotoInfo',
+    'MessagesInfo',
     'css!Page/css/Page.css'
-], function (Component, Header, ProfileInfo, Wall, CreatePost, ProfilePic, Messages, Gallery, Friends, FriendsAction, PhotoInfo) {
+], function (Component, Header, ProfileInfo, Wall, CreatePost, ProfilePic, Messages, Gallery, Friends, FriendsAction, PhotoInfo, MessagesInfo) {
+
     'use strict';
 
     class Page extends Component {
@@ -39,65 +41,10 @@ define([
                                 </div>
                                 ${(this.state.curUserId != this.state.id) ? this.childrens.create(FriendsAction, { id: this.state.id, curUserId: this.state.curUserId }) : ''}
                                 ${this.childrens.create(PhotoInfo, { id: this.state.id })}
-                                <div class="module">
-                                    <!--Модуль ссылок-->
-                                    <div class="page-links">
-                                        <div class="page-links__link">
-                                            <div class="page-links__image-link">
-                                                <img src="img/ui/link1.png" alt="" class="page-links__image">
-                                            </div>
-                                            <div class="page-links__title">
-                                                Поклонники
-                                            </div>
-                                        </div>
-                                        <div class="page-links__link">
-                                            <div class="page-links__image-link">
-                                                <img src="img/ui/link2.png" alt="" class="page-links__image">
-                                            </div>
-                                            <div class="page-links__title">
-                                                Интересное
-                                            </div>
-                                        </div>
-                                        <div class="page-links__link">
-                                            <div class="page-links__image-link">
-                                                <img src="img/ui/link3.png" alt="" class="page-links__image">
-                                            </div>
-                                            <div class="page-links__title">
-                                                Друзья
-                                            </div>
-                                        </div>
-                                        <div class="page-links__link">
-                                            <div class="page-links__image-link">
-                                                <img src="img/ui/link4.png" alt="" class="page-links__image">
-                                            </div>
-                                            <div class="page-links__title">
-                                                Видосы
-                                            </div>
-                                        </div>
-                                        <div class="page-links__link">
-                                            <div class="page-links__image-link">
-                                                <img src="img/ui/link5.png" alt="" class="page-links__image">
-                                            </div>
-                                            <div class="page-links__title">
-                                                Фотки
-                                            </div>
-                    
-                                        </div>
-                                        <div class="page-links__link">
-                                            <div class="page-links__image-link">
-                                                <img src="img/ui/link6.png" alt="" class="page-links__image">
-                                            </div>
-                                            <div class="page-links__title">
-                                                Музыка
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                 
                                 ${(this.state.curUserId == this.state.id) ? this.childrens.create(Friends, { curUserId: this.state.curUserId }) : ''}
-                                <div class="module">
-                                    ${this.childrens.create(Messages)}
-                                </div>
+                                ${this.childrens.create(MessagesInfo, { id: this.state.id, curUserId: this.state.curUserId })}
+                                
                             </div>
                         </div>
                     </div>`;
