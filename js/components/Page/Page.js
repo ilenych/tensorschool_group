@@ -23,7 +23,6 @@ define([
             super(options);
             this.state.id = options.id || options.options.curUserId;
             this.state.curUserId = options.options.curUserId;
-            console.log(Theme);
             Theme.changeTheme(options.options.themeIndex || 0);
         }
 

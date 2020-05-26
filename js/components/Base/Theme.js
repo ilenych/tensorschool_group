@@ -30,6 +30,5 @@ define([
     }
 
     const theme = new Theme();
-    console.log(theme);
     return theme;
 });
