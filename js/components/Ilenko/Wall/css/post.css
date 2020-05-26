@@ -160,7 +160,7 @@
   display: flex;
   justify-content: flex-end;
   cursor: pointer;
-  color: #4da3ff;
+  color: var(--link-color);
 }
 .post-comments__more:hover {
   text-decoration: underline;
