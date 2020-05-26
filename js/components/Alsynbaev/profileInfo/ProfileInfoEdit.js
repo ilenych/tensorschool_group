@@ -2,8 +2,9 @@ define([
     'Base/Component',
     'ProfileInfo/ProfileInfoPersonModel',
     'ProfileInfo/Requestor',
+    'Base/Theme',
     'css!ProfileInfo/css/ProfileInfoEdit.css'
-], function (Component, ProfileInfoPersonModel, Requestor) {
+], function (Component, ProfileInfoPersonModel, Requestor, Theme) {
     'use strict';
 
     class ProfileInfoEdit extends Component {
@@ -36,6 +37,17 @@ define([
                 strOptions += `<option value="${i}" ${i == num ? 'selected' : ''}>${relationStr[i]}</option>`
             }
             return `<select name="relation">${strOptions}</select>`;
+        }
+
+        renderThemes(num) {
+            const themes = Theme.themes;
+            let themesStr;
+
+            for (let i = 0; i < themes.length; i++) {
+                themesStr += `<option value="${i}" ${i == num ? 'selected' : ''}>${themes[i].name}</option>`
+            }
+
+            return `<select name="theme">${themesStr}</select>`;
         }
 
         beforeMount() {
@@ -154,6 +166,14 @@ define([
                             value: `<input name="email" type="email" value="${this.state.items.email || ''}">`
                         }
                     ]
+                }, {
+                    title: 'Тема',
+                    fields: [
+                        {
+                            title: 'Тема',
+                            value: `${this.renderThemes(this.state.items.themeIndex || 0)}`
+                        }
+                    ]
                 }]
             });
         }
@@ -195,6 +215,7 @@ define([
                 games: form.games.value,
                 about: form.about.value,
                 quotes: form.quotes.value,
+                themeIndex: form.theme.value
             });
 
             //передаем модель на сервер
@@ -225,10 +246,10 @@ define([
             let infoRender = categories.map((item) => this.childrens.create(ProfileInfoCategoryEdit, item)).join('');
 
             return `<div class="profile-info-edit">
-                                    <form name="profileInfoEditForm">
-                                        ${infoRender}
-                                        <input class="profile-info-edit__saveBtn" type="button" value="Сохранить">
-                                    </form>
+                        <form name="profileInfoEditForm">
+                            ${infoRender}
+                            <input class="profile-info-edit__saveBtn" type="button" value="Сохранить">
+                        </form>
                 </div>`;
         }
     }

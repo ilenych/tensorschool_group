@@ -40,12 +40,12 @@
     grid-gap: 15px;
 }
 .friendsAction__button--add{
-    background: #4a76a8;
+    background: var(--background-header-color);
 	color: #fff;
 }
 .friendsAction__button--remove{
     background:#e6f2ff;
-	color:  #4a76a8;
+	color:  var(--background-header-color);
 }
 .friendsAction__button{
 	box-shadow: 1px 1px 5px #999;

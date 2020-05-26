@@ -27,7 +27,7 @@
 	margin-bottom: 15px;
 }
 .profile-main-info__more-info {
-	color: #4da3ff;
+	color: var(--link-color);
 	cursor: pointer;
 	width: 100%;
 	text-align: center;
@@ -44,7 +44,7 @@
 	color: #ccc;
 }
 .profile-main-info__edit:hover{
-	color: #4da3ff;
+	color: var(--link-color);
 }
 .profile-main-info__more-info:hover {
 	text-decoration: underline;
@@ -63,7 +63,7 @@
 	color: rgb(230, 228, 228);
 }
 .profile-info-category__moreLabel:hover{
-	color: #4da3ff;
+	color: var(--link-color);
 }
 
 .profile-info-category__fields {

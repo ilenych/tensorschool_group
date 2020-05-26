@@ -28,7 +28,7 @@
     object-fit: cover;
 }
 .messages__user-name {
-	color: #2f5cc8;
+	color: var(--link-color);
 	cursor: pointer;
 	display: flex;
 	justify-content: space-between;
@@ -55,7 +55,7 @@
     transition: all 0.1s linear;
     transform: scale(1);
     text-align: center;
-    background: #4a76a8;
+    background: var(--background-header-color);
     color: #e6f2ff;
     width: 50%;
     align-self: center;
@@ -73,7 +73,7 @@
 }
 .messages__linkName,
 .messages__user-name{    
-    color: rgb(80, 80, 175);
+    color: var(--link-color);
     text-decoration: none;
 }
 .messages__linkName:hover{

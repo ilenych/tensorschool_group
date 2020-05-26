@@ -1,7 +1,7 @@
 .header__nav {
     display: flex;
     justify-content: flex-end;
-    background: #4a76a8;
+    background: var(--background-header-color);
     padding: 0 10px;
     align-items: center;
     border-radius: 0 0 10px 10px;
@@ -22,7 +22,7 @@
     display: inline; /* Выключить если требуется */
     content: "#stayhome"; /* Текст */
     color: #fff;
-    background-color: #224b7a; 
+    background-color: var(--background-header-secondary-color);
     font-size: 0.9em;
     padding: 3px;
 }

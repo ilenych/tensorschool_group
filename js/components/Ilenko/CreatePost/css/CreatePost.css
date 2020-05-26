@@ -118,7 +118,7 @@
   font-size: 14px;
   cursor: pointer;
   color: white;
-  background-color: #4a76a8;
+  background-color: var(--background-header-color);
   transition: all 0.1s linear;
   transform: scale(1);
   box-shadow: 1px 1px 5px #999;

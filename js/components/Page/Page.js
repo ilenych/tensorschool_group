@@ -11,8 +11,9 @@ define([
     'Friends/FriendsAction',
     'PhotoInfo',
     'MessagesInfo',
+    'Base/Theme',
     'css!Page/css/Page.css'
-], function (Component, Header, ProfileInfo, Wall, CreatePost, ProfilePic, Messages, Gallery, Friends, FriendsAction, PhotoInfo, MessagesInfo) {
+], function (Component, Header, ProfileInfo, Wall, CreatePost, ProfilePic, Messages, Gallery, Friends, FriendsAction, PhotoInfo, MessagesInfo, Theme) {
 
     'use strict';
 
@@ -22,6 +23,8 @@ define([
             super(options);
             this.state.id = options.id || options.options.curUserId;
             this.state.curUserId = options.options.curUserId;
+            console.log(Theme);
+            Theme.changeTheme(options.options.themeIndex || 0);
         }
 
         render() {

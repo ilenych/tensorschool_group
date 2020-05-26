@@ -2,3 +2,10 @@
     margin: 0;
     outline: none;
 }
+
+:root{
+    --background-header-color:#4a76a8;
+    /* #4a76a8; */
+    --background-header-secondary-color:#224b7a; 
+    --link-color:#4da3ff;
+}

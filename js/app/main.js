@@ -23,9 +23,9 @@ define([
         }).then(function (result) {
             if (result) {
                 if (!url.search) {
-                    Router.loadPage(`?page=${result.id}`, { curUserId: result.id });
+                    Router.loadPage(`?page=${result.id}`, { curUserId: result.id, themeIndex: result.data.themeIndex });
                 } else {
-                    Router.loadPage(url.search, { curUserId: result.id });
+                    Router.loadPage(url.search, { curUserId: result.id, themeIndex: result.data.themeIndex });
                 }
             }
         }).catch(error => console.log("error", error));

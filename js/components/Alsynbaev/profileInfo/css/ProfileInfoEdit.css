@@ -31,7 +31,7 @@
 
 .profile-info-edit__saveBtn{
 	margin: 10px auto;
-	background: #4a76a8;
+	background: var(--background-header-color);
 	color: #fff;
 	box-shadow: 1px 1px 5px #999;
 	border: none;
