@@ -12,8 +12,9 @@ define([
     'PhotoInfo',
     'MessagesInfo',
     'Base/Theme',
+    'Adressee',
     'css!Page/css/Page.css'
-], function (Component, Header, ProfileInfo, Wall, CreatePost, ProfilePic, Messages, Gallery, Friends, FriendsAction, PhotoInfo, MessagesInfo, Theme) {
+], function (Component, Header, ProfileInfo, Wall, CreatePost, ProfilePic, Messages, Gallery, Friends, FriendsAction, PhotoInfo, MessagesInfo, Theme, Adressee) {
 
     'use strict';
 
@@ -43,10 +44,9 @@ define([
                                 </div>
                                 ${(this.state.curUserId != this.state.id) ? this.childrens.create(FriendsAction, { id: this.state.id, curUserId: this.state.curUserId }) : ''}
                                 ${(this.state.curUserId == this.state.id) ? this.childrens.create(PhotoInfo, { id: this.state.id }) : ''}
-                
                                 ${(this.state.curUserId == this.state.id) ? this.childrens.create(Friends, { curUserId: this.state.curUserId }) : ''}
                                 ${this.childrens.create(MessagesInfo, { id: this.state.id, curUserId: this.state.curUserId })}
-                                
+                                ${(this.state.curUserId == this.state.id) ? this.childrens.create(Adressee) : ''}
                             </div>
                         </div>
                     </div>`;

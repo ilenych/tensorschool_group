@@ -165,11 +165,7 @@ define([
             return this.request('user_link/delete', requestOptions);
         }
 
-        async getMessageAddresseList(page, pageSize) {
-
-            let urlencoded = new URLSearchParams();
-            urlencoded.append('page', page || 0);
-            urlencoded.append('pageSize', pageSize || 10);
+        async getMessageAddresseList() {
 
             return this.request('message/addressee_list');
 

@@ -1,0 +1,46 @@
+.addressee__content {
+    overflow-y: scroll;
+    max-height: 300px;
+    padding: 0 5px 0 0;
+    margin: 0 0 10px 0;
+}
+.addressee__title {
+	height: 40px;
+	color: #cacaca;
+}
+
+.addressee__addressee {
+	display: grid;
+	grid-template-columns: 50px 1fr;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ececec;
+    padding: 0 0 5px 0;
+}
+.addressee__addressee:last-child {
+    border-bottom: none;
+}
+.addressee__user-image{
+	width: 30px;
+	height: 30px;
+	justify-self: center;
+    grid-row: span 3 / auto;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.addressee__user-name {
+	color: var(--link-color);
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+}
+.addressee__addressee-text {
+    grid-column: 2;
+}
+.addressee__linkName,
+.addressee__user-name{    
+    color: var(--link-color);
+    text-decoration: none;
+}
+.addressee__linkName:hover{
+    text-decoration: underline;
+}

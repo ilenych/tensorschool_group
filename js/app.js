@@ -20,6 +20,7 @@ requirejs.config({
         ProfileInfo: 'components/Alsynbaev/profileInfo', // Алсынбаев Фанис
         Friends: 'components/Alsynbaev/Friends', // Алсынбаев Фанис
         MessagesInfo: 'components/Alsynbaev/MessagesInfo', // Алсынбаев Фанис
+        Adressee: 'components/Alsynbaev/Addressee', // Алсынбаев Фанис
 
         css: 'lib/require.css.min'
     }
